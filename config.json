@@ -35,32 +35,17 @@
     "BOTNAME": "TAKLU BABU",
     "PREFIX": "#",
     "ADMINBOT": [
-        "100058415170590",
-        "100094547994769",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "100070531069371"
     ],
     "NDH": [
-        "100058415170590",
-        "100094547994769",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "100070531069371"
     ],
     "DATABASE": {
         "sqlite": {
             "storage": "data.sqlite"
         }
     },
-    "APPSTATEPATH": "shankarstate.json",
+    "APPSTATEPATH": "appstate.json",
     "FCAOption": {
         "forceLogin": true,
         "listenEvents": true,
