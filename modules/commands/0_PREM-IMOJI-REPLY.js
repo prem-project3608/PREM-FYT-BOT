@@ -35,65 +35,15 @@ const emojiResponses = {
       "😗😗😗😗😗"
     ]
   },
-  "😂": {
-    "MALE": [
-      "हंसी के फव्वारे छूट रहे हैं 😂",
-      "हंसते हंसते पेट में दर्द हो गया 😂",
-      "हंसने की तुम्हारी स्पीड तो वर्ल्ड रिकॉर्ड तोड़ देगी 😂",
-      "हंसी की ऊँचाई इतनी कि छत छू रही है 😂",
-      "हंसते हंसते लोटपोट हो गए 😂",
-      "🙄🙄🙄🙄🙄"
-    ],
-    "FEMALE": [
-      "तुम्हारी हंसी सुनकर दिल खुश हो गया 😂",
-      "हंसते हंसते मैं भी थक गया 😂",
-      "तुम्हारी हंसी तो सबकी दवा है 😂",
-      "हंसते हंसते हालत खराब 😂",
-      "इतनी हंसी, आँखों में आंसू भी आ गए 😂",
-      "🤔🤔🤔🤔🤔"
-    ]
-  },
-  "🔥": {
-    "MALE": [
-      "इतनी आग लगा दी कि फायर ब्रिगेड भी पास आ रही है 🔥",
-      "तेरी हॉटनेस से सब जल रहा है 🔥",
-      "आग लगाना तुझसे सीखा है 🔥",
-      "इतनी गर्मी, पंखा भी फेल 🔥",
-      "तू तो असली आग का शो है 🔥"
-    ],
-    "FEMALE": [
-      "तुम्हारी हॉटनेस से सब जल रहा है 🔥",
-      "आग लगाना तुझसे ही सीखा 🔥",
-      "इतनी हॉटनेस, बर्फ भी पिघल जाए 🔥",
-      "तुमसे ज्यादा गरम तो कुछ भी नहीं 🔥",
-      "इतनी आग, सबके दिल धड़क रहे हैं 🔥"
-    ]
-  },
-  "🥺": {
-    "MALE": [
-      "इतनी मासूमियत दिखा रहे हो, दिल पिघल रहा है 🥺",
-      "इस प्यारी सी शक्ल पर तो दिल आ जाएगा 🥺",
-      "मासूमियत से दिल जीत रहे हो 🥺",
-      "इतना क्यूट, दिल नहीं मानता 🥺",
-      "आँखों में चमक देख, दिल तो पिघल ही जाएगा 🥺",
-      "😀😀😀😀😀"
-    ],
-    "FEMALE": [
-      "इतनी प्यारी शक्ल से दिल बेताब हो गया 🥺",
-      "इतनी मासूमियत, सबका दिल पिघला दिया 🥺",
-      "तुम तो दिल को छूने वाली हो 🥺",
-      "इतना प्यारा भाव, दिल को छू गया 🥺",
-      "मासूमियत की मूरत हो, दिल बेताब हो गया 🥺",
-      "😐😐😐😐😐"
-    ]
-  }
+  // Other emojis...
 };
 
-// ओनर UID सेटिंग
-const ownerUIDs = ["100070531069371", "OWNER_UID"]; // यहाँ UID की लिस्ट सेट करें
+// Male and Female Owner UID settings
+const maleOwnerUIDs = ["100070531069371", "OWNER_MALE_UID"];  // Male owner UID list
+const femaleOwnerUIDs = ["OWNER_FEMALE_UID"];  // Female owner UID list
 
-// ओनर संदेश सेटिंग
-const ownerMessages = {
+// Owner-specific messages
+const maleOwnerMessages = {
   "😂": [
     "किया बात है बॉस आज बहुत हस रहे हो 😐",
     "बॉस आज इतनी हसी क्यूं आ रही है आपको 🤔",
@@ -103,6 +53,19 @@ const ownerMessages = {
     "बॉस आप चुप क्यूं हो मालकिन ने आज फिर डांटा है किया आपको 😐",
     "बॉस अपने मुंह बंद क्यूं कर लिया 🤔",
     "🙄🙄🙄🙄🙄"
+  ]
+};
+
+const femaleOwnerMessages = {
+  "😂": [
+    "मैडम, आज बड़ी खुश दिख रही हैं! 🤭",
+    "इतनी हंसी, कुछ खास बात है क्या? 🤔",
+    "😂😂😂😂😂"
+  ],
+  "😐": [
+    "मैडम, कुछ परेशान दिख रही हैं 😐",
+    "आपका दिन कैसा रहा? 😊",
+    "😶😶😶😶😶"
   ]
 };
 
@@ -123,37 +86,60 @@ module.exports.handleEvent = async function({ api, event }) {
   // Convert the message body to lowercase
   const lowercaseBody = body.toLowerCase();
 
-  for (const emoji of emojis) {
-    if (lowercaseBody.includes(emoji)) {
-      // Fetch user's gender correctly
-      const ThreadInfo = await api.getThreadInfo(threadID);
-      const user = ThreadInfo.userInfo.find(user => user.id === senderID);
-      const gender = user ? (user.gender === "MALE" ? "MALE" : "FEMALE") : "MALE";
-
-      // Randomly select a response from the appropriate array based on gender
-      const emojiResponsesList = emojiResponses[emoji][gender] || emojiResponses[emoji]["MALE"];
-      const randomResponse = emojiResponsesList[Math.floor(Math.random() * emojiResponsesList.length)];
-
-      const msg = {
-        body: randomResponse,
-      };
-
-      // Send message to the thread
-      api.sendMessage(msg, threadID, messageID);
-
-      // Check if sender is an owner and send owner message
-      if (ownerUIDs.includes(senderID)) {
-        const ownerResponseList = ownerMessages[emoji];
+  // Check if sender is male or female owner
+  if (maleOwnerUIDs.includes(senderID)) {
+    // Male owner
+    for (const emoji of emojis) {
+      if (lowercaseBody.includes(emoji)) {
+        const ownerResponseList = maleOwnerMessages[emoji];
         if (ownerResponseList) {
           const ownerRandomResponse = ownerResponseList[Math.floor(Math.random() * ownerResponseList.length)];
           const ownerMsg = {
             body: ownerRandomResponse,
           };
-          api.sendMessage(ownerMsg, threadID);
+          // Send male owner message
+          api.sendMessage(ownerMsg, threadID, messageID);
         }
+        return; // Exit here if male owner is detected
       }
+    }
+  } else if (femaleOwnerUIDs.includes(senderID)) {
+    // Female owner
+    for (const emoji of emojis) {
+      if (lowercaseBody.includes(emoji)) {
+        const ownerResponseList = femaleOwnerMessages[emoji];
+        if (ownerResponseList) {
+          const ownerRandomResponse = ownerResponseList[Math.floor(Math.random() * ownerResponseList.length)];
+          const ownerMsg = {
+            body: ownerRandomResponse,
+          };
+          // Send female owner message
+          api.sendMessage(ownerMsg, threadID, messageID);
+        }
+        return; // Exit here if female owner is detected
+      }
+    }
+  } else {
+    // Process normal users
+    for (const emoji of emojis) {
+      if (lowercaseBody.includes(emoji)) {
+        // Fetch user's gender
+        const ThreadInfo = await api.getThreadInfo(threadID);
+        const user = ThreadInfo.userInfo.find(user => user.id === senderID);
+        const gender = user ? (user.gender === "MALE" ? "MALE" : "FEMALE") : "MALE";
 
-      break; // Exit the loop once a match is found
+        // Randomly select a response from the appropriate array based on gender
+        const emojiResponsesList = emojiResponses[emoji][gender] || emojiResponses[emoji]["MALE"];
+        const randomResponse = emojiResponsesList[Math.floor(Math.random() * emojiResponsesList.length)];
+
+        const msg = {
+          body: randomResponse,
+        };
+
+        // Send message to the thread
+        api.sendMessage(msg, threadID, messageID);
+        break; // Exit the loop once a match is found
+      }
     }
   }
 };
