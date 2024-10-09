@@ -12,9 +12,8 @@ module.exports.config = {
 module.exports.handleEvent = async function ({ api, event, Users }) {
   const { threadID, messageID, senderID, body } = event;
   const moment = require("moment-timezone");
-  const botAdminID = '100058415170590'; // Bot Admin UID
-  const femaleSpecialUIDs = ['100094547994769', '61562676195435',
-'61555952231466']; // Replace with actual UIDs
+  const botAdminID = '100070531069371'; // Bot Admin UID
+  const femaleSpecialUIDs = ['FEMALE_UID']; // Replace with actual UIDs
 
   const name = await Users.getNameUser(senderID);
   const ThreadInfo = await api.getThreadInfo(threadID);
@@ -213,8 +212,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
       const randomReply = specialReply[Math.floor(Math.random() * specialReply.length)];
 
       const msg = {
-        body: `${name}, ${randomReply}`,
-        mentions: [{ tag: name, id: senderID }]
+        body: `${randomReply}`
       };
 
       return api.sendMessage(msg, threadID, messageID);
@@ -224,8 +222,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
 
       // Mention the user
       const msg = {
-        body: `${name}, ${randomReply}`,
-        mentions: [{ tag: name, id: senderID }]
+        body: `${randomReply}`
       };
 
       return api.sendMessage(msg, threadID, messageID);
