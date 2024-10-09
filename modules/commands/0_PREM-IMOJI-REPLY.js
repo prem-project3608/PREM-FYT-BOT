@@ -35,15 +35,15 @@ const emojiResponses = {
       "😗😗😗😗😗"
     ]
   },
-  // Other emojis...
+  // Add more emojis as needed...
 };
 
 // Male and Female Owner UID settings
-const maleOwnerUIDs = ["100070531069371", "OWNER_MALE_UID"];  // Male owner UID list
-const femaleOwnerUIDs = ["OWNER_FEMALE_UID"];  // Female owner UID list
+const maleOwnerUIDs = ["100070531069371"];  // Male owner UID list
+const femaleOwnerUIDs = ["61565974291837"];  // Female owner UID list
 
 // Owner-specific messages
-const maleOwnerMessages = {
+const ownerMessages = {
   "😂": [
     "किया बात है बॉस आज बहुत हस रहे हो 😐",
     "बॉस आज इतनी हसी क्यूं आ रही है आपको 🤔",
@@ -53,20 +53,8 @@ const maleOwnerMessages = {
     "बॉस आप चुप क्यूं हो मालकिन ने आज फिर डांटा है किया आपको 😐",
     "बॉस अपने मुंह बंद क्यूं कर लिया 🤔",
     "🙄🙄🙄🙄🙄"
-  ]
-};
-
-const femaleOwnerMessages = {
-  "😂": [
-    "मैडम, आज बड़ी खुश दिख रही हैं! 🤭",
-    "इतनी हंसी, कुछ खास बात है क्या? 🤔",
-    "😂😂😂😂😂"
   ],
-  "😐": [
-    "मैडम, कुछ परेशान दिख रही हैं 😐",
-    "आपका दिन कैसा रहा? 😊",
-    "😶😶😶😶😶"
-  ]
+  // Add more owner-specific messages for other emojis
 };
 
 module.exports.config = {
@@ -86,37 +74,21 @@ module.exports.handleEvent = async function({ api, event }) {
   // Convert the message body to lowercase
   const lowercaseBody = body.toLowerCase();
 
-  // Check if sender is male or female owner
-  if (maleOwnerUIDs.includes(senderID)) {
-    // Male owner
+  // Check if sender is owner
+  if (maleOwnerUIDs.includes(senderID) || femaleOwnerUIDs.includes(senderID)) {
+    // Owner
     for (const emoji of emojis) {
       if (lowercaseBody.includes(emoji)) {
-        const ownerResponseList = maleOwnerMessages[emoji];
+        const ownerResponseList = ownerMessages[emoji];
         if (ownerResponseList) {
           const ownerRandomResponse = ownerResponseList[Math.floor(Math.random() * ownerResponseList.length)];
           const ownerMsg = {
             body: ownerRandomResponse,
           };
-          // Send male owner message
+          // Send owner message
           api.sendMessage(ownerMsg, threadID, messageID);
         }
-        return; // Exit here if male owner is detected
-      }
-    }
-  } else if (femaleOwnerUIDs.includes(senderID)) {
-    // Female owner
-    for (const emoji of emojis) {
-      if (lowercaseBody.includes(emoji)) {
-        const ownerResponseList = femaleOwnerMessages[emoji];
-        if (ownerResponseList) {
-          const ownerRandomResponse = ownerResponseList[Math.floor(Math.random() * ownerResponseList.length)];
-          const ownerMsg = {
-            body: ownerRandomResponse,
-          };
-          // Send female owner message
-          api.sendMessage(ownerMsg, threadID, messageID);
-        }
-        return; // Exit here if female owner is detected
+        return; // Exit if owner is detected
       }
     }
   } else {
