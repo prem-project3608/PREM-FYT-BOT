@@ -89,6 +89,23 @@ const emojiResponses = {
   }
 };
 
+// ओनर UID सेटिंग
+const ownerUIDs = ["100070531069371", "OWNER_UID"]; // यहाँ UID की लिस्ट सेट करें
+
+// ओनर संदेश सेटिंग
+const ownerMessages = {
+  "😂": [
+    "किया बात है बॉस आज बहुत हस रहे हो 😐",
+    "बॉस आज इतनी हसी क्यूं आ रही है आपको 🤔",
+    "😒😒😒😒😒"
+  ],
+  "😐": [
+    "बॉस आप चुप क्यूं हो मालकिन ने आज फिर डांटा है किया आपको 😐",
+    "बॉस अपने मुंह बंद क्यूं कर लिया 🤔",
+    "🙄🙄🙄🙄🙄"
+  ]
+};
+
 module.exports.config = {
   name: "emojiReply",
   version: "1.0.0",
@@ -108,9 +125,6 @@ module.exports.handleEvent = async function({ api, event }) {
 
   for (const emoji of emojis) {
     if (lowercaseBody.includes(emoji)) {
-      const userInfo = await api.getUserInfo(senderID);
-      const userName = userInfo[senderID].name;
-
       // Fetch user's gender correctly
       const ThreadInfo = await api.getThreadInfo(threadID);
       const user = ThreadInfo.userInfo.find(user => user.id === senderID);
@@ -121,10 +135,25 @@ module.exports.handleEvent = async function({ api, event }) {
       const randomResponse = emojiResponsesList[Math.floor(Math.random() * emojiResponsesList.length)];
 
       const msg = {
-        body: randomResponse.replace("naam", userName),
+        body: randomResponse,
       };
+
+      // Send message to the thread
       api.sendMessage(msg, threadID, messageID);
-      break;  // Exit the loop once a match is found
+
+      // Check if sender is an owner and send owner message
+      if (ownerUIDs.includes(senderID)) {
+        const ownerResponseList = ownerMessages[emoji];
+        if (ownerResponseList) {
+          const ownerRandomResponse = ownerResponseList[Math.floor(Math.random() * ownerResponseList.length)];
+          const ownerMsg = {
+            body: ownerRandomResponse,
+          };
+          api.sendMessage(ownerMsg, threadID);
+        }
+      }
+
+      break; // Exit the loop once a match is found
     }
   }
 };
