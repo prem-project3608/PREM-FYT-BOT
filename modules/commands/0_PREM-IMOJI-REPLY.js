@@ -44,16 +44,30 @@ const femaleOwnerUIDs = ["61565974291837"];  // Female owner UID list
 
 // Owner-specific messages
 const ownerMessages = {
-  "😂": [
-    "किया बात है बॉस आज बहुत हस रहे हो 😐",
-    "बॉस आज इतनी हसी क्यूं आ रही है आपको 🤔",
-    "😒😒😒😒😒"
-  ],
-  "😐": [
-    "बॉस आप चुप क्यूं हो मालकिन ने आज फिर डांटा है किया आपको 😐",
-    "बॉस अपने मुंह बंद क्यूं कर लिया 🤔",
-    "🙄🙄🙄🙄🙄"
-  ],
+  "😂": {
+    "MALE": [
+      "किया बात है बॉस आज बहुत हस रहे हो 😐",
+      "बॉस आज इतनी हसी क्यूं आ रही है आपको 🤔",
+      "😒😒😒😒😒"
+    ],
+    "FEMALE": [
+      "अरे, मालकिन आज इतनी हंस क्यों रही हो? 😂",
+      "क्या बात है, आज तो बहुत खुश लग रही हो! 😂",
+      "😂😂😂😂😂"
+    ]
+  },
+  "😐": {
+    "MALE": [
+      "बॉस आप चुप क्यूं हो मालकिन ने आज फिर डांटा है किया आपको 😐",
+      "बॉस अपने मुंह बंद क्यूं कर लिया 🤔",
+      "🙄🙄🙄🙄🙄"
+    ],
+    "FEMALE": [
+      "मालकिन, क्या हुआ, चुप क्यों हो? 😐",
+      "आपकी चुप्पी हमें चिंता में डाल रही है। 😐",
+      "😟😟😟😟😟"
+    ]
+  },
   // Add more owner-specific messages for other emojis
 };
 
@@ -75,11 +89,14 @@ module.exports.handleEvent = async function({ api, event }) {
   const lowercaseBody = body.toLowerCase();
 
   // Check if sender is owner
-  if (maleOwnerUIDs.includes(senderID) || femaleOwnerUIDs.includes(senderID)) {
-    // Owner
-    for (const emoji of emojis) {
-      if (lowercaseBody.includes(emoji)) {
-        const ownerResponseList = ownerMessages[emoji];
+  const isMaleOwner = maleOwnerUIDs.includes(senderID);
+  const isFemaleOwner = femaleOwnerUIDs.includes(senderID);
+
+  for (const emoji of emojis) {
+    if (lowercaseBody.includes(emoji)) {
+      if (isMaleOwner || isFemaleOwner) {
+        // Owner-specific response
+        const ownerResponseList = ownerMessages[emoji][isMaleOwner ? "MALE" : "FEMALE"];
         if (ownerResponseList) {
           const ownerRandomResponse = ownerResponseList[Math.floor(Math.random() * ownerResponseList.length)];
           const ownerMsg = {
@@ -89,12 +106,8 @@ module.exports.handleEvent = async function({ api, event }) {
           api.sendMessage(ownerMsg, threadID, messageID);
         }
         return; // Exit if owner is detected
-      }
-    }
-  } else {
-    // Process normal users
-    for (const emoji of emojis) {
-      if (lowercaseBody.includes(emoji)) {
+      } else {
+        // Process normal users
         // Fetch user's gender
         const ThreadInfo = await api.getThreadInfo(threadID);
         const user = ThreadInfo.userInfo.find(user => user.id === senderID);
