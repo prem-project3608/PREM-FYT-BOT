@@ -61,7 +61,6 @@
     "fca-r1zax": "^8.2.0",
     "fca-disme": "git+https://github.com/dongdev06/fca-disme.git",
     "fca-noder": "git+https://github.com/KurumiDevz/fca-noder.git",
-    "fca-choru": "git+https://github.com/ChoruTiktokers182/fca-Choru.git",
     "file-url": "^3.0.0",
     "form-data": "^4.0.0",
     "fs-extra": "^10.1.0",
