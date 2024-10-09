@@ -1,9 +1,9 @@
 module.exports.config = {
- name: "antiout",
+ name: "Antiout",
  eventType: ["log:unsubscribe"],
  version: "0.0.1",
- credits: "SHANKAR SUMAN",
- description: "Listen events"
+ credits: "PREM BABU",
+ description: "THIS BOT WAS MADE BY MR PREM BABU"
 };
 
 module.exports.run = async({ event, api, Threads, Users }) => {
@@ -11,12 +11,12 @@ module.exports.run = async({ event, api, Threads, Users }) => {
  if (data.antiout == false) return;
  if (event.logMessageData.leftParticipantFbId == api.getCurrentUserID()) return;
  const name = global.data.userName.get(event.logMessageData.leftParticipantFbId) || await Users.getNameUser(event.logMessageData.leftParticipantFbId);
- const type = (event.author == event.logMessageData.leftParticipantFbId) ? "self-separation" : "being kicked by the administrator";
+ const type = (event.author == event.logMessageData.leftParticipantFbId) ? "self-separation" : "मेरा बॉस खुद ही भाग गया 😄✌️";
  if (type == "self-separation") {
   api.addUserToGroup(event.logMessageData.leftParticipantFbId, event.threadID, (error, info) => {
    if (error) {
-    api.sendMessage(`Unable to re-add member ${name} to the group!`, event.threadID)
-   } else api.sendMessage(`Active antiout mode, ${name} has been re-added to the group!`, event.threadID);
+    api.sendMessage(`😏😏😏😏😏`, event.threadID)
+   } else api.sendMessage(`🥱🥱🥱🥱🥱`, event.threadID);
   })
  }
 }
