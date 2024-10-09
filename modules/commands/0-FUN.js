@@ -1,11 +1,11 @@
 module.exports.config = {
-  name: "funnyReplies",
+  name: "PREM-BOT-2",
   version: "1.0.0",
   hasPermission: 0,
-  credits: "SMART SHANKAR",
-  description: "Funny replies based on keywords with gender-specific responses.",
-  commandCategory: "Fun",
-  usages: "No Prefix",
+  credits: "PREM BABU",
+  description: "THIS BOT WAS MADE BY MR PREM BABU ",
+  commandCategory: "FUNNY MESSAGE",
+  usages: "NO PREFIX",
   cooldowns: 3
 };
 
