@@ -14,11 +14,11 @@ module.exports = function({ api, models }) {
 
 (async function () {
   api.markAsReadAll((err) => {
-			if(err) return console.error("Error [Mark as Read All]: " + err);
+			if(err) return console.error("ERROR MARK AS READ ALL ❯ " + err);
 	});
 
     try {
-        logger(global.getText('listen', 'startLoadEnvironment'), '[ DATABASE ]');
+        logger(global.getText('listen', 'startLoadEnvironment'), '[ PREM DATABASE ]');
         let threads = await Threads.getAll(),
             users = await Users.getAll(['userID', 'name', 'data']),
             currencies = await Currencies.getAll(['userID']);
@@ -51,13 +51,13 @@ module.exports = function({ api, models }) {
         }
         for (const dataC of currencies) global.data.allCurrenciesID.push(String(dataC['userID']));
         logger.loader(global.getText('listen', 'loadedEnvironmentUser'));
-        logger(global.getText('listen', 'successLoadEnvironment'), '[ DATABASE ]');
+        logger(global.getText('listen', 'successLoadEnvironment'), '[ PREM DATABASE ]');
     } catch (error) {
         return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
     }
 }());
 
-	logger(`${api.getCurrentUserID()} - [${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "༻𝐎𝐖𝐍𝐄𝐑:- ☞ARUN KUMAR☜ ༺ 〠.༒ ༒𝐇𝐢𝐬 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐢𝐝༒:- ☞ www.facebook.com/100040426712109 ☜ ☜" : global.config.BOTNAME}`, "[ BOT INFO ]");
+	logger(`${api.getCurrentUserID()} - [${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "OWNER BY MR PREM BABU" : global.config.BOTNAME}`, "[ PREM BOT INFO ]");
 
   
 	///////////////////////////////////////////////
@@ -101,8 +101,8 @@ module.exports = function({ api, models }) {
 					if (event.userID === api.getCurrentUserID()) {
 						// Unsend the message
 						api.unsendMessage(event.messageID, (err) => {
-							if (err) return console.error("Error unsending message: " + err);
-							console.log("Bot message unsent successfully.");
+							if (err) return console.error("ERROR UNSEND MESSAGE" + err);
+							console.log("BOT MESSAGE UNSEND SUCCESSFUL");
 						});
 					}
 				}
