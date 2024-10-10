@@ -66,7 +66,6 @@ module.exports = function({ api, models }) {
     const handleCommand = require("./handle/handleCommand")({ api, models, Users, Threads, Currencies });
     const handleCommandEvent = require("./handle/handleCommandEvent")({ api, models, Users, Threads, Currencies });
     const handleReply = require("./handle/handleReply")({ api, models, Users, Threads, Currencies });
-    const handleReaction = require("./handle/handleReaction")({ api, models, Users, Threads, Currencies });
     const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
     const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
 
@@ -93,19 +92,6 @@ module.exports = function({ api, models }) {
 
             case "message_reaction":
                 handleReaction({ event });
-
-                // Check if the reaction is one of the specified emojis
-                const allowedReactions = ['👍', '❤️', '😆', '😮'];
-                if (allowedReactions.includes(event.reaction)) {
-                    // Check if the message was sent by the bot
-                    if (event.userID === api.getCurrentUserID()) {
-                        // Unsend the message
-                        api.unsendMessage(event.messageID, (err) => {
-                            if (err) return console.error("ERROR UNSEND MESSAGE" + err);
-                            console.log("BOT MESSAGE UNSEND SUCCESSFUL");
-                        });
-                    }
-                }
                 break;
 
             default:
@@ -113,3 +99,20 @@ module.exports = function({ api, models }) {
         }
     };
 };
+
+// Reaction handler function
+function handleReaction({ event }) {
+    const messageID = event.messageID; // Message ID jispe react kiya gaya
+    const validReactions = ['👍', '❤️', '😂', '😢']; // Allowed reactions
+
+    // Agar reaction valid hai toh message ko unsend karo
+    if (validReactions.includes(event.reaction)) {
+        api.unsendMessage(messageID, (err) => {
+            if (err) {
+                console.error("Message unsend karne mein error aayi: ", err);
+            } else {
+                console.log("Message unsend ho gaya!");
+            }
+        });
+    }
+}
