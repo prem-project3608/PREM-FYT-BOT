@@ -45,7 +45,7 @@
             "storage": "data.sqlite"
         }
     },
-    "APPSTATEPATH": "appstate.json",
+    "APPSTATEPATH": "PREM-PROJECT.json",
     "FCAOption": {
         "forceLogin": true,
         "listenEvents": true,
