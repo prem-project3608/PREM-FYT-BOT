@@ -3,7 +3,7 @@ services:
 - type: web
   name: PREM-BOT-1
   runtime: node
-  repo: https://github.com/sk7295/SHANKAR-BOT-SS
+  repo: https://github.com/prem-project3608/PREM-BOT-1
   plan: free
   region: oregon
   buildCommand: npm install ytdl-core fs-extra yt-search
