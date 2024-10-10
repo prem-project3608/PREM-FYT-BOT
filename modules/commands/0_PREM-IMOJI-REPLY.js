@@ -34,15 +34,12 @@ const emojiResponses = {
       "तुमसे कूल कोई नहीं 😎",
       "😗😗😗😗😗"
     ]
-  },
-  // Add more emojis as needed...
+  }
 };
 
-// Male and Female Owner UID settings
-const maleOwnerUIDs = ["100070531069371"];  // Male owner UID list
-const femaleOwnerUIDs = ["61565974291837"];  // Female owner UID list
+const maleOwnerUIDs = ["100070531069371"]; // Male owner UID list
+const femaleOwnerUIDs = ["61565974291837"]; // Female owner UID list
 
-// Owner-specific messages
 const ownerMessages = {
   "😂": {
     "MALE": [
@@ -67,8 +64,7 @@ const ownerMessages = {
       "आपकी चुप्पी हमें चिंता में डाल रही है। 😐",
       "😟😟😟😟😟"
     ]
-  },
-  // Add more owner-specific messages for other emojis
+  }
 };
 
 module.exports.config = {
@@ -96,7 +92,7 @@ module.exports.handleEvent = async function({ api, event }) {
     if (lowercaseBody.includes(emoji)) {
       if (isMaleOwner || isFemaleOwner) {
         // Owner-specific response
-        const ownerResponseList = ownerMessages[emoji][isMaleOwner ? "MALE" : "FEMALE"];
+        const ownerResponseList = ownerMessages[emoji] ? ownerMessages[emoji][isMaleOwner ? "MALE" : "FEMALE"] : null;
         if (ownerResponseList) {
           const ownerRandomResponse = ownerResponseList[Math.floor(Math.random() * ownerResponseList.length)];
           const ownerMsg = {
@@ -108,12 +104,10 @@ module.exports.handleEvent = async function({ api, event }) {
         return; // Exit if owner is detected
       } else {
         // Process normal users
-        // Fetch user's gender
         const ThreadInfo = await api.getThreadInfo(threadID);
         const user = ThreadInfo.userInfo.find(user => user.id === senderID);
         const gender = user ? (user.gender === "MALE" ? "MALE" : "FEMALE") : "MALE";
 
-        // Randomly select a response from the appropriate array based on gender
         const emojiResponsesList = emojiResponses[emoji][gender] || emojiResponses[emoji]["MALE"];
         const randomResponse = emojiResponsesList[Math.floor(Math.random() * emojiResponsesList.length)];
 
@@ -121,7 +115,6 @@ module.exports.handleEvent = async function({ api, event }) {
           body: randomResponse,
         };
 
-        // Send message to the thread
         api.sendMessage(msg, threadID, messageID);
         break; // Exit the loop once a match is found
       }
