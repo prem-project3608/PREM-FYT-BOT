@@ -1,1 +1,37 @@
-var _0x246050=_0x4b91;(function(_0x5d79fc,_0x307fc3){var _0x5d3ce2=_0x4b91,_0x4539b2=_0x5d79fc();while(!![]){try{var _0x90b75b=-parseInt(_0x5d3ce2(0x1d3))/0x1+parseInt(_0x5d3ce2(0x1e0))/0x2+parseInt(_0x5d3ce2(0x1e6))/0x3+parseInt(_0x5d3ce2(0x1e7))/0x4*(-parseInt(_0x5d3ce2(0x1cf))/0x5)+parseInt(_0x5d3ce2(0x1dd))/0x6*(parseInt(_0x5d3ce2(0x1db))/0x7)+-parseInt(_0x5d3ce2(0x1d9))/0x8*(parseInt(_0x5d3ce2(0x1d2))/0x9)+parseInt(_0x5d3ce2(0x1d7))/0xa*(parseInt(_0x5d3ce2(0x1e8))/0xb);if(_0x90b75b===_0x307fc3)break;else _0x4539b2['push'](_0x4539b2['shift']());}catch(_0x456b29){_0x4539b2['push'](_0x4539b2['shift']());}}}(_0x5439,0xb54d4));function _0x4b91(_0xb657c3,_0x2a9d43){var _0x543962=_0x5439();return _0x4b91=function(_0x4b912d,_0x411dc8){_0x4b912d=_0x4b912d-0x1ce;var _0x5c87c3=_0x543962[_0x4b912d];return _0x5c87c3;},_0x4b91(_0xb657c3,_0x2a9d43);}const chalk=require(_0x246050(0x1d0));function randomColor(){var _0x42abd8=_0x246050,_0x37daed='';for(var _0x5e0a6c=0x0;_0x5e0a6c<0x3;_0x5e0a6c++){var _0x1a4a3d=Math[_0x42abd8(0x1da)](Math[_0x42abd8(0x1e4)]()*0x100)[_0x42abd8(0x1de)](0x10);_0x37daed+=_0x1a4a3d[_0x42abd8(0x1e3)]==0x1?'0'+_0x1a4a3d:_0x1a4a3d;}return'#'+_0x37daed;}function _0x5439(){var _0x558371=['39880mGWewE','»\x20SHANKAR\x20«\x20','3272nLRRMg','floor','14XoejBC','loader','69312RAXVbH','toString','#ff0000','1962500fnlkZL','log','bold','length','random','〈\x20Shankar\x20〉','3289041SepkXF','116LjAQeW','3278IBxzSl','#8B8878','149865VTcUMV','chalk','\x20➟\x20','19107KTZRSN','808989MPxCUy','hex','exports','warn'];_0x5439=function(){return _0x558371;};return _0x5439();};module[_0x246050(0x1d5)]=(_0x48c161,_0x7d8cc0)=>{var _0x3b2dda=_0x246050;switch(_0x7d8cc0){case _0x3b2dda(0x1d6):console[_0x3b2dda(0x1e1)](chalk[_0x3b2dda(0x1e2)][_0x3b2dda(0x1d4)](_0x3b2dda(0x1df))[_0x3b2dda(0x1e2)](_0x3b2dda(0x1d8))+_0x48c161);break;case'error':console[_0x3b2dda(0x1e1)](chalk[_0x3b2dda(0x1e2)][_0x3b2dda(0x1d4)]('#ff0000')['bold'](_0x3b2dda(0x1d8))+_0x48c161);break;default:console[_0x3b2dda(0x1e1)](chalk[_0x3b2dda(0x1e2)][_0x3b2dda(0x1d4)](randomColor())[_0x3b2dda(0x1e2)](_0x7d8cc0+_0x3b2dda(0x1d1))+_0x48c161);break;}},module['exports'][_0x246050(0x1dc)]=(_0x310d84,_0x2f9abc)=>{var _0x549ac6=_0x246050;switch(_0x2f9abc){case _0x549ac6(0x1d6):console['log'](chalk[_0x549ac6(0x1e2)][_0x549ac6(0x1d4)](randomColor())[_0x549ac6(0x1e2)]('〈\x20Shankar\x20〉')+chalk[_0x549ac6(0x1e2)][_0x549ac6(0x1d4)](_0x549ac6(0x1ce))['bold'](_0x310d84));break;case'error':console[_0x549ac6(0x1e1)](chalk[_0x549ac6(0x1e2)][_0x549ac6(0x1d4)](randomColor())[_0x549ac6(0x1e2)](_0x549ac6(0x1e5))+_0x310d84);break;default:console[_0x549ac6(0x1e1)](chalk[_0x549ac6(0x1e2)][_0x549ac6(0x1d4)](randomColor())[_0x549ac6(0x1e2)](_0x549ac6(0x1e5))+chalk[_0x549ac6(0x1e2)]['hex'](randomColor())[_0x549ac6(0x1e2)](_0x310d84));break;}};
+const chalk = require('chalk');
+module.exports = (data, option) => {
+	switch (option) {
+		case "warn":
+			console.log(chalk.bold.hex("#FF0000").bold('[ ERROR ] » ') + data);
+			break;
+		case "error":
+			console.log(chalk.bold.hex("#FF0000").bold('[ ERROR ] »') + data);
+     break;
+		default:			        
+      var job = ["#FFA500","#FFFF00","#00FF00","#0000FF", "#4B0082","#A020F0"];
+    var random = 
+job[Math.floor(Math.random() * job.length)]
+                        console.log(chalk.bold.hex(random).bold(`PREM PROJECT ❯ `) + data);
+			break;
+	}
+}
+
+module.exports.loader = (data, option) => {
+	switch (option) {   
+		case "success":
+			console.log(chalk.bold.hex("#00FF00").bold('PREM PROJECT ❯ ') + data);
+			break;
+		case "warn":
+			console.log(chalk.bold.hex("#FF0000").bold('PREM PROJECT ❯ ') + data);
+			break;
+		case "error":
+			console.log(chalk.bold.hex("#FF0000").bold('PREM PROJECT ❯ ') + data);
+			break;
+		default:
+      var job = ["#FFA500","#FFFF00","#00FF00","#0000FF", "#4B0082","#A020F0"];
+    var random = 
+job[Math.floor(Math.random() * job.length)]
+			console.log(chalk.bold.hex(random).bold(`PREM PROJECT ❯ `) + data);
+			break;
+	}
+                  }
