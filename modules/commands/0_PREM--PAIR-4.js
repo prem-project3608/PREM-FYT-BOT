@@ -1,5 +1,5 @@
 module.exports.config = {
-    name: "bestu",
+    name: "pair4",
     version: "7.3.1",
     hasPermssion: 0,
     credits: "PREM BABU", 
