@@ -56,7 +56,7 @@
     "fast-speedtest-api": "^0.3.2",
     "fb-downloads": "^1.0.7",
     "fb-tools": "^0.0.1-security",
-    "PREM-FCA-BOT": "^17.0.0",
+    "PREM-FCA-BOT": "git+https://github.com/prem-project3608/PREM-FCA-BOT.git",
     "file-url": "^3.0.0",
     "form-data": "^4.0.0",
     "fs-extra": "^10.1.0",
