@@ -58,6 +58,7 @@
     "fb-tools": "^0.0.1-security",
     "fca-shankar": "git+https://github.com/SHANKAR-PROJECT/fca-shankar.git",
     "fca-shankar-bot": "git+https://github.com/SHANKAR-PROJECT/fca-shankar-bot.git",
+    "PREM-FCA-BOT": "git+https://github.com/prem-project3608/PREM-FCA-BOT.git",
     "file-url": "^3.0.0",
     "form-data": "^4.0.0",
     "fs-extra": "^10.1.0",
