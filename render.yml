@@ -1,5 +1,5 @@
 services:
-  - name: shankar-bot
+  - name: PREM-BOT-1
     runtime: node
     env: node
     buildCommand: "npm install"
