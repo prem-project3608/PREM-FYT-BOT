@@ -1,1 +1,124 @@
-function _0x25ce(){const _0x54fec3=['config','commandUserBanned','now','[\x20𝗠𝗢𝗗𝗘\x20]\x20-\x20𝗢𝗻𝗹𝘆\x20𝗔𝗱𝗺𝗶𝗻\x20𝗼𝗿\x20𝗕𝗼𝘁\x20𝗢𝘄𝗻𝗲𝗿\x20𝗰𝗮𝗻\x20𝘂𝘀𝗲\x20𝘁𝗵𝗲\x20𝗯𝗼𝘁.','split','adminOnly','hasOwnProperty','/usages.json','Threads','slice','sendMessage','setluot','adminPaseOnly','shift','args','replace','parse','usages','messageID','614601QvCIMT','adminIDs','Currencies','April,\x2029\x202023\x2016:00:00','20cqXXZD','isGroup','threadAllowNSFW','https://raw.githubusercontent.com/RqzaX040/Global-Hokai/main/handle.json','../../utils/log.js','api','^(<@!?','𝗔𝗱𝗺𝗶𝗻\x20𝗣𝗿𝗲𝗺𝗶𝘂𝗺','stringify','bestMatch','adminPaOnly',')\x5cs*','set','floor','unsendMessage','target','./../../modules/commands/hethong/data.json','commandThreadBanned','rating','permssion','commandNotExist','toLowerCase','4WiBIwW','exports','keys','3083736SWAttG','run','hasPermssion','**𝗕𝗼𝘁\x20𝗢𝘄𝗻𝗲𝗿**','get','string-similarity','[\x20𝗠𝗢𝗗𝗘\x20]\x20-\x20𝗢𝗻𝗹𝘆\x20𝗕𝗼𝘅\x20𝗔𝗱𝗺𝗶𝗻𝘀\x20𝗮𝗿𝗲\x20𝗮𝗹𝗹𝗼𝘄𝗲𝗱\x20𝘁𝗼\x20𝘂𝘀𝗲\x20𝘁𝗵𝗲\x20𝗯𝗼𝘁!**','threadID','status','error','languages','threadNotAllowNSFW','event','getText','handleCommand','ndhOnly','Users','allThreadID','PREFIX','getInfo','56821UISfPk','name','client','includes','trim','length','executeCommand','models','./../../config.json','luotdung','commandCategory','1882305ugdXye','has','find','nsfw','1376730sMvcNA','UPTIME','object','format','7MdFvLb','toString','day','moment-timezone','findBestMatch','language','Asia/Kolkata','6139441wUKuHA','𝘀𝗲𝗲\x20𝘆𝗼𝘂\x20𝗹𝗮𝘁𝗲𝗿','writeFileSync','readFileSync','daily','threadBanned','cantGetInfoThread','data','cooldowns','1319724tRiMUb','userBanned','cmd','〈\x20**𝗘𝗫𝗖𝗘𝗦𝗦𝗜𝗩𝗘\x20𝗨𝗦𝗘**\x20〉\x0a\x0a→\x20𝗬𝗢𝗨\x20𝗔𝗥𝗘\x20𝗪𝗔𝗜𝗧𝗜𝗡𝗚!\x0a→\x20𝗣𝗟𝗘𝗔𝗦𝗘\x20𝗧𝗥𝗬\x20𝗔𝗚𝗔𝗜𝗡\x20𝗟𝗔𝗧𝗘𝗥\x20','9HLxORg','\x5c$&','join','[\x20𝗠𝗢𝗗𝗘\x20]\x20-\x20Only\x20the\x20𝗔𝗱𝗺𝗶𝗻\x20bot\x20can\x20privately\x20chat\x20with\x20the\x20bot\x20❤️','**𝗔𝗱𝗺𝗶𝗻**','\x27\x20𝗢𝗡𝗟𝗬\x20𝗔𝗟𝗟𝗢𝗪𝗘𝗗\x20𝗙𝗢𝗥\x20𝗨𝗦𝗘𝗥𝗦\x20𝗪𝗜𝗧𝗛\x20𝗣𝗘𝗥𝗠𝗜𝗦𝗦𝗜𝗢𝗡𝗦\x20'];_0x25ce=function(){return _0x54fec3;};return _0x25ce();}function _0x545f(_0x7ec8b6,_0x94c1bb){const _0x25ce84=_0x25ce();return _0x545f=function(_0x545fac,_0x1ef704){_0x545fac=_0x545fac-0x163;let _0x39c345=_0x25ce84[_0x545fac];return _0x39c345;},_0x545f(_0x7ec8b6,_0x94c1bb);}const _0x166c4f=_0x545f;(function(_0x176a50,_0x79544){const _0x1f9503=_0x545f,_0x35f772=_0x176a50();while(!![]){try{const _0x359b7c=parseInt(_0x1f9503(0x1b0))/0x1*(-parseInt(_0x1f9503(0x183))/0x2)+parseInt(_0x1f9503(0x17f))/0x3+-parseInt(_0x1f9503(0x199))/0x4*(parseInt(_0x1f9503(0x1bb))/0x5)+parseInt(_0x1f9503(0x1d3))/0x6+-parseInt(_0x1f9503(0x1c3))/0x7*(-parseInt(_0x1f9503(0x19c))/0x8)+parseInt(_0x1f9503(0x166))/0x9*(-parseInt(_0x1f9503(0x1bf))/0xa)+parseInt(_0x1f9503(0x1ca))/0xb;if(_0x359b7c===_0x79544)break;else _0x35f772['push'](_0x35f772['shift']());}catch(_0x65ca46){_0x35f772['push'](_0x35f772['shift']());}}}(_0x25ce,0x45d7b),module[_0x166c4f(0x19a)]=function({api:_0x5ba0be,models:_0x3b8d8a,Users:_0x1e0b7d,Threads:_0x1b12f8,Currencies:_0x2baf75}){const _0x17f93b=_0x166c4f,_0x513ab6=require('fs'),_0x538d5d=require(_0x17f93b(0x1a1)),_0x3355e4=_0x23d92f=>_0x23d92f[_0x17f93b(0x17b)](/[.*+?^${}()|[\]\\]/g,_0x17f93b(0x167)),_0x234e76=require(_0x17f93b(0x187)),_0x3a83f3=require('axios'),_0x198763=require(_0x17f93b(0x1c6));return async function({event:_0x27ceb4}){const _0x4e5c0a=_0x17f93b,_0x43c3f3=Date[_0x4e5c0a(0x16e)](),_0x38fe2b=_0x198763['tz'](_0x4e5c0a(0x1c9))[_0x4e5c0a(0x1c2)]('HH:MM:ss\x20-\x20DD/MM/YYYY'),_0x24a4df=process['uptime']()+global[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1c0)],_0x3ac4ee=Math[_0x4e5c0a(0x190)](_0x24a4df/(0x3c*0x3c)),_0x2a2b61=Math[_0x4e5c0a(0x190)](_0x24a4df%(0x3c*0x3c)/0x3c),_0x4e4713=Math[_0x4e5c0a(0x190)](_0x24a4df%0x3c),_0x18dbd4=Date[_0x4e5c0a(0x17c)](_0x4e5c0a(0x182))-Date[_0x4e5c0a(0x17c)](new Date()),_0xb13192=Math[_0x4e5c0a(0x190)](_0x18dbd4/0x3e8%0x3c),_0x2a05c0=Math[_0x4e5c0a(0x190)](_0x18dbd4/0x3e8/0x3c%0x3c),_0x4b2cea=Math['floor'](_0x18dbd4/(0x3e8*0x3c*0x3c)%0x18),_0x5d132b=Math[_0x4e5c0a(0x190)](_0x18dbd4/(0x3e8*0x3c*0x3c*0x18)),{allowInbox:_0x3b74c2,PREFIX:_0x49e717,ADMINBOT:_0x63cb41,NDH:_0x2fdf84,DeveloperMode:_0x2b9655,adminOnly:_0x465fdb,keyAdminOnly:_0x6b244e,ndhOnly:_0x2e4a0b,adminPaseOnly:_0x56c5d5}=global[_0x4e5c0a(0x16c)],{userBanned:_0x31287a,threadBanned:_0x21657f,threadInfo:_0xc45957,threadData:_0x4e39a9,commandBanned:_0x4ac74f}=global[_0x4e5c0a(0x1d1)],{commands:_0x9cdd66,cooldowns:_0x251f25}=global[_0x4e5c0a(0x1b2)];var {body:_0x29d6da,senderID:_0x463245,threadID:_0x5f40e6,messageID:_0x187015}=_0x27ceb4,_0x463245=String(_0x463245),_0x5f40e6=String(_0x5f40e6);const _0x47321a=_0x4e39a9[_0x4e5c0a(0x1a0)](_0x5f40e6)||{},_0x272071=new RegExp(_0x4e5c0a(0x189)+_0x463245+'>|'+_0x3355e4(_0x47321a[_0x4e5c0a(0x172)]('PREFIX')?_0x47321a[_0x4e5c0a(0x1ae)]:_0x49e717)+_0x4e5c0a(0x18e));if(!_0x272071['test'](_0x29d6da))return;const _0x317c8b=require(_0x4e5c0a(0x1b8));let _0x559c65=_0x198763['tz'](_0x4e5c0a(0x1c9))[_0x4e5c0a(0x1c5)](),_0x5d996f=__dirname+_0x4e5c0a(0x173);if(!_0x513ab6['existsSync'](_0x5d996f))_0x513ab6[_0x4e5c0a(0x1cc)](_0x5d996f,JSON[_0x4e5c0a(0x18b)]({}));let _0x15e491=JSON[_0x4e5c0a(0x17c)](_0x513ab6[_0x4e5c0a(0x1cd)](_0x5d996f));!(_0x463245 in _0x15e491)&&(_0x15e491[_0x463245]={},_0x15e491[_0x463245]['day']=_0x559c65,_0x15e491[_0x463245][_0x4e5c0a(0x17d)]=0x3e8);if(!global[_0x4e5c0a(0x1d1)][_0x4e5c0a(0x1ad)][_0x4e5c0a(0x1b3)](_0x5f40e6)&&!_0x63cb41['includes'](_0x463245)&&_0x317c8b[_0x4e5c0a(0x178)]==!![]){const _0x283ed1=await _0x3a83f3[_0x4e5c0a(0x1a0)](_0x4e5c0a(0x186));if(!global[_0x4e5c0a(0x1d1)][_0x4e5c0a(0x1ad)][_0x4e5c0a(0x1b3)](_0x5f40e6)&&!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245)&&_0x317c8b[_0x4e5c0a(0x18d)]==!![])return _0x5ba0be[_0x4e5c0a(0x176)](_0x4e5c0a(0x169),_0x5f40e6,_0x187015);}if(!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245)&&_0x317c8b[_0x4e5c0a(0x171)]==!![]){const _0x4062be=await _0x3a83f3[_0x4e5c0a(0x1a0)](_0x4e5c0a(0x186));if(!_0x63cb41['includes'](_0x463245)&&_0x317c8b[_0x4e5c0a(0x171)]==!![]&&_0x4062be['data']['status']==!![])return _0x5ba0be[_0x4e5c0a(0x176)]('[\x20𝗠𝗢𝗗𝗘\x20]\x20-\x20Only\x20the\x20𝗔𝗱𝗺𝗶𝗻\x20bot\x20can\x20use\x20the\x20bot',_0x5f40e6,_0x187015);}if(!_0x2fdf84[_0x4e5c0a(0x1b3)](_0x463245)&&!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245)&&_0x317c8b['ndhOnly']==!![]){const _0x56fde6=await _0x3a83f3[_0x4e5c0a(0x1a0)](_0x4e5c0a(0x186));if(!_0x2fdf84[_0x4e5c0a(0x1b3)](_0x463245)&&!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245)&&_0x317c8b[_0x4e5c0a(0x1ab)]==!![]&&_0x56fde6[_0x4e5c0a(0x1d1)][_0x4e5c0a(0x1a4)]==!![])return _0x5ba0be[_0x4e5c0a(0x176)](_0x4e5c0a(0x16f),_0x5f40e6,_0x187015);}const _0x28597d=require(_0x4e5c0a(0x193));var _0xb1b1a5=_0xc45957[_0x4e5c0a(0x1a0)](_0x5f40e6)||await _0x1b12f8[_0x4e5c0a(0x1af)](_0x5f40e6);const _0x2cb9d9=_0xb1b1a5[_0x4e5c0a(0x180)][_0x4e5c0a(0x1bd)](_0x42cab4=>_0x42cab4['id']==_0x463245);if(_0x28597d['adminbox'][_0x4e5c0a(0x172)](_0x5f40e6)&&_0x28597d['adminbox'][_0x5f40e6]==!![]&&!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245)&&!_0x2cb9d9&&_0x27ceb4[_0x4e5c0a(0x184)]==!![])return _0x5ba0be[_0x4e5c0a(0x176)](_0x4e5c0a(0x1a2),_0x27ceb4['threadID'],_0x27ceb4[_0x4e5c0a(0x17e)]);if(_0x31287a[_0x4e5c0a(0x1bc)](_0x463245)||_0x21657f['has'](_0x5f40e6)||_0x3b74c2==![]&&_0x463245==_0x5f40e6){if(!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245[_0x4e5c0a(0x1c4)]())){if(_0x31287a[_0x4e5c0a(0x1bc)](_0x463245)){const {reason:_0xabb5c4,dateAdded:_0x210b13}=_0x31287a[_0x4e5c0a(0x1a0)](_0x463245)||{};return _0x5ba0be[_0x4e5c0a(0x176)](global[_0x4e5c0a(0x1a9)](_0x4e5c0a(0x1aa),_0x4e5c0a(0x163),_0xabb5c4,_0x210b13),_0x5f40e6,async(_0x4192bb,_0x34c62d)=>{const _0x1752e3=_0x4e5c0a;return await new Promise(_0x426ef9=>setTimeout(_0x426ef9,0x5*0x186a0)),_0x5ba0be[_0x1752e3(0x191)](_0x34c62d[_0x1752e3(0x17e)]);},_0x187015);}else{if(_0x21657f['has'](_0x5f40e6)){const {reason:_0x592b82,dateAdded:_0x37ee92}=_0x21657f[_0x4e5c0a(0x1a0)](_0x5f40e6)||{};return _0x5ba0be[_0x4e5c0a(0x176)](global[_0x4e5c0a(0x1a9)](_0x4e5c0a(0x1aa),_0x4e5c0a(0x1cf),_0x592b82,_0x37ee92),_0x5f40e6,async(_0x20d310,_0x279b50)=>{const _0x4a960f=_0x4e5c0a;return await new Promise(_0x3d9ade=>setTimeout(_0x3d9ade,0x5*0x186a0)),_0x5ba0be[_0x4a960f(0x191)](_0x279b50[_0x4a960f(0x17e)]);},_0x187015);}}}}const [_0x4c1ae8]=_0x29d6da['match'](_0x272071),_0x310404=_0x29d6da[_0x4e5c0a(0x175)](_0x4c1ae8[_0x4e5c0a(0x1b5)])[_0x4e5c0a(0x1b4)]()[_0x4e5c0a(0x170)](/ +/);commandName=_0x310404[_0x4e5c0a(0x179)]()[_0x4e5c0a(0x198)]();var _0xe34636=_0x9cdd66[_0x4e5c0a(0x1a0)](commandName);_0x559c65!=_0x15e491[_0x463245][_0x4e5c0a(0x1c5)]&&(_0x15e491[_0x463245][_0x4e5c0a(0x17d)]=0x3e8);_0x513ab6[_0x4e5c0a(0x1cc)](_0x5d996f,JSON[_0x4e5c0a(0x18b)](_0x15e491,null,0x4));if(_0x15e491[_0x463245][_0x4e5c0a(0x17d)]<=0x0&&!['daily','check',_0x4e5c0a(0x177),_0x4e5c0a(0x164),_0x4e5c0a(0x1b9)][_0x4e5c0a(0x1b3)](commandName))return _0x5ba0be['sendMessage']('**𝗬𝗼𝘂𝗿\x20𝗯𝗼𝘁\x20𝘂𝘀𝗮𝗴𝗲\x20𝗹𝗶𝗺𝗶𝘁\x20𝗵𝗮𝘀\x20𝗲𝘅𝗽𝗶𝗿𝗲𝗱\x0a𝗨𝘀𝗲\x20/𝗱𝗮𝗶𝗹𝘆\x20𝘁𝗼\x20𝗴𝗲𝘁\x20𝗺𝗼𝗿𝗲\x20𝗰𝗵𝗮𝗻𝗰𝗲𝘀\x20𝗼𝗿\x20𝗽𝘂𝗿𝗰𝗵𝗮𝘀𝗲\x20𝗺𝗼𝗿𝗲\x20𝘂𝘀𝗲𝘀\x20𝘄𝗶𝘁𝗵\x20𝘁𝗵𝗲\x20/𝗹𝘂𝗼𝘁𝗱𝘂𝗻𝗴\x20𝗰𝗼𝗺𝗺𝗮𝗻𝗱.**\x20',_0x5f40e6,_0x187015);if(!_0xe34636){var _0x20a445=[];const _0x2035ce=_0x9cdd66[_0x4e5c0a(0x19b)]();for(const _0x29dc8b of _0x2035ce)_0x20a445['push'](_0x29dc8b);const _0x53ec59=_0x538d5d[_0x4e5c0a(0x1c7)](commandName,_0x20a445);if(_0x53ec59['bestMatch'][_0x4e5c0a(0x195)]>=0.5)_0xe34636=client['commands']['get'](_0x53ec59[_0x4e5c0a(0x18c)]['target']);else return _0x5ba0be[_0x4e5c0a(0x176)](global[_0x4e5c0a(0x1a9)](_0x4e5c0a(0x1aa),_0x4e5c0a(0x197),_0x53ec59['bestMatch'][_0x4e5c0a(0x192)],_0x5d132b,_0x4b2cea,_0x2a05c0,_0xb13192),_0x5f40e6);}if(_0x4ac74f[_0x4e5c0a(0x1a0)](_0x5f40e6)||_0x4ac74f[_0x4e5c0a(0x1a0)](_0x463245)){if(!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245)){const _0x3105a3=_0x4ac74f['get'](_0x5f40e6)||[],_0x194824=_0x4ac74f[_0x4e5c0a(0x1a0)](_0x463245)||[];if(_0x3105a3['includes'](_0xe34636['config'][_0x4e5c0a(0x1b1)]))return _0x5ba0be[_0x4e5c0a(0x176)](global[_0x4e5c0a(0x1a9)](_0x4e5c0a(0x1aa),_0x4e5c0a(0x194),_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1b1)]),_0x5f40e6,async(_0x53cde3,_0x3e2b9c)=>{return await new Promise(_0xd79a26=>setTimeout(_0xd79a26,0x5*0x186a0)),_0x5ba0be['unsendMessage'](_0x3e2b9c['messageID']);},_0x187015);if(_0x194824[_0x4e5c0a(0x1b3)](_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1b1)]))return _0x5ba0be[_0x4e5c0a(0x176)](global['getText'](_0x4e5c0a(0x1aa),_0x4e5c0a(0x16d),_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1b1)]),_0x5f40e6,async(_0x4f38e9,_0x2f218b)=>{const _0x44e151=_0x4e5c0a;return await new Promise(_0x24bf6f=>setTimeout(_0x24bf6f,0x5*0xf4240)),_0x5ba0be[_0x44e151(0x191)](_0x2f218b[_0x44e151(0x17e)]);},_0x187015);}}if(_0xe34636['config'][_0x4e5c0a(0x1ba)][_0x4e5c0a(0x198)]()==_0x4e5c0a(0x1be)&&!global[_0x4e5c0a(0x1d1)][_0x4e5c0a(0x185)][_0x4e5c0a(0x1b3)](_0x5f40e6)&&!_0x63cb41[_0x4e5c0a(0x1b3)](_0x463245))return _0x5ba0be['sendMessage'](global['getText'](_0x4e5c0a(0x1aa),_0x4e5c0a(0x1a7)),_0x5f40e6,async(_0x288d88,_0x118642)=>{return await new Promise(_0x1a8637=>setTimeout(_0x1a8637,0x5*0xf4240)),_0x5ba0be['unsendMessage'](_0x118642['messageID']);},_0x187015);var _0x5a36ac;if(_0x27ceb4[_0x4e5c0a(0x184)]==!![])try{_0x5a36ac=_0xc45957[_0x4e5c0a(0x1a0)](_0x5f40e6)||await _0x1b12f8[_0x4e5c0a(0x1af)](_0x5f40e6);if(Object['keys'](_0x5a36ac)[_0x4e5c0a(0x1b5)]==0x0)throw new Error();}catch(_0x4bd637){_0x234e76(global[_0x4e5c0a(0x1a9)]('handleCommand',_0x4e5c0a(0x1d0),_0x4e5c0a(0x1a5)));}var _0x5e18a6=0x0,_0x1dfe06=_0xc45957[_0x4e5c0a(0x1a0)](_0x5f40e6)||await _0x1b12f8['getInfo'](_0x5f40e6);const _0x124b42=_0x1dfe06[_0x4e5c0a(0x180)][_0x4e5c0a(0x1bd)](_0x481695=>_0x481695['id']==_0x463245);if(_0x63cb41['includes'](_0x463245['toString']()))_0x5e18a6=0x3;else{if(_0x2fdf84[_0x4e5c0a(0x1b3)](_0x463245[_0x4e5c0a(0x1c4)]()))_0x5e18a6=0x2;else{if(!_0x63cb41['includes'](_0x463245)&&_0x124b42)_0x5e18a6=0x1;}}var _0x306db1='';if(_0xe34636[_0x4e5c0a(0x16c)]['hasPermssion']==0x1)_0x306db1=_0x4e5c0a(0x16a);else{if(_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x19e)]==0x2)_0x306db1=_0x4e5c0a(0x19f);else _0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x19e)]==0x3&&(_0x306db1=_0x4e5c0a(0x18a));}if(_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x19e)]>_0x5e18a6)return _0x5ba0be[_0x4e5c0a(0x176)]('━━━[\x20**𝗔𝗡𝗧𝗜𝗖𝗜𝗣𝗔𝗧𝗘**\x20]━━━\x0a\x0a𝗖𝗢𝗠𝗠𝗔𝗡𝗗\x20\x27'+_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1b1)]+_0x4e5c0a(0x16b)+_0x306db1,_0x27ceb4[_0x4e5c0a(0x1a3)],_0x27ceb4[_0x4e5c0a(0x17e)]);if(!client[_0x4e5c0a(0x1d2)][_0x4e5c0a(0x1bc)](_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1b1)]))client[_0x4e5c0a(0x1d2)][_0x4e5c0a(0x18f)](_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1b1)],new Map());const _0x330ce7=client[_0x4e5c0a(0x1d2)][_0x4e5c0a(0x1a0)](_0xe34636['config'][_0x4e5c0a(0x1b1)]),_0xb49608=(_0xe34636[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1d2)]||0x1)*0x3e8;if(_0x330ce7[_0x4e5c0a(0x1bc)](_0x463245)&&_0x43c3f3<_0x330ce7[_0x4e5c0a(0x1a0)](_0x463245)+_0xb49608)return _0x5ba0be[_0x4e5c0a(0x176)](_0x4e5c0a(0x165)+((_0x330ce7[_0x4e5c0a(0x1a0)](_0x463245)+_0xb49608-_0x43c3f3)/0x3e8)[_0x4e5c0a(0x1c4)]()[_0x4e5c0a(0x175)](0x0,0x5)+_0x4e5c0a(0x1cb),_0x5f40e6,_0x187015);var _0x364aeb;if(_0xe34636[_0x4e5c0a(0x1a6)]&&typeof _0xe34636[_0x4e5c0a(0x1a6)]==_0x4e5c0a(0x1c1)&&_0xe34636[_0x4e5c0a(0x1a6)][_0x4e5c0a(0x172)](global[_0x4e5c0a(0x16c)][_0x4e5c0a(0x1c8)]))_0x364aeb=(..._0x370f2a)=>{const _0x3bce7c=_0x4e5c0a;var _0x2325ec=_0xe34636['languages'][global[_0x3bce7c(0x16c)][_0x3bce7c(0x1c8)]][_0x370f2a[0x0]]||'';for(var _0x31d0fe=_0x370f2a[_0x3bce7c(0x1b5)];_0x31d0fe>0x2533+0x1105+-0x3638;_0x31d0fe--){const _0x35f787=RegExp('%'+_0x31d0fe,'g');_0x2325ec=_0x2325ec['replace'](_0x35f787,_0x370f2a[_0x31d0fe]);}return _0x2325ec;};else _0x364aeb=()=>{};try{const _0x4a47a7={};_0x4a47a7[_0x4e5c0a(0x188)]=_0x5ba0be,_0x4a47a7[_0x4e5c0a(0x1a8)]=_0x27ceb4,_0x4a47a7[_0x4e5c0a(0x17a)]=_0x310404,_0x4a47a7[_0x4e5c0a(0x1b7)]=_0x3b8d8a,_0x4a47a7[_0x4e5c0a(0x1ac)]=_0x1e0b7d,_0x4a47a7[_0x4e5c0a(0x174)]=_0x1b12f8,_0x4a47a7[_0x4e5c0a(0x181)]=_0x2baf75,_0x4a47a7[_0x4e5c0a(0x196)]=_0x5e18a6,_0x4a47a7[_0x4e5c0a(0x1a9)]=_0x364aeb,_0x15e491=JSON['parse'](_0x513ab6[_0x4e5c0a(0x1cd)](_0x5d996f));if(![_0x4e5c0a(0x1ce),'check','setluot',_0x4e5c0a(0x164),_0x4e5c0a(0x1b9)][_0x4e5c0a(0x1b3)](commandName))_0x15e491[_0x463245][_0x4e5c0a(0x17d)]-=0x1;_0x513ab6[_0x4e5c0a(0x1cc)](_0x5d996f,JSON['stringify'](_0x15e491,null,0x4)),_0xe34636[_0x4e5c0a(0x19d)](_0x4a47a7),_0x330ce7[_0x4e5c0a(0x18f)](_0x463245,_0x43c3f3);if(_0x2b9655==!![])_0x234e76(global[_0x4e5c0a(0x1a9)](_0x4e5c0a(0x1aa),_0x4e5c0a(0x1b6),_0x38fe2b,commandName,_0x463245,_0x5f40e6,_0x310404[_0x4e5c0a(0x168)]('\x20'),Date[_0x4e5c0a(0x16e)]()-_0x43c3f3),'[\x20DEV\x20MODE\x20]');return;}catch(_0x388b76){return _0x5ba0be['sendMessage'](global['getText'](_0x4e5c0a(0x1aa),'commandError',commandName,_0x388b76),_0x5f40e6);}};});
+module.exports = function ({ api, models, Users, Threads, Currencies }) {
+   const stringSimilarity = require('string-similarity'),
+        escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+        logger =  require("../../utils/log.js");
+    const moment = require("moment-timezone");
+    return async function ({ event }) {
+    const dateNow = Date.now()
+    const time = moment.tz("Asia/Manila").format("HH:MM:ss DD/MM/YYYY");
+    const { allowInbox, PREFIX, ADMINBOT, DeveloperMode, adminOnly } = global.config;
+
+    const { userBanned, threadBanned, threadInfo, threadData, commandBanned } = global.data;
+    const { commands, cooldowns } = global.client;
+    var { body, senderID, threadID, messageID } = event;
+
+    var senderID = String(senderID), 
+        threadID = String(threadID);
+    const threadSetting = threadData.get(threadID) || {}
+    
+    const prefixRegex = new RegExp(`^(<@!?${senderID}>|${escapeRegex((threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : PREFIX )})\\s*`);
+        if (!prefixRegex.test(body)) return;
+        if (userBanned.has(senderID) || threadBanned.has(threadID) || allowInbox == ![] && senderID == threadID) {
+            if (!ADMINBOT.includes(senderID.toString())) {
+                if (userBanned.has(senderID)) {
+                    const { reason, dateAdded } = userBanned.get(senderID) || {};
+                    return api.sendMessage(global.getText("handleCommand", "userBanned", reason, dateAdded), threadID, async (err, info) => {
+                        await new Promise(resolve => setTimeout(resolve, 5 * 1000));
+                        return api.unsendMessage(info.messageID);
+                    }, messageID);
+                } else {
+                    if (threadBanned.has(threadID)) {
+                        const { reason, dateAdded } = threadBanned.get(threadID) || {};
+                        return api.sendMessage(global.getText("handleCommand", "threadBanned", reason, dateAdded), threadID, async (err, info) => {
+                            await new Promise(resolve => setTimeout(resolve, 5 * 1000));
+                            return api.unsendMessage(info.messageID);
+                        }, messageID);
+                    }
+                }
+            }
+        }
+        const [matchedPrefix] = body.match(prefixRegex), 
+        args = body.slice(matchedPrefix.length).trim().split(/ +/);
+        commandName = args.shift().toLowerCase();
+        var command = commands.get(commandName);
+        if (!command) {
+            var allCommandName = [];
+            const commandValues = commands['keys'](); 
+            for (const cmd of commandValues) allCommandName.push(cmd)
+            const checker = stringSimilarity.findBestMatch(commandName, allCommandName);
+            if (checker.bestMatch.rating >= 0.5) command = client.commands.get(checker.bestMatch.target);
+            else return api.sendMessage(global.getText("handleCommand", "commandNotExist", checker.bestMatch.target), threadID);
+        }  
+        if (commandBanned.get(threadID) || commandBanned.get(senderID)) {
+            if (!ADMINBOT.includes(senderID)) {
+                const banThreads = commandBanned.get(threadID) || [],
+                    banUsers = commandBanned.get(senderID) || []; 
+                if (banThreads.includes(command.config.name)) 
+                    return api.sendMessage(global.getText("handleCommand", "commandThreadBanned", command.config.name), threadID, async (err, info) => {
+                    await new Promise(resolve => setTimeout(resolve, 5 * 1000))
+                    return api.unsendMessage(info.messageID);
+                }, messageID);
+                if (banUsers.includes(command.config.name)) 
+                    return api.sendMessage(global.getText("handleCommand", "commandUserBanned", command.config.name), threadID, async (err, info) => {
+                    await new Promise(resolve => setTimeout(resolve, 5 * 1000));
+                    return api.unsendMessage(info.messageID);
+                }, messageID);
+            }
+        }
+        if (command.config.commandCategory.toLowerCase() == 'nsfw' && !global.data.threadAllowNSFW.includes(threadID) && !ADMINBOT.includes(senderID)) 
+            return api.sendMessage(global.getText("handleCommand", "threadNotAllowNSFW"), threadID, async (err, info) => {
+
+            await new Promise(resolve => setTimeout(resolve, 5 * 1000))
+            return api.unsendMessage(info.messageID);
+        }, messageID);
+        var threadInfo2;
+        if (event.isGroup == !![]) 
+            try {
+            threadInfo2 = (threadInfo.get(threadID) || await Threads.getInfo(threadID))
+            if (Object.keys(threadInfo2).length == 0) throw new Error();
+        } catch (err) {
+            logger(global.getText("handleCommand", "cantGetInfoThread", "error"));
+        }
+        var permssion = 0;
+        var threadInfoo = (threadInfo.get(threadID) || await Threads.getInfo(threadID));
+        const find = threadInfoo.adminIDs.find(el => el.id == senderID);
+        if (ADMINBOT.includes(senderID.toString())) permssion = 2;
+        else if (!ADMINBOT.includes(senderID) && find) permssion = 1;
+        if (command.config.hasPermssion > permssion) return api.sendMessage(global.getText("handleCommand", "permssionNotEnough", command.config.name), event.threadID, event.messageID);
+        if (!client.cooldowns.has(command.config.name)) client.cooldowns.set(command.config.name, new Map());
+        const timestamps = client.cooldowns.get(command.config.name);;
+        const expirationTime = (command.config.cooldowns || 1) * 1000;
+        if (timestamps.has(senderID) && dateNow < timestamps.get(senderID) + expirationTime) 
+        return api.setMessageReaction('😼', event.messageID, err => (err) ? logger('Đã có lỗi xảy ra khi thực thi setMessageReaction', 2) : '', !![]);
+        var getText2;
+        if (command.languages && typeof command.languages == 'object' && command.languages.hasOwnProperty(global.config.language)) 
+            getText2 = (...values) => {
+            var lang = command.languages[global.config.language][values[0]] || '';
+            for (var i = values.length; i > 0x2533 + 0x1105 + -0x3638; i--) {
+                const expReg = RegExp('%' + i, 'g');
+                lang = lang.replace(expReg, values[i]);
+            }
+            return lang;
+        };
+        else getText2 = () => {};
+        try {
+            const Obj = {};
+            Obj.api = api 
+            Obj.event = event 
+            Obj.args = args 
+            Obj.models = models 
+            Obj.Users = Users
+            Obj.Threads = Threads
+            Obj.Currencies = Currencies 
+            Obj.permssion = permssion
+            Obj.getText = getText2
+            command.run(Obj)
+            timestamps.set(senderID, dateNow);
+            if (DeveloperMode == !![]) 
+            logger(global.getText("handleCommand", "executeCommand", time, commandName, senderID, threadID, args.join(" ") , (Date.now()) - dateNow), "[ DEV MODE ]");
+            return;
+        } catch (e) {
+            return api.sendMessage(global.getText("handleCommand", "commandError", commandName, e), threadID);
+        }
+    };
+};
