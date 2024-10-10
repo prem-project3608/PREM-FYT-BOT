@@ -1,7 +1,7 @@
 # Exported from Render on 2024-09-14T21:36:33Z
 services:
 - type: web
-  name: SHANKAR-BOT-SS
+  name: PREM-BOT-1
   runtime: node
   repo: https://github.com/sk7295/SHANKAR-BOT-SS
   plan: free
