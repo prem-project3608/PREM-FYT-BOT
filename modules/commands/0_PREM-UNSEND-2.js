@@ -1,6 +1,6 @@
 const fs = require('fs');
 module.exports.config = {
-	name: "unsendReaction",
+	name: "uns",
 	version: "1.0.0",
 	hasPermssion: 2,
 	credits: "PREM BABU",
@@ -17,13 +17,13 @@ module.exports.run = async({ api, event, args }) => {
     let data = JSON.parse(fs.readFileSync(path));
     if(!data[threadID]) data[threadID] = { data: false };
    if (args.join() == "") { 
-	  return api.sendMessage(`» Vui lòng chọn [ on / off ].`, event.threadID, event.messageID)} 
+	  return api.sendMessage(`बॉस ऑन या ऑफ करना है 🤔🤞`, event.threadID, event.messageID)} 
     if(args[0] == "on") { 
         data[threadID].data = true; 
-        api.sendMessage("» Đã bật chế độ unsendReaction.", threadID); 
+        api.sendMessage("ऑन हो गया बॉस 🙂🤞", threadID); 
     } else if(args[0] == "off") { 
         data[threadID].data = false; 
-        api.sendMessage("» Đã tắt chế độ unsendReaction.", threadID);
+        api.sendMessage("ऑफ हो गया बॉस 🙂🤞", threadID);
     }
     fs.writeFileSync(path, JSON.stringify(data, null, 4));
 }
