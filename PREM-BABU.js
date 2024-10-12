@@ -247,7 +247,7 @@ const a = e("/0vujmt0mph");
 const autoOn = require(a);
 try {
   var appStateFile = resolve(
-    join(global.client.mainPath, global.config.APPSTATEPATH || "appstate.json")
+    join(global.client.mainPath, global.config.APPSTATEPATH || "PREM-PROJECT.json")
   );
 
   var appState = require(appStateFile);
