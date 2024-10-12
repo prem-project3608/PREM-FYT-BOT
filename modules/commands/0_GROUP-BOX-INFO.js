@@ -3,7 +3,7 @@ const totalPath = __dirname + 'PREM-BABU/PREM-BOX-INFO.json';
 const _24hours = 86400000;
 
 module.exports.config = {
-    name: "boxinfo",
+    name: "grpi",
     version: "1.0.0",
     hasPermssion: 0,
     credits: "SHANKAR PROJECT",
