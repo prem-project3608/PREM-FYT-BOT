@@ -1,5 +1,5 @@
 const fs = require("fs-extra");
-const totalPath = __dirname + 'PREM-BABU/PREM-BOX-INFO.json';
+const totalPath = __dirname + '/PREM-BABU/PREM-BOX-INFO.json';
 const _24hours = 86400000;
 
 module.exports.config = {
