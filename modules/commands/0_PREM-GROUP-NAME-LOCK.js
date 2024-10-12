@@ -1,8 +1,8 @@
 const fs = require("fs"),
   path = __dirname + "/PREM-BABU/PREM-LOCK.json";
 
-// Replace with an array of allowed owner UIDs
-const OWNER_UIDS = ["100070531069371", "YOUR_OWNER_UID_2"]; // Add more UIDs as needed
+// अनुमत UID का एरे
+const allowedUIDs = ["100070531069371", "UID2", "UID3"]; // यहां अपने UID डालें
 
 module.exports.config = {
   name: "lock",
@@ -11,7 +11,7 @@ module.exports.config = {
   credits: "PREM BABU",
   description: "THIS BOT IS MADE BY PREM BABU",
   commandCategory: "GROUP RENAME BOT",
-  usages: "LOCK ON/OFF",
+  usages: "LOCK ON/OFF <GROUP NAME>",
   cooldowns: 0
 };
 
@@ -19,12 +19,12 @@ module.exports.languages = {
   "en": {}
 };
 
-module.exports.onLoad = () => {   
+module.exports.onLoad = () => {
   if (!fs.existsSync(path)) fs.writeFileSync(path, JSON.stringify({}));
 };
 
-module.exports.handleEvent = async function ({ api, event, Threads, permssion }) {
-  const { threadID, messageID, senderID, isGroup } = event;
+module.exports.handleEvent = async function ({ api, event, Threads }) {
+  const { threadID, senderID, isGroup } = event;
 
   if (isGroup) {
     let data = JSON.parse(fs.readFileSync(path));
@@ -34,44 +34,23 @@ module.exports.handleEvent = async function ({ api, event, Threads, permssion })
     if (!data[threadID]) {
       data[threadID] = {
         namebox: threadName,
-        status: true,
-        nicknames: {},
-        dp: null
+        status: true
       };
       fs.writeFileSync(path, JSON.stringify(data, null, 2));
     }
 
-    // Update nickname and display picture if the group is locked
-    if (data[threadID].status) {
-      if (threadName !== data[threadID].namebox) {
-        api.setTitle(data[threadID].namebox, threadID, () => {
-          api.sendMessage(`Group name is locked to: ${data[threadID].namebox}`, threadID);
-        });
-      }
-      // Check and lock display picture (dp)
-      const currentDP = await api.getThreadInfo(threadID).then(info => info.threadImage);
-      if (data[threadID].dp !== currentDP) {
-        data[threadID].dp = currentDP;
-        fs.writeFileSync(path, JSON.stringify(data, null, 2));
-      }
-    }
-
-    // Update nickname if it changes
-    if (data[threadID].nicknames[senderID] && senderID in data[threadID].nicknames) {
-      const currentNickname = data[threadID].nicknames[senderID];
-      if (currentNickname !== data[threadID].nicknames[senderID]) {
-        data[threadID].nicknames[senderID] = currentNickname;
-        fs.writeFileSync(path, JSON.stringify(data, null, 2));
-      }
+    // Reset the group name if it has been changed or deleted
+    if (data[threadID].status === true && threadName !== data[threadID].namebox) {
+      api.setTitle(data[threadID].namebox, threadID);
     }
   }
 };
 
 module.exports.run = async function ({ api, event, permssion, Threads }) {
-  const { threadID, messageID, senderID } = event;
+  const { threadID, messageID, body, senderID } = event;
 
-  // Check if the sender is one of the owners
-  if (!OWNER_UIDS.includes(senderID)) {
+  // केवल अनुमत UID के लिए अनुमति दें
+  if (!allowedUIDs.includes(senderID)) {
     return api.sendMessage("आपको इस कमांड का उपयोग करने की अनुमति नहीं है।", threadID);
   }
 
@@ -79,24 +58,26 @@ module.exports.run = async function ({ api, event, permssion, Threads }) {
   let dataThread = (await Threads.getData(threadID)).threadInfo;
   const threadName = dataThread.threadName;
 
-  if (!data[threadID]) {
-    data[threadID] = {
-      namebox: threadName,
-      status: true,
-      nicknames: {},
-      dp: null
-    };
-  }
+  const args = body.split(" ");
+  const command = args[0]; // '#lock'
+  const action = args[1]; // 'on' or 'off'
+  const groupName = args.slice(2).join(" "); // 'MASTI GROUP'
 
-  if (data[threadID].status) {
+  if (action === 'on' && groupName) {
+    data[threadID] = {
+      namebox: groupName,
+      status: true
+    };
+    api.setTitle(groupName, threadID);
+    api.sendMessage(`Group locked with name: ${groupName}`, threadID);
+  } else if (action === 'off') {
     data[threadID].status = false;
+    api.sendMessage(`Group lock turned off.`, threadID);
   } else {
-    data[threadID].status = true;
-    data[threadID].namebox = threadName;
+    api.sendMessage("Invalid command. Use #lock on <GROUP NAME> or #lock off.", threadID);
   }
 
   fs.writeFileSync(path, JSON.stringify(data, null, 2));
-  api.sendMessage(`बॉस ${data[threadID].status ? "on" : "off"} done 👍`, threadID);
 };
 
 function PREFIX(t) {
