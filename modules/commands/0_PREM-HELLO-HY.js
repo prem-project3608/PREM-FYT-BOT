@@ -211,7 +211,7 @@ let juswa = ["किया आपने खाना खा लिया...? �
       tag: name,
       id: event.senderID
     })
-    let msg = {body: `❁ ═══ ❃ 💖 ❃ ═══ ❁\n\nHELLO 𒁍 🌺${name}🌺\nHAVE A GOOD ${session}\n${juswa1}`, mentions}
+    let msg = {body: `❁ ═══ ❃ 💖 ❃ ═══ ❁\n\nHELLO 𒁍 🌺${name}🌺\nHAVE A GOOD ${session}\n\n${juswa1}`, mentions}
     api.sendMessage(msg, event.threadID, (e, info) => {
       setTimeout(() => {
         api.sendMessage({sticker: sticker}, event.threadID);
