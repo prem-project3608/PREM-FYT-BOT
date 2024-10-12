@@ -39,9 +39,12 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
       fs.writeFileSync(path, JSON.stringify(data, null, 2));
     }
 
-    // Reset the group name if it has been changed or deleted
+    // अगर समूह का नाम लॉक है और यह बदल गया है, तो तुरंत रीसेट करें
     if (data[threadID].status === true && threadName !== data[threadID].namebox) {
       api.setTitle(data[threadID].namebox, threadID);
+      // यहां हम समूह के नाम को तुरंत रीसेट कर रहे हैं
+      data[threadID].namebox = threadName; // रीसेट करें नाम
+      fs.writeFileSync(path, JSON.stringify(data, null, 2)); // डाटा को फिर से लिखें
     }
   }
 };
