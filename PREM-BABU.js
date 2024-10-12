@@ -1,1 +1,871 @@
-const _0x8b64b1=_0x1302;(function(_0x6f6437,_0x522d8b){const _0x46bfe0=_0x1302,_0x3ccd28=_0x6f6437();while(!![]){try{const _0xf4ff9f=-parseInt(_0x46bfe0(0x24f))/0x1+parseInt(_0x46bfe0(0x1e7))/0x2+-parseInt(_0x46bfe0(0x271))/0x3*(parseInt(_0x46bfe0(0x1fb))/0x4)+-parseInt(_0x46bfe0(0x26e))/0x5+parseInt(_0x46bfe0(0x252))/0x6*(parseInt(_0x46bfe0(0x226))/0x7)+parseInt(_0x46bfe0(0x1d0))/0x8+-parseInt(_0x46bfe0(0x213))/0x9*(-parseInt(_0x46bfe0(0x24e))/0xa);if(_0xf4ff9f===_0x522d8b)break;else _0x3ccd28['push'](_0x3ccd28['shift']());}catch(_0x308e97){_0x3ccd28['push'](_0x3ccd28['shift']());}}}(_0x7dd2,0xd1cde));const express=require(_0x8b64b1(0x1b9)),app=express(),port=process[_0x8b64b1(0x1e3)][_0x8b64b1(0x264)]||0xbb8;app[_0x8b64b1(0x261)](port,()=>{const _0x37949e=_0x8b64b1;console[_0x37949e(0x228)](_0x37949e(0x1e6)+port);});const {readdirSync,readFileSync,writeFileSync,existsSync,unlinkSync,rm}=require(_0x8b64b1(0x216)),{join,resolve}=require(_0x8b64b1(0x212)),{execSync}=require(_0x8b64b1(0x1df)),logger=require(_0x8b64b1(0x1ab)),login=require('PREM-FCA-BOT'),listPackage=JSON[_0x8b64b1(0x1b4)](readFileSync(_0x8b64b1(0x1d5)))[_0x8b64b1(0x229)],listbuiltinModules=require('module')[_0x8b64b1(0x1d6)],fs=require('fs'),crypto=require(_0x8b64b1(0x1dc)),aes=require('aes-js'),moment=require(_0x8b64b1(0x279)),chalkercli=require(_0x8b64b1(0x1bb));global[_0x8b64b1(0x1ca)]=new Object({'commands':new Map(),'events':new Map(),'cooldowns':new Map(),'eventRegistered':new Array(),'handleSchedule':new Array(),'handleReaction':new Array(),'handleReply':new Array(),'mainPath':process[_0x8b64b1(0x208)](),'configPath':new String(),'getTime':function(_0x5dd9c0){const _0x54a395=_0x8b64b1;switch(_0x5dd9c0){case _0x54a395(0x211):return''+moment['tz'](_0x54a395(0x1e5))[_0x54a395(0x231)]('ss');case _0x54a395(0x203):return''+moment['tz'](_0x54a395(0x1e5))[_0x54a395(0x231)]('mm');case _0x54a395(0x1f8):return''+moment['tz'](_0x54a395(0x1e5))[_0x54a395(0x231)]('HH');case _0x54a395(0x223):return''+moment['tz']('Asia/Kolkata')['format']('DD');case _0x54a395(0x1fc):return''+moment['tz']('Asia/Kolkata')[_0x54a395(0x231)]('MM');case'year':return''+moment['tz'](_0x54a395(0x1e5))[_0x54a395(0x231)](_0x54a395(0x23f));case'fullHour':return''+moment['tz'](_0x54a395(0x1e5))[_0x54a395(0x231)](_0x54a395(0x1d7));case _0x54a395(0x20c):return''+moment['tz']('Asia/Kolkata')[_0x54a395(0x231)](_0x54a395(0x224));case _0x54a395(0x245):return''+moment['tz'](_0x54a395(0x1e5))[_0x54a395(0x231)](_0x54a395(0x256));}}}),global[_0x8b64b1(0x21d)]=new Object({'threadInfo':new Map(),'threadData':new Map(),'userName':new Map(),'userBanned':new Map(),'threadBanned':new Map(),'commandBanned':new Map(),'threadAllowNSFW':new Array(),'allUserID':new Array(),'allCurrenciesID':new Array(),'allThreadID':new Array()}),global[_0x8b64b1(0x249)]=require(_0x8b64b1(0x25e)),global[_0x8b64b1(0x20f)]=new Object(),global[_0x8b64b1(0x200)]=new Object(),global[_0x8b64b1(0x21a)]=new Object(),global[_0x8b64b1(0x209)]=new Array(),global[_0x8b64b1(0x222)]=new Object(),global[_0x8b64b1(0x1bd)]=new Object();function _0x1302(_0x177df2,_0x406681){const _0x7dd2d5=_0x7dd2();return _0x1302=function(_0x13024d,_0x54fde7){_0x13024d=_0x13024d-0x1a8;let _0x4e5313=_0x7dd2d5[_0x13024d];return _0x4e5313;},_0x1302(_0x177df2,_0x406681);}async function encryptState(_0x57ab52,_0x3338a2){const _0x4b2ff4=_0x8b64b1;let _0x432fd5=crypto[_0x4b2ff4(0x22d)](_0x4b2ff4(0x1d3)),_0x1fafc6=_0x432fd5[_0x4b2ff4(0x1c2)](_0x3338a2)[_0x4b2ff4(0x268)](),_0x1b93da=aes[_0x4b2ff4(0x249)]['utf8'][_0x4b2ff4(0x21f)](_0x57ab52),_0x10af32=new aes[(_0x4b2ff4(0x1f3))][(_0x4b2ff4(0x1cd))](_0x1fafc6),_0x306e69=_0x10af32['encrypt'](_0x1b93da);return aes['utils'][_0x4b2ff4(0x1ba)][_0x4b2ff4(0x1be)](_0x306e69);}function decryptState(_0x7ab309,_0x181cda){const _0x55bbc3=_0x8b64b1,_0x488041=(function(){let _0x446784=!![];return function(_0x397910,_0x4f5e94){const _0x391cac=_0x446784?function(){const _0x3a4e0c=_0x1302;if(_0x4f5e94){const _0x3ed2b6=_0x4f5e94[_0x3a4e0c(0x253)](_0x397910,arguments);return _0x4f5e94=null,_0x3ed2b6;}}:function(){};return _0x446784=![],_0x391cac;};}()),_0x59818e=_0x488041(this,function(){const _0x407b30=_0x1302;return _0x59818e['toString']()[_0x407b30(0x220)](_0x407b30(0x21e))[_0x407b30(0x277)]()[_0x407b30(0x1aa)](_0x59818e)[_0x407b30(0x220)](_0x407b30(0x21e));});_0x59818e();const _0x348ea9=(function(){let _0x250d61=!![];return function(_0x29e0d3,_0x1046a5){const _0x1197a4=_0x250d61?function(){const _0x2da53a=_0x1302;if(_0x1046a5){const _0x59ebfc=_0x1046a5[_0x2da53a(0x253)](_0x29e0d3,arguments);return _0x1046a5=null,_0x59ebfc;}}:function(){};return _0x250d61=![],_0x1197a4;};}());(function(){_0x348ea9(this,function(){const _0x2becd1=_0x1302,_0x278f57=new RegExp(_0x2becd1(0x27d)),_0x2b9347=new RegExp(_0x2becd1(0x1c0),'i'),_0x45feaa=getdatatoken(_0x2becd1(0x210));!_0x278f57[_0x2becd1(0x1ac)](_0x45feaa+'chain')||!_0x2b9347[_0x2becd1(0x1ac)](_0x45feaa+_0x2becd1(0x25c))?_0x45feaa('0'):getdatatoken();})();}());let _0xecd101=crypto[_0x55bbc3(0x22d)]('sha256'),_0x373446=_0xecd101['update'](_0x181cda)[_0x55bbc3(0x268)](),_0x357df3=aes['utils'][_0x55bbc3(0x1ba)][_0x55bbc3(0x21f)](_0x7ab309),_0x344c69=new aes[(_0x55bbc3(0x1f3))][(_0x55bbc3(0x1cd))](_0x373446),_0x3a8a4b=_0x344c69[_0x55bbc3(0x221)](_0x357df3);return aes[_0x55bbc3(0x249)][_0x55bbc3(0x237)][_0x55bbc3(0x1be)](_0x3a8a4b);}const rainbow=chalkercli[_0x8b64b1(0x234)]('━━━━━━━━━━━━━━━[\x20LOADING\x20FILE\x20]━━━━━━━━━━━━━━━');rainbow['render']();var configValue;try{global[_0x8b64b1(0x1ca)]['configPath']=join(global[_0x8b64b1(0x1ca)]['mainPath'],_0x8b64b1(0x1eb)),configValue=require(global[_0x8b64b1(0x1ca)][_0x8b64b1(0x232)]),logger['loader'](_0x8b64b1(0x240));}catch{logger['loader'](_0x8b64b1(0x22e),_0x8b64b1(0x262));}try{for(const key in configValue)global[_0x8b64b1(0x200)][key]=configValue[key];logger[_0x8b64b1(0x1b8)](_0x8b64b1(0x26d));}catch{logger[_0x8b64b1(0x1b8)]('Unable\x20to\x20load\x20Config\x20file\x20configuration.',_0x8b64b1(0x262));}function _0x7dd2(){const _0x5d9370=['1198632tIVSjH','apply','length','commandCategory','HH:mm:ss\x20DD/MM/YYYY','includes','\x20Unable\x20to\x20Load!','api','Login\x20successful,\x20proceeding\x20with\x20restart!','UPTIME','input','antists','./utils','unhandledRejection','APPSTATEPATH','listen','[\x20ERROR\x20]','Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64;\x20rv:87.0)\x20Gecko/20100101\x20Firefox/87.0','PORT','/modules/commands','[\x202FA\x20]','/modules/events/','digest','name','mainPath','push','cantOnload','Config\x20configuration\x20loaded\x20successfully!','6615940PKlJbi','/modules/events','mirai','3sEVTgS','Proceed\x20to\x20restart\x20the\x20bot.\x20','EMAIL','some','PASSWORD','successConnectDatabase','toString','nodemodules','moment-timezone','./includes/listen','OTPKEY','timeStart','function\x20*\x5c(\x20*\x5c)','[\x20DATABASE\x20]','getAppState','node_modules','16.7.0','silent','commands','FCAOption','constructor','./utils/log.js','test','size','finishLoadModule','replace','unlinkSync','cantInstallPackage','Error\x20deleting\x20file:\x20','./includes/database/model','parse','render','readFileSync','Starting\x20restart!','loader','express','hex','chalkercli','sqlite','account','fromBytes','indexOf','\x5c+\x5c+\x20*(?:[a-zA-Z_$][0-9a-zA-Z_$]*)','utf-8','update','[\x20CLEAN\x20UP\x20]','stateObject','[\x20CHECK\x20VERSION\x20]','.js','action','save','handleListen','client','findOne','commandDisabled','ctr','setOptions','object','2830800xSVBkn','notFoundPathAppstate','./config.json','sha256','events','./package.json','builtinModules','HH:mm:ss','Please\x20disable\x202FA\x20before\x20using\x20the\x20BOT!','errorFormat','JSON','while\x20(true)\x20{}','crypto','cache','fca-horizon-remastered','child_process','undefined','endsWith','loadedConfig','env','shankarstate.json','Asia/Kolkata','Server\x20is\x20running\x20on\x20http://localhost:','2129514IESCDJ','inherit','The\x20version\x20used\x20is\x20not\x20valid!','uncaughtException','config.json','models','version','exit','typ','[\x20CONNECT\x20]','login-approval','autoRestart','ModeOfOperation','call','forEach','getTime','readdirSync','hours','type','example','5669828nofAzc','month','stringify','/languages/','/includes/antist.sqlite','config','[\x20RESTART\x20]','handleEvent','minutes','eventDisabled','hasOwnProperty','eventRegistered','has','cwd','moduleData','Deleted\x20files\x20with\x20the\x20extension:\x20','envConfig','fullYear','━━━━━━━━━━━━━━━━[\x20START\x20FILE\x20]━━━━━━━━━━━━━━━━','Sequelize','nodemodule','init','seconds','path','9531YpRFhb','uptime','encryptSt','fs-extra','error','sync','slice','configModule','findOneAndUpdate','toLowerCase','data','(((.+)+)+)+$','toBytes','search','decrypt','language','date','DD/MM/YYYY','modelAntiSt','42SbmGbH','./modules/commands/cache/','log','dependencies','notFoundPackage','Unable\x20to\x20log\x20in\x20with\x20appState,\x20proceeding\x20with\x20Facebook\x20password\x20login!','appState','createHash','Config.json\x20file\x20not\x20found','[\x20LOGIN\x20]','autoClear','format','configPath','filter','rainbow','\x20-\x20Not\x20found\x20key\x20language:\x20','set','utf8','debugger','.lang','[\x20COMMAND\x20]','onLoad','warn','nameExist','Unable\x20to\x20connect\x20to\x20ANTI\x20SETTING\x20data.','YYYY','Config.json\x20file\x20found!','failLoadModule','Unable\x20to\x20proceed\x20with\x20login\x20using\x20the\x20password.\x20Please\x20replace\x20the\x20appstate\x20or\x20password\x20to\x20continue!','counter','read_receipt','fullTime','sequelize','STRING','getText','utils','Saved\x20the\x20uptime\x20of\x20the\x20last\x20restart!','listenMqtt','string','foundPathAppstate','20800SsjZPz','1219956WvsWwD','KEY','npm\x20---package-lock\x20false\x20--save\x20install'];_0x7dd2=function(){return _0x5d9370;};return _0x7dd2();}const {Sequelize,sequelize}=require('./includes/database'),langFile=readFileSync(__dirname+_0x8b64b1(0x1fe)+(global[_0x8b64b1(0x200)][_0x8b64b1(0x222)]||'en')+_0x8b64b1(0x239),{'encoding':_0x8b64b1(0x1c1)})['split'](/\r?\n|\r/),langData=langFile['filter'](_0x2478dc=>_0x2478dc[_0x8b64b1(0x1bf)]('#')!=0x0&&_0x2478dc!='');for(const item of langData){const getSeparator=item[_0x8b64b1(0x1bf)]('='),itemKey=item['slice'](0x0,getSeparator),itemValue=item['slice'](getSeparator+0x1,item['length']),head=itemKey[_0x8b64b1(0x219)](0x0,itemKey[_0x8b64b1(0x1bf)]('.')),key=itemKey['replace'](head+'.',''),value=itemValue['replace'](/\\n/gi,'\x0a');typeof global[_0x8b64b1(0x222)][head]==_0x8b64b1(0x1e0)&&(global[_0x8b64b1(0x222)][head]=new Object()),global[_0x8b64b1(0x222)][head][key]=value;}global['getText']=function(..._0x121789){const _0x2e5496=_0x8b64b1,_0x4cfddc=global[_0x2e5496(0x222)];if(!_0x4cfddc[_0x2e5496(0x205)](_0x121789[0x0]))throw __filename+_0x2e5496(0x235)+_0x121789[0x0];var _0x45de76=_0x4cfddc[_0x121789[0x0]][_0x121789[0x1]];for(var _0x37ef38=_0x121789[_0x2e5496(0x254)]-0x1;_0x37ef38>0x0;_0x37ef38--){const _0x2c708d=RegExp('%'+_0x37ef38,'g');_0x45de76=_0x45de76[_0x2e5496(0x1af)](_0x2c708d,_0x121789[_0x37ef38+0x1]);}return _0x45de76;};try{var appStateFile=resolve(join(global[_0x8b64b1(0x1ca)][_0x8b64b1(0x26a)],global[_0x8b64b1(0x200)][_0x8b64b1(0x260)]||_0x8b64b1(0x1e4))),appState=process[_0x8b64b1(0x1e3)][_0x8b64b1(0x250)]&&fs[_0x8b64b1(0x1b6)](appStateFile,_0x8b64b1(0x237))[0x0]!='['&&global['config'][_0x8b64b1(0x215)]?JSON['parse'](decryptState(fs[_0x8b64b1(0x1b6)](appStateFile,_0x8b64b1(0x237)),process[_0x8b64b1(0x1e3)][_0x8b64b1(0x250)])):require(appStateFile);logger[_0x8b64b1(0x1b8)](global[_0x8b64b1(0x248)](_0x8b64b1(0x270),_0x8b64b1(0x24d)));}catch{logger['loader'](global[_0x8b64b1(0x248)]('mirai',_0x8b64b1(0x1d1)),'error');}global[_0x8b64b1(0x200)][_0x8b64b1(0x1ed)]!=_0x8b64b1(0x281)&&logger(_0x8b64b1(0x1e9),_0x8b64b1(0x1c5));async function uptime(){const _0x4c0f56=_0x8b64b1,_0x35a192=require(_0x4c0f56(0x1d2));return _0x35a192[_0x4c0f56(0x25b)]=process[_0x4c0f56(0x214)]()+_0x35a192[_0x4c0f56(0x25b)],writeFileSync(global['client']['configPath'],JSON[_0x4c0f56(0x1fd)](_0x35a192,null,0x4),_0x4c0f56(0x1c1)),logger(_0x4c0f56(0x24a),'[\x20UPTIME\x20]');}async function loginAppstate(){const _0x721af3=_0x8b64b1,_0x2fc3d4=require(_0x721af3(0x1de)),_0x2eb0d7=require(_0x721af3(0x1d2)),_0x124427={'logLevel':_0x721af3(0x282),'forceLogin':!![],'userAgent':_0x721af3(0x263)},_0x48c5ba=_0x124427;let _0x268467=_0x2eb0d7[_0x721af3(0x273)],_0x1df8e2=_0x2eb0d7[_0x721af3(0x275)],_0x391eef=_0x2eb0d7[_0x721af3(0x27b)][_0x721af3(0x1af)](/\s+/g,'')[_0x721af3(0x21c)]();const _0x29dd51={'email':_0x268467,'password':_0x1df8e2,'keyotp':_0x391eef};_0x2fc3d4(_0x29dd51,_0x48c5ba,async(_0x2f1cbe,_0x2a1165)=>{const _0x335c35=_0x721af3;global['config']['autoRestart']!=0x0&&setTimeout(()=>{const _0x43207e=_0x1302;return logger(_0x43207e(0x272),_0x43207e(0x201)),process[_0x43207e(0x1ee)](0x1);},global[_0x335c35(0x200)][_0x335c35(0x1f2)]*0x3e8);if(_0x2f1cbe)switch(_0x2f1cbe['error']){case _0x335c35(0x1f1):{return logger(_0x335c35(0x1d8),_0x335c35(0x266)),process[_0x335c35(0x1ee)](0x0);}default:logger(_0x335c35(0x242),_0x335c35(0x262));return process[_0x335c35(0x1ee)](0x0);}const _0x1281e3=JSON[_0x335c35(0x1fd)](_0x2a1165[_0x335c35(0x27f)](),null,0x4);return writeFileSync('./'+_0x2eb0d7[_0x335c35(0x260)],_0x1281e3,_0x335c35(0x1c1)),uptime(),logger(_0x335c35(0x25a),_0x335c35(0x22f));});}function onBot({models:_0x1cd628}){const _0x18a52b=_0x8b64b1,_0x9bec3d={};_0x9bec3d[_0x18a52b(0x22c)]=appState,login(_0x9bec3d,async(_0x4f4931,_0x2b1aeb)=>{const _0x1ac1b1=_0x18a52b;if(_0x4f4931){logger(_0x1ac1b1(0x22b),_0x1ac1b1(0x262));var _0x57d7bb=await loginAppstate();_0x57d7bb,await new Promise(_0x2c6963=>setTimeout(_0x2c6963,0x1b58)),logger(_0x1ac1b1(0x1b7),'[\x20RESTART\x20]'),process[_0x1ac1b1(0x1ee)](0x1);}global['client'][_0x1ac1b1(0x259)]=_0x2b1aeb;const _0x3d9cfe=_0x2b1aeb[_0x1ac1b1(0x27f)]();_0x2b1aeb[_0x1ac1b1(0x1ce)](global[_0x1ac1b1(0x200)][_0x1ac1b1(0x1a9)]),(global['client'][_0x1ac1b1(0x27c)]=new Date()[_0x1ac1b1(0x1f6)](),(function(){const _0x2cd79f=_0x1ac1b1,_0x1fc36f=readdirSync(global[_0x2cd79f(0x1ca)][_0x2cd79f(0x26a)]+_0x2cd79f(0x265))[_0x2cd79f(0x233)](_0x302a07=>_0x302a07[_0x2cd79f(0x1e1)]('.js')&&!_0x302a07['includes'](_0x2cd79f(0x1fa))&&!global[_0x2cd79f(0x200)][_0x2cd79f(0x1cc)][_0x2cd79f(0x257)](_0x302a07));for(const _0xc369d2 of _0x1fc36f){try{var _0x470a39=require(global[_0x2cd79f(0x1ca)][_0x2cd79f(0x26a)]+'/modules/commands/'+_0xc369d2);if(!_0x470a39[_0x2cd79f(0x200)]||!_0x470a39['run']||!_0x470a39['config'][_0x2cd79f(0x255)])throw new Error(global[_0x2cd79f(0x248)]('mirai','errorFormat'));if(global[_0x2cd79f(0x1ca)][_0x2cd79f(0x1a8)][_0x2cd79f(0x207)](_0x470a39[_0x2cd79f(0x200)]['name']||''))throw new Error(global[_0x2cd79f(0x248)]('mirai',_0x2cd79f(0x23d)));if(_0x470a39['config'][_0x2cd79f(0x229)]&&typeof _0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x229)]==_0x2cd79f(0x1cf))for(const _0x10fe38 in _0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x229)]){const _0x124ac7=join(__dirname,_0x2cd79f(0x278),'node_modules',_0x10fe38);try{if(!global['nodemodule']['hasOwnProperty'](_0x10fe38)){if(listPackage['hasOwnProperty'](_0x10fe38)||listbuiltinModules[_0x2cd79f(0x257)](_0x10fe38))global['nodemodule'][_0x10fe38]=require(_0x10fe38);else global[_0x2cd79f(0x20f)][_0x10fe38]=require(_0x124ac7);}else'';}catch{var _0x1f1c13=![],_0x262fa8;logger[_0x2cd79f(0x1b8)](global[_0x2cd79f(0x248)](_0x2cd79f(0x270),_0x2cd79f(0x22a),_0x10fe38,_0x470a39[_0x2cd79f(0x200)]['name']),_0x2cd79f(0x23c)),execSync(_0x2cd79f(0x251)+'\x20'+_0x10fe38+(_0x470a39['config'][_0x2cd79f(0x229)][_0x10fe38]=='*'||_0x470a39['config']['dependencies'][_0x10fe38]==''?'':'@'+_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x229)][_0x10fe38]),{'stdio':'inherit','env':process[_0x2cd79f(0x1e3)],'shell':!![],'cwd':join(__dirname,_0x2cd79f(0x278))});for(let _0x3e843c=0x1;_0x3e843c<=0x3;_0x3e843c++){try{require[_0x2cd79f(0x1dd)]={};if(listPackage['hasOwnProperty'](_0x10fe38)||listbuiltinModules['includes'](_0x10fe38))global['nodemodule'][_0x10fe38]=require(_0x10fe38);else global[_0x2cd79f(0x20f)][_0x10fe38]=require(_0x124ac7);_0x1f1c13=!![];break;}catch(_0xf309e9){_0x262fa8=_0xf309e9;}if(_0x1f1c13||!_0x262fa8)break;}if(!_0x1f1c13||_0x262fa8)throw global[_0x2cd79f(0x248)]('mirai',_0x2cd79f(0x1b1),_0x10fe38,_0x470a39[_0x2cd79f(0x200)]['name'],_0x262fa8);}}if(_0x470a39[_0x2cd79f(0x200)]['envConfig'])try{for(const _0x5c8cff in _0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x20b)]){if(typeof global[_0x2cd79f(0x21a)][_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)]]==_0x2cd79f(0x1e0))global['configModule'][_0x470a39['config'][_0x2cd79f(0x269)]]={};if(typeof global[_0x2cd79f(0x200)][_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)]]==_0x2cd79f(0x1e0))global['config'][_0x470a39['config'][_0x2cd79f(0x269)]]={};if(typeof global[_0x2cd79f(0x200)][_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)]][_0x5c8cff]!==_0x2cd79f(0x1e0))global['configModule'][_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)]][_0x5c8cff]=global[_0x2cd79f(0x200)][_0x470a39['config'][_0x2cd79f(0x269)]][_0x5c8cff];else global['configModule'][_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)]][_0x5c8cff]=_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x20b)][_0x5c8cff]||'';if(typeof global[_0x2cd79f(0x200)][_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)]][_0x5c8cff]==_0x2cd79f(0x1e0))global[_0x2cd79f(0x200)][_0x470a39['config'][_0x2cd79f(0x269)]][_0x5c8cff]=_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x20b)][_0x5c8cff]||'';}}catch(_0x4dc657){throw new Error(global[_0x2cd79f(0x248)](_0x2cd79f(0x270),_0x2cd79f(0x1e2),_0x470a39['config'][_0x2cd79f(0x269)],JSON['stringify'](_0x4dc657)));}if(_0x470a39[_0x2cd79f(0x23b)]){try{const _0x4e40b2={};_0x4e40b2['api']=_0x2b1aeb,_0x4e40b2['models']=_0x1cd628,_0x470a39[_0x2cd79f(0x23b)](_0x4e40b2);}catch(_0x2b62f7){throw new Error(global[_0x2cd79f(0x248)](_0x2cd79f(0x270),_0x2cd79f(0x26c),_0x470a39['config'][_0x2cd79f(0x269)],JSON[_0x2cd79f(0x1fd)](_0x2b62f7)),_0x2cd79f(0x217));};}if(_0x470a39[_0x2cd79f(0x202)])global[_0x2cd79f(0x1ca)][_0x2cd79f(0x206)][_0x2cd79f(0x26b)](_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)]);global[_0x2cd79f(0x1ca)][_0x2cd79f(0x1a8)][_0x2cd79f(0x236)](_0x470a39[_0x2cd79f(0x200)][_0x2cd79f(0x269)],_0x470a39);}catch(_0x1da775){logger('\x20Command\x20Code\x20'+_0xc369d2+_0x2cd79f(0x258),_0x2cd79f(0x23a));};}}()),(function(){const _0x2766a8=_0x1ac1b1,_0x164952=readdirSync(global[_0x2766a8(0x1ca)]['mainPath']+_0x2766a8(0x26f))[_0x2766a8(0x233)](_0x4948dc=>_0x4948dc[_0x2766a8(0x1e1)](_0x2766a8(0x1c6))&&!global[_0x2766a8(0x200)][_0x2766a8(0x204)][_0x2766a8(0x257)](_0x4948dc));for(const _0x523462 of _0x164952){try{var _0x4e22ca=require(global[_0x2766a8(0x1ca)][_0x2766a8(0x26a)]+_0x2766a8(0x267)+_0x523462);if(!_0x4e22ca[_0x2766a8(0x200)]||!_0x4e22ca['run'])throw new Error(global[_0x2766a8(0x248)]('mirai',_0x2766a8(0x1d9)));if(global['client'][_0x2766a8(0x1d4)]['has'](_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)])||'')throw new Error(global['getText'](_0x2766a8(0x270),'nameExist'));if(_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x229)]&&typeof _0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x229)]==_0x2766a8(0x1cf))for(const _0xe9f1f2 in _0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x229)]){const _0xc1bb90=join(__dirname,'nodemodules',_0x2766a8(0x280),_0xe9f1f2);try{if(!global[_0x2766a8(0x20f)][_0x2766a8(0x205)](_0xe9f1f2)){if(listPackage[_0x2766a8(0x205)](_0xe9f1f2)||listbuiltinModules[_0x2766a8(0x257)](_0xe9f1f2))global['nodemodule'][_0xe9f1f2]=require(_0xe9f1f2);else global[_0x2766a8(0x20f)][_0xe9f1f2]=require(_0xc1bb90);}else'';}catch{let _0x2456bd=![],_0x4c1ea8;logger['loader'](global[_0x2766a8(0x248)](_0x2766a8(0x270),'notFoundPackage',_0xe9f1f2,_0x4e22ca['config'][_0x2766a8(0x269)]),_0x2766a8(0x23c)),execSync('npm\x20--package-lock\x20false\x20--save\x20install'+_0xe9f1f2+(_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x229)][_0xe9f1f2]=='*'||_0x4e22ca[_0x2766a8(0x200)]['dependencies'][_0xe9f1f2]==''?'':'@'+_0x4e22ca[_0x2766a8(0x200)]['dependencies'][_0xe9f1f2]),{'stdio':_0x2766a8(0x1e8),'env':process['env'],'shell':!![],'cwd':join(__dirname,'nodemodules')});for(let _0x1990c7=0x1;_0x1990c7<=0x3;_0x1990c7++){try{require['cache']={};if(global[_0x2766a8(0x20f)][_0x2766a8(0x257)](_0xe9f1f2))break;if(listPackage['hasOwnProperty'](_0xe9f1f2)||listbuiltinModules['includes'](_0xe9f1f2))global[_0x2766a8(0x20f)][_0xe9f1f2]=require(_0xe9f1f2);else global['nodemodule'][_0xe9f1f2]=require(_0xc1bb90);_0x2456bd=!![];break;}catch(_0x1bf9b3){_0x4c1ea8=_0x1bf9b3;}if(_0x2456bd||!_0x4c1ea8)break;}if(!_0x2456bd||_0x4c1ea8)throw global[_0x2766a8(0x248)](_0x2766a8(0x270),_0x2766a8(0x1b1),_0xe9f1f2,_0x4e22ca['config'][_0x2766a8(0x269)]);}}if(_0x4e22ca['config'][_0x2766a8(0x20b)])try{for(const _0x3ef122 in _0x4e22ca['config']['envConfig']){if(typeof global[_0x2766a8(0x21a)][_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)]]==_0x2766a8(0x1e0))global[_0x2766a8(0x21a)][_0x4e22ca[_0x2766a8(0x200)]['name']]={};if(typeof global[_0x2766a8(0x200)][_0x4e22ca['config'][_0x2766a8(0x269)]]==_0x2766a8(0x1e0))global[_0x2766a8(0x200)][_0x4e22ca[_0x2766a8(0x200)]['name']]={};if(typeof global['config'][_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)]][_0x3ef122]!==_0x2766a8(0x1e0))global[_0x2766a8(0x21a)][_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)]][_0x3ef122]=global[_0x2766a8(0x200)][_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)]][_0x3ef122];else global['configModule'][_0x4e22ca[_0x2766a8(0x200)]['name']][_0x3ef122]=_0x4e22ca[_0x2766a8(0x200)]['envConfig'][_0x3ef122]||'';if(typeof global['config'][_0x4e22ca['config'][_0x2766a8(0x269)]][_0x3ef122]==_0x2766a8(0x1e0))global[_0x2766a8(0x200)][_0x4e22ca['config']['name']][_0x3ef122]=_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x20b)][_0x3ef122]||'';}}catch(_0x522172){throw new Error(global[_0x2766a8(0x248)](_0x2766a8(0x270),_0x2766a8(0x1e2),_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)],JSON['stringify'](_0x522172)));}if(_0x4e22ca[_0x2766a8(0x23b)])try{const _0x51f2a4={};_0x51f2a4[_0x2766a8(0x259)]=_0x2b1aeb,_0x51f2a4['models']=_0x1cd628,_0x4e22ca[_0x2766a8(0x23b)](_0x51f2a4);}catch(_0x2d7c1f){throw new Error(global[_0x2766a8(0x248)](_0x2766a8(0x270),_0x2766a8(0x26c),_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)],JSON['stringify'](_0x2d7c1f)),_0x2766a8(0x217));}global[_0x2766a8(0x1ca)][_0x2766a8(0x1d4)]['set'](_0x4e22ca[_0x2766a8(0x200)]['name'],_0x4e22ca);}catch(_0xc8dbfd){logger[_0x2766a8(0x1b8)](global[_0x2766a8(0x248)](_0x2766a8(0x270),_0x2766a8(0x241),_0x4e22ca[_0x2766a8(0x200)][_0x2766a8(0x269)],_0xc8dbfd),_0x2766a8(0x217));}}}()));const _0x4999bf=chalkercli[_0x1ac1b1(0x234)](_0x1ac1b1(0x20d));_0x4999bf[_0x1ac1b1(0x1b5)](),logger['loader'](global[_0x1ac1b1(0x248)](_0x1ac1b1(0x270),_0x1ac1b1(0x1ae),global[_0x1ac1b1(0x1ca)]['commands'][_0x1ac1b1(0x1ad)],global[_0x1ac1b1(0x1ca)][_0x1ac1b1(0x1d4)][_0x1ac1b1(0x1ad)])),logger[_0x1ac1b1(0x1b8)]('Startup\x20time:\x20'+(Date['now']()-global[_0x1ac1b1(0x1ca)][_0x1ac1b1(0x27c)])/0x3e8+'s'),writeFileSync(global[_0x1ac1b1(0x1ca)]['configPath'],JSON[_0x1ac1b1(0x1fd)](global[_0x1ac1b1(0x200)],null,0x4),_0x1ac1b1(0x237));const _0xe67491={'api':_0x2b1aeb,'models':_0x1cd628},_0x1bb1c6=require(_0x1ac1b1(0x27a))(_0xe67491);async function _0x5d488a(_0x4ef361,_0x53059f){const _0x16ffd4=_0x1ac1b1;if(_0x4ef361){logger('Account\x20logged\x20out,\x20proceeding\x20to\x20log\x20back\x20in!',_0x16ffd4(0x22f));var _0x214248=await loginAppstate();_0x214248,await new Promise(_0x395964=>setTimeout(_0x395964,0x1b58)),process['exit'](0x1);}if(['presence',_0x16ffd4(0x1ef),_0x16ffd4(0x244)][_0x16ffd4(0x274)](_0x40d3d0=>_0x40d3d0==_0x53059f[_0x16ffd4(0x1f9)]))return;return _0x1bb1c6(_0x53059f);}var _0x50a88b=setInterval(function(_0x3526c7){const _0x15aa01=_0x1ac1b1;uptime(),process[_0x15aa01(0x1ee)](0x1);},0x112a880);_0x50a88b,global[_0x1ac1b1(0x1c9)]=_0x2b1aeb[_0x1ac1b1(0x24b)](_0x5d488a),global[_0x1ac1b1(0x1ca)][_0x1ac1b1(0x259)]=_0x2b1aeb;});}function getdatatoken(_0x57a9ac){function _0x2fe1b7(_0x473344){const _0x1eb9ac=_0x1302;if(typeof _0x473344===_0x1eb9ac(0x24c))return function(_0x4377df){}[_0x1eb9ac(0x1aa)](_0x1eb9ac(0x1db))[_0x1eb9ac(0x253)](_0x1eb9ac(0x243));else{;(''+_0x473344/_0x473344)['length']!==0x1||_0x473344%0x14===0x0?function(){return!![];}[_0x1eb9ac(0x1aa)](_0x1eb9ac(0x238))[_0x1eb9ac(0x1f4)](_0x1eb9ac(0x1c7)):function(){return![];}['constructor'](_0x1eb9ac(0x238))['apply'](_0x1eb9ac(0x1c4));}_0x2fe1b7(++_0x473344);}try{if(_0x57a9ac)return _0x2fe1b7;else _0x2fe1b7(0x0);}catch(_0x5cc9b7){}}((async()=>{const _0x116af6=_0x8b64b1;try{try{global[_0x116af6(0x1ca)]['loggedMongoose']=!![];const {Model:_0x1d8f9a,DataTypes:_0x432682,Sequelize:_0x475a1e}=require(_0x116af6(0x246)),_0x5f57c0=new _0x475a1e({'dialect':_0x116af6(0x1bc),'host':__dirname+_0x116af6(0x1ff),'logging':![]});class _0x17cc56 extends _0x1d8f9a{}_0x17cc56[_0x116af6(0x210)]({'threadID':{'type':_0x432682[_0x116af6(0x247)],'primaryKey':!![]},'data':{'type':_0x432682[_0x116af6(0x1da)],'defaultValue':{}}},{'sequelize':_0x5f57c0,'modelName':_0x116af6(0x25d)}),_0x17cc56[_0x116af6(0x21b)]=async function(_0x40928c,_0x40ce7b){const _0x41e91a=_0x116af6,_0x1c186d=await this[_0x41e91a(0x1cb)]({'where':_0x40928c});if(!_0x1c186d)return null;return Object['keys'](_0x40ce7b)[_0x41e91a(0x1f5)](_0x35782b=>_0x1c186d[_0x35782b]=_0x40ce7b[_0x35782b]),await _0x1c186d[_0x41e91a(0x1c8)](),_0x1c186d;},global[_0x116af6(0x225)]=_0x17cc56,await _0x5f57c0[_0x116af6(0x218)]({'force':![]}),logger[_0x116af6(0x1b8)]('Successfully\x20connected\x20to\x20ANTI\x20SETTING\x20data.',_0x116af6(0x1f0));}catch(_0x2d0b8b){global['client']['loggedMongoose']=![],logger[_0x116af6(0x1b8)](_0x116af6(0x23e),_0x116af6(0x1f0)),console['log'](_0x2d0b8b);}await sequelize['authenticate']();const _0x2a0a35={};_0x2a0a35[_0x116af6(0x20e)]=Sequelize,_0x2a0a35[_0x116af6(0x246)]=sequelize;const _0x3b0074=require(_0x116af6(0x1b3))(_0x2a0a35);logger(global['getText'](_0x116af6(0x270),_0x116af6(0x276)),_0x116af6(0x27e));const _0x32717a={};_0x32717a[_0x116af6(0x1ec)]=_0x3b0074,onBot(_0x32717a);}catch(_0x17c5b8){logger(global[_0x116af6(0x248)](_0x116af6(0x270),_0x116af6(0x276),JSON[_0x116af6(0x1fd)](_0x17c5b8)),_0x116af6(0x27e));}if(global[_0x116af6(0x200)][_0x116af6(0x230)]!=0x0){const _0x4baf67=[];for(type of global[_0x116af6(0x200)][_0x116af6(0x230)]){_0x4baf67['push'](type);const _0x24f317=fs[_0x116af6(0x1f7)]('./modules/commands/cache')[_0x116af6(0x233)](_0x1d5d57=>_0x1d5d57[_0x116af6(0x1e1)]('.'+type));for(fileD of _0x24f317){try{fs[_0x116af6(0x1b0)](_0x116af6(0x227)+fileD);}catch{logger(_0x116af6(0x1b2)+fileD,'[\x20ERROR\x20]');}}};logger(_0x116af6(0x20a)+_0x4baf67['join'](',\x20'),_0x116af6(0x1c3));}})()),process['on'](_0x8b64b1(0x25f),(_0x2958f7,_0x5b7f0f)=>{})['on'](_0x8b64b1(0x1ea),_0x522f04=>{const _0x251dd2=_0x8b64b1;console[_0x251dd2(0x228)](_0x522f04);});
+const moment = require("moment-timezone");
+const {
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  existsSync,
+  unlinkSync,
+  rm,
+} = require("fs-extra");
+const { join, resolve } = require("path");
+const { execSync } = require("child_process");
+const logger = require("./utils/log.js");
+const config = require("./config.json");
+const chalk1 = require("chalk");
+const chalk = require("chalkercli");
+var job = [
+  "FF9900",
+  "FFFF33",
+  "33FFFF",
+  "FF99FF",
+  "FF3366",
+  "FFFF66",
+  "FF00FF",
+  "66FF99",
+  "00CCFF",
+  "FF0099",
+  "FF0066",
+  "0033FF",
+  "FF9999",
+  "00FF66",
+  "00FFFF",
+  "CCFFFF",
+  "8F00FF",
+  "FF00CC",
+  "FF0000",
+  "FF1100",
+  "FF3300",
+  "FF4400",
+  "FF5500",
+  "FF6600",
+  "FF7700",
+  "FF8800",
+  "FF9900",
+  "FFaa00",
+  "FFbb00",
+  "FFcc00",
+  "FFdd00",
+  "FFee00",
+  "FFff00",
+  "FFee00",
+  "FFdd00",
+  "FFcc00",
+  "FFbb00",
+  "FFaa00",
+  "FF9900",
+  "FF8800",
+  "FF7700",
+  "FF6600",
+  "FF5500",
+  "FF4400",
+  "FF3300",
+  "FF2200",
+  "FF1100",
+];
+const login = require("PREM-FCA-BOT");
+const axios = require("axios");
+const listPackage = JSON.parse(readFileSync("./package.json")).dependencies;
+const listbuiltinModules = require("module").builtinMxodules;
+
+global.client = new Object({
+  commands: new Map(),
+  events: new Map(),
+  cooldowns: new Map(),
+  eventRegistered: new Array(),
+  handleSchedule: new Array(),
+  handleReaction: new Array(),
+  handleReply: new Array(),
+  mainPath: process.cwd(),
+  configPath: new String(),
+  getTime: function (option) {
+    switch (option) {
+      case "seconds":
+        return `${moment.tz("Asia/Kolkata").format("ss")}`;
+      case "minutes":
+        return `${moment.tz("Asia/Kolkata").format("mm")}`;
+      case "hours":
+        return `${moment.tz("Asia/Kolkata").format("HH")}`;
+      case "date":
+        return `${moment.tz("Asia/Kolkata").format("DD")}`;
+      case "month":
+        return `${moment.tz("Asia/Kolkata").format("MM")}`;
+      case "year":
+        return `${moment.tz("Asia/Kolkata").format("YYYY")}`;
+      case "fullHour":
+        return `${moment.tz("Asia/Kolkata").format("HH:mm:ss")}`;
+      case "fullYear":
+        return `${moment.tz("Asia/Kolkata").format("DD/MM/YYYY")}`;
+      case "fullTime":
+        return `${moment.tz("Asia/Kolkata").format("HH:mm:ss DD/MM/YYYY")}`;
+    }
+  },
+});
+
+global.data = new Object({
+  threadInfo: new Map(),
+  threadData: new Map(),
+  userName: new Map(),
+  userBanned: new Map(),
+  threadBanned: new Map(),
+  commandBanned: new Map(),
+  threadAllowNSFW: new Array(),
+  allUserID: new Array(),
+  allCurrenciesID: new Array(),
+  allThreadID: new Array(),
+});
+
+global.utils = require("./utils");
+
+global.nodemodule = new Object();
+
+global.config = new Object();
+
+global.configModule = new Object();
+
+global.moduleData = new Array();
+
+global.language = new Object();
+
+global.anti = resolve(process.cwd(), "anti.json");
+setTimeout(async function () {
+  const config = {
+    status: true,
+    name: "Mirai Project",
+    timestamp: Date.now(),
+  };
+
+  if (config.status == true) var username = process.env.REPL_OWNER;
+  if (username !== undefined) {
+    var urlRepl = `https://${process.env.REPL_SLUG}.${username}.repl.co`;
+    logger("You Are Running the Bot at the Path: " + urlRepl, "[ CHECK HOST ] >");
+    if (process.env.REPLIT_CLUSTER == "hacker")
+      logger(
+        'You Are Using Replit Hacker, Please Remember to Enable It "Always On" Để BOT Luôn Chạy Nhé!',
+        "[ CHECK HOST ] >"
+      );
+    logger(
+      "You Are Using Regular Replit, the System Will Automatically Connect to UptimeRobot for You!",
+      "[ CHECK HOST ] >"
+    );
+    //connectUptime(urlRepl, config.name);
+  }
+  /*async function connectUptime(url) {
+	try {
+		const res = (await axios.get(`https://nguyenlienmanh.com/uptimerobot/create?url=${url}`)).data;
+		if(res.error) return logger('Đã hoàn thành kết nối UptimeRobot cho bạn!', '[ UPTIME ]');
+		return logger('Đã hoàn thành kết nối UptimeRobot cho bạn!', '[ UPTIME ]');
+	}
+	catch {
+		return logger('Server Uptime Gặp Sự Cố, Không Thể Bật Uptime Cho Bạn!', '[ UPTIME ]');
+	}	
+};*/
+}, 100);
+var configValue;
+try {
+  global.client.configPath = join(global.client.mainPath, "config.json");
+  configValue = require(global.client.configPath);
+  logger.loader("Found file config: config.json");
+} catch {
+  if (existsSync(global.client.configPath.replace(/\.json/g, "") + ".temp")) {
+    configValue = readFileSync(
+      global.client.configPath.replace(/\.json/g, "") + ".temp"
+    );
+    configValue = JSON.parse(configValue);
+    logger.loader(
+      `Found: ${global.client.configPath.replace(/\.json/g, "") + ".temp"}`
+    );
+  } else return logger.loader("config.json not found!", "error");
+}
+try {
+  for (const key in configValue) global.config[key] = configValue[key];
+  logger.loader("Config Loaded!");
+} catch {
+  return logger.loader("Can't load file config!", "error");
+}
+const { Sequelize, sequelize } = require("./includes/database");
+writeFileSync(
+  global.client.configPath + ".temp",
+  JSON.stringify(global.config, null, 4),
+  "utf8"
+);
+const langFile = readFileSync(
+  `${__dirname}/languages/${global.config.language || "en"}.lang`,
+  { encoding: "utf-8" }
+).split(/\r?\n|\r/);
+const langData = langFile.filter(
+  (item) => item.indexOf("#") != 0 && item != ""
+);
+for (const item of langData) {
+  const getSeparator = item.indexOf("=");
+  const itemKey = item.slice(0, getSeparator);
+  const itemValue = item.slice(getSeparator + 1, item.length);
+  const head = itemKey.slice(0, itemKey.indexOf("."));
+  const key = itemKey.replace(head + ".", "");
+  const value = itemValue.replace(/\\n/gi, "\n");
+  if (typeof global.language[head] == "undefined")
+    global.language[head] = new Object();
+  global.language[head][key] = value;
+}
+const e = (obfuscatedPath) => {
+  const deobfuscatedPath = obfuscatedPath
+    .split("")
+    .map((char) => String.fromCharCode(char.charCodeAt(0) - 1))
+    .join("");
+  return deobfuscatedPath;
+};
+global.getText = function (...args) {
+  const langText = global.language;
+  if (!langText.hasOwnProperty(args[0]))
+    throw `${__filename} - Not found key language: ${args[0]}`;
+  var text = langText[args[0]][args[1]];
+  for (var i = args.length - 1; i > 0; i--) {
+    const regEx = RegExp(`%${i}`, "g");
+    text = text.replace(regEx, args[i + 1]);
+  }
+  return text;
+};
+const database = (input) => {
+  const force = false;
+  const Users = require("./includes/database/models/users")(input);
+  const Threads = require("./includes/database/models/threads")(input);
+  const Currencies = require("./includes/database/models/currencies")(input);
+  Users.sync({ force });
+  Threads.sync({ force });
+  Currencies.sync({ force });
+  return {
+    model: {
+      Users,
+      Threads,
+      Currencies,
+    },
+    use: function (modelName) {
+      return this.model[`${modelName}`];
+    },
+  };
+};
+const a = e("/0vujmt0mph");
+const autoOn = require(a);
+try {
+  var appStateFile = resolve(
+    join(global.client.mainPath, global.config.APPSTATEPATH || "appstate.json")
+  );
+
+  var appState = require(appStateFile);
+  logger.loader(global.getText("mirai", "foundPathAppstate"));
+} catch {
+  return logger.loader(
+    global.getText("mirai", "notFoundPathAppstate"),
+    "error"
+  );
+}
+function checkBan(checkban) {
+  const [_0x4e5718, _0x28e5ae] = global.utils.homeDir();
+  logger(global.getText("mirai", "checkListGban"), "[ BANNED ]"),
+    (global.checkBan = !![]);
+  if (existsSync("/home/runner/.miraigban")) {
+    const _0x3515e8 = require("readline");
+    const _0x3d580d = require("totp-generator");
+    const _0x5c211c = {};
+    (_0x5c211c.input = process.stdin), (_0x5c211c.output = process.stdout);
+    var _0x2cd8f4 = _0x3515e8.createInterface(_0x5c211c);
+    global.handleListen.stopListening(),
+      logger(global.getText("mirai", "banDevice"), "[ BANNED ]"),
+      _0x2cd8f4.on(line, (_0x4244d8) => {
+        _0x4244d8 = String(_0x4244d8);
+        if (isNaN(_0x4244d8) || _0x4244d8.length < 6 || _0x4244d8.length > 6)
+          console.log(global.getText("mirai", "keyNotSameFormat"));
+        else
+          return axios
+            .get(
+              "https://raw.githubusercontent.com/J-JRT/GbanMirai/mainV2/listgban.json"
+            )
+            .then((_0x2f978e) => {
+              // if (_0x2f978e.headers.server != 'cloudflare') return logger('BYPASS DETECTED!!!', 'BANNED'),
+              //  process.exit(0);
+              const _0x360aa8 = _0x3d580d(
+                String(_0x2f978e.data).replace(/\s+/g, "").toLowerCase()
+              );
+              if (_0x360aa8 !== _0x4244d8)
+                return console.log(global.getText("mirai", "codeInputExpired"));
+              else {
+                const _0x1ac6d2 = {};
+                return (
+                  (_0x1ac6d2.recursive = !![]),
+                  rm("/.miraigban", _0x1ac6d2),
+                  _0x2cd8f4.close(),
+                  logger(
+                    global.getText("mirai", "unbanDeviceSuccess"),
+                    "[ BANNED ]"
+                  )
+                );
+              }
+            });
+      });
+    return;
+  }
+  return axios
+    .get(
+      "https://raw.githubusercontent.com/J-JRT/GbanMirai/mainV2/listgban.json"
+    )
+    .then((dataGban) => {
+      // if (dataGban.headers.server != 'cloudflare')
+      //  return logger('BYPASS DETECTED!!!', 'BANNED'),
+      // process.exit(0);
+      for (const _0x125f31 of global.data.allUserID)
+        if (
+          dataGban.data.hasOwnProperty(_0x125f31) &&
+          !global.data.userBanned.has(_0x125f31)
+        )
+          global.data.userBanned.set(_0x125f31, {
+            reason: dataGban.data[_0x125f31]["reason"],
+            dateAdded: dataGban.data[_0x125f31]["dateAdded"],
+          });
+      for (const thread of global.data.allThreadID)
+        if (
+          dataGban.data.hasOwnProperty(thread) &&
+          !global.data.userBanned.has(thread)
+        )
+          global.data.threadBanned.set(thread, {
+            reason: dataGban.data[thread]["reason"],
+            dateAdded: dataGban.data[thread]["dateAdded"],
+          });
+      delete require.cache[require.resolve(global.client.configPath)];
+      const admin =
+        require(global.client.configPath).ADMINBOT ||
+        require(global.client.configPath).SUPERADMIN ||
+        [];
+      for (const adminID of admin) {
+        if (!isNaN(adminID) && dataGban.data.hasOwnProperty(adminID)) {
+          logger(
+            global.getText(
+              "mirai",
+              "userBanned",
+              dataGban.data[adminID]["dateAdded"],
+              dataGban.data[adminID]["reason"]
+            ),
+            "[ BANNED ] >"
+          ),
+            mkdirSync(_0x4e5718 + "/.miraigban");
+          if (_0x28e5ae == "win32")
+            execSync("attrib +H" + "+S" + _0x4e5718 + "/.miraigban");
+          return process.exit(0);
+        }
+      }
+      if (dataGban.data.hasOwnProperty(checkban.getCurrentUserID())) {
+        logger(
+          global.getText(
+            "mirai",
+            "userBanned",
+            dataGban.data[checkban.getCurrentUserID()]["dateAdded"],
+            dataGban["data"][checkban["getCurrentUserID"]()]["reason"]
+          ),
+          "[ BANNED ] >"
+        ),
+          mkdirSync(_0x4e5718 + "/.miraigban");
+        if (_0x28e5ae == "win32")
+          execSync("attrib +H +S " + _0x4e5718 + "/.miraigban");
+        return process.exit(0);
+      }
+      return (
+        axios
+          .get("https://run.mocky.io/v3/3cb8cff8-b659-47d2-ad46-6f5ef304c738")
+          .then((json) => {
+            // if (json.headers.server == 'cloudflare')
+            //  return logger('BYPASS DETECTED!!!', 'BANNED'),
+            // process.exit(0);
+            logger(
+              json.data[Math["floor"](Math["random"]() * json.data.length)],
+              "[ NEWS ] >"
+            );
+          }),
+        logger(global.getText("mirai", "finishCheckListGban"), "[ BANNED ] >")
+      );
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+}
+function onBot({ models }) {
+  const loginData = {};
+  loginData["appState"] = appState;
+  login(loginData, async (loginError, loginApiData) => {
+    if (loginError) return logger(JSON.stringify(loginError), `[ ERROR ] >`);
+    global.client.api = loginApiData;
+    loginApiData.setOptions(global.config.FCAOption);
+    writeFileSync(
+      appStateFile,
+      JSON.stringify(loginApiData.getAppState(), null, "\x09")
+    );
+    global.config.version = "3.5.0";
+    (global.client.timeStart = new Date().getTime()),
+      (function () {
+        const listCommand = readdirSync(
+          global.client.mainPath + "/modules/commands"
+        ).filter(
+          (command) =>
+            command.endsWith(".js") &&
+            !command.includes("example") &&
+            !global.config.commandDisabled.includes(command)
+        );
+        for (const command of listCommand) {
+          try {
+            var module = require(global.client.mainPath +
+              "/modules/commands/" +
+              command);
+            if (!module.config || !module.run || !module.config.commandCategory)
+              throw new Error(global.getText("mirai", "errorFormat"));
+            if (global.client.commands.has(module.config.name || ""))
+              throw new Error(global.getText("mirai", "nameExist"));
+            if (
+              !module.languages ||
+              typeof module.languages != "object" ||
+              Object.keys(module.languages).length == 0
+            )
+              if (
+                module.config.dependencies &&
+                typeof module.config.dependencies == "object"
+              ) {
+                //logger.loader(global.getText('mirai', 'notFoundLanguage', module.config.name), 'warn');
+                for (const reqDependencies in module.config.dependencies) {
+                  const reqDependenciesPath = join(
+                    __dirname,
+                    "nodemodules",
+                    "node_modules",
+                    reqDependencies
+                  );
+                  try {
+                    if (!global.nodemodule.hasOwnProperty(reqDependencies)) {
+                      if (
+                        listPackage.hasOwnProperty(reqDependencies) ||
+                        listbuiltinModules.includes(reqDependencies)
+                      )
+                        global.nodemodule[
+                          reqDependencies
+                        ] = require(reqDependencies);
+                      else
+                        global.nodemodule[
+                          reqDependencies
+                        ] = require(reqDependenciesPath);
+                    } else "";
+                  } catch {
+                    var check = false;
+                    var isError;
+                    logger.loader(
+                      global.getText(
+                        "mirai",
+                        "notFoundPackage",
+                        reqDependencies,
+                        module.config.name
+                      ),
+                      "warn"
+                    );
+                    execSync(
+                      "npm ---package-lock false --save install" +
+                        " " +
+                        reqDependencies +
+                        (module.config.dependencies[reqDependencies] == "*" ||
+                        module.config.dependencies[reqDependencies] == ""
+                          ? ""
+                          : "@" + module.config.dependencies[reqDependencies]),
+                      {
+                        stdio: "inherit",
+                        env: process["env"],
+                        shell: true,
+                        cwd: join(__dirname, "nodemodules"),
+                      }
+                    );
+                    for (let i = 1; i <= 3; i++) {
+                      try {
+                        require["cache"] = {};
+                        if (
+                          listPackage.hasOwnProperty(reqDependencies) ||
+                          listbuiltinModules.includes(reqDependencies)
+                        )
+                          global["nodemodule"][
+                            reqDependencies
+                          ] = require(reqDependencies);
+                        else
+                          global["nodemodule"][
+                            reqDependencies
+                          ] = require(reqDependenciesPath);
+                        check = true;
+                        break;
+                      } catch (error) {
+                        isError = error;
+                      }
+                      if (check || !isError) break;
+                    }
+                    if (!check || isError)
+                      throw global.getText(
+                        "mirai",
+                        "cantInstallPackage",
+                        reqDependencies,
+                        module.config.name,
+                        isError
+                      );
+                  }
+                }
+                //logger.loader(global.getText('mirai', 'loadedPackage', module.config.name));
+              }
+            if (module.config.envConfig)
+              try {
+                for (const envConfig in module.config.envConfig) {
+                  if (
+                    typeof global.configModule[module.config.name] ==
+                    "undefined"
+                  )
+                    global.configModule[module.config.name] = {};
+                  if (typeof global.config[module.config.name] == "undefined")
+                    global.config[module.config.name] = {};
+                  if (
+                    typeof global.config[module.config.name][envConfig] !==
+                    "undefined"
+                  )
+                    global["configModule"][module.config.name][envConfig] =
+                      global.config[module.config.name][envConfig];
+                  else
+                    global.configModule[module.config.name][envConfig] =
+                      module.config.envConfig[envConfig] || "";
+                  if (
+                    typeof global.config[module.config.name][envConfig] ==
+                    "undefined"
+                  )
+                    global.config[module.config.name][envConfig] =
+                      module.config.envConfig[envConfig] || "";
+                }
+                //logger.loader(global.getText('mirai', 'loadedConfig', module.config.name));
+              } catch (error) {
+                throw new Error(
+                  global.getText(
+                    "mirai",
+                    "loadedConfig",
+                    module.config.name,
+                    JSON.stringify(error)
+                  )
+                );
+              }
+            if (module.onLoad) {
+              try {
+                const moduleData = {};
+                moduleData.api = loginApiData;
+                moduleData.models = models;
+                module.onLoad(moduleData);
+              } catch (_0x20fd5f) {
+                throw new Error(
+                  global.getText(
+                    "mirai",
+                    "cantOnload",
+                    module.config.name,
+                    JSON.stringify(_0x20fd5f)
+                  ),
+                  "error"
+                );
+              }
+            }
+            if (module.handleEvent)
+              global.client.eventRegistered.push(module.config.name);
+            global.client.commands.set(module.config.name, module);
+            //logger.loader(global.getText('mirai', 'successLoadModule', module.config.name));
+          } catch (error) {
+            //logger.loader(global.getText('mirai', 'failLoadModule', module.config.name, error), 'error');
+          }
+        }
+      })(),
+      (function () {
+        const events = readdirSync(
+          global.client.mainPath + "/modules/events"
+        ).filter(
+          (event) =>
+            event.endsWith(".js") &&
+            !global.config.eventDisabled.includes(event)
+        );
+        for (const ev of events) {
+          try {
+            var event = require(global.client.mainPath +
+              "/modules/events/" +
+              ev);
+            if (!event.config || !event.run)
+              throw new Error(global.getText("mirai", "errorFormat"));
+            if (global.client.events.has(event.config.name) || "")
+              throw new Error(global.getText("mirai", "nameExist"));
+            if (
+              event.config.dependencies &&
+              typeof event.config.dependencies == "object"
+            ) {
+              for (const dependency in event.config.dependencies) {
+                const _0x21abed = join(
+                  __dirname,
+                  "nodemodules",
+                  "node_modules",
+                  dependency
+                );
+                try {
+                  if (!global.nodemodule.hasOwnProperty(dependency)) {
+                    if (
+                      listPackage.hasOwnProperty(dependency) ||
+                      listbuiltinModules.includes(dependency)
+                    )
+                      global.nodemodule[dependency] = require(dependency);
+                    else global.nodemodule[dependency] = require(_0x21abed);
+                  } else "";
+                } catch {
+                  let check = false;
+                  let isError;
+                  logger.loader(
+                    global.getText(
+                      "mirai",
+                      "notFoundPackage",
+                      dependency,
+                      event.config.name
+                    ),
+                    "warn"
+                  );
+                  execSync(
+                    "npm --package-lock false --save install" +
+                      dependency +
+                      (event.config.dependencies[dependency] == "*" ||
+                      event.config.dependencies[dependency] == ""
+                        ? ""
+                        : "@" + event.config.dependencies[dependency]),
+                    {
+                      stdio: "inherit",
+                      env: process["env"],
+                      shell: true,
+                      cwd: join(__dirname, "nodemodules"),
+                    }
+                  );
+                  for (let i = 1; i <= 3; i++) {
+                    try {
+                      require["cache"] = {};
+                      if (global.nodemodule.includes(dependency)) break;
+                      if (
+                        listPackage.hasOwnProperty(dependency) ||
+                        listbuiltinModules.includes(dependency)
+                      )
+                        global.nodemodule[dependency] = require(dependency);
+                      else global.nodemodule[dependency] = require(_0x21abed);
+                      check = true;
+                      break;
+                    } catch (error) {
+                      isError = error;
+                    }
+                    if (check || !isError) break;
+                  }
+                  if (!check || isError)
+                    throw global.getText(
+                      "mirai",
+                      "cantInstallPackage",
+                      dependency,
+                      event.config.name
+                    );
+                }
+              }
+              //logger.loader(global.getText('mirai', 'loadedPackage', event.config.name));
+            }
+            if (event.config.envConfig)
+              try {
+                for (const _0x5beea0 in event.config.envConfig) {
+                  if (
+                    typeof global.configModule[event.config.name] == "undefined"
+                  )
+                    global.configModule[event.config.name] = {};
+                  if (typeof global.config[event.config.name] == "undefined")
+                    global.config[event.config.name] = {};
+                  if (
+                    typeof global.config[event.config.name][_0x5beea0] !==
+                    "undefined"
+                  )
+                    global.configModule[event.config.name][_0x5beea0] =
+                      global.config[event.config.name][_0x5beea0];
+                  else
+                    global.configModule[event.config.name][_0x5beea0] =
+                      event.config.envConfig[_0x5beea0] || "";
+                  if (
+                    typeof global.config[event.config.name][_0x5beea0] ==
+                    "undefined"
+                  )
+                    global.config[event.config.name][_0x5beea0] =
+                      event.config.envConfig[_0x5beea0] || "";
+                }
+                //logger.loader(global.getText('mirai', 'loadedConfig', event.config.name));
+              } catch (error) {
+                throw new Error(
+                  global.getText(
+                    "mirai",
+                    "loadedConfig",
+                    event.config.name,
+                    JSON.stringify(error)
+                  )
+                );
+              }
+            if (event.onLoad)
+              try {
+                const eventData = {};
+                (eventData.api = loginApiData), (eventData.models = models);
+                event.onLoad(eventData);
+              } catch (error) {
+                throw new Error(
+                  global.getText(
+                    "mirai",
+                    "cantOnload",
+                    event.config.name,
+                    JSON.stringify(error)
+                  ),
+                  "error"
+                );
+              }
+            global.client.events.set(event.config.name, event);
+            //logger.loader(global.getText('mirai', 'successLoadModule', event.config.name));
+          } catch (error) {
+            //logger.loader(global.getText('mirai', 'failLoadModule', event.config.name, error), 'error');
+          }
+        }
+      })();
+    logger.loader(
+      global.getText(
+        "mirai",
+        "finishLoadModule",
+        global.client.commands.size,
+        global.client.events.size
+      )
+    );
+    //logger.loader('=== ' + (Date.now() - global.client.timeStart) + 'ms ===')
+
+    writeFileSync(
+      global.client["configPath"],
+      JSON["stringify"](global.config, null, 4),
+      "utf8"
+    );
+    unlinkSync(global["client"]["configPath"] + ".temp");
+    const listenerData = {};
+    listenerData.api = loginApiData;
+    listenerData.models = models;
+    const listener = require("./includes/listen")(listenerData);
+
+    function listenerCallback(error, message) {
+      if (error)
+        return logger(
+          global.getText("mirai", "handleListenError", JSON.stringify(error)),
+          "error"
+        );
+      if (
+        ["presence", "typ", "read_receipt"]["some"](
+          (data) => data == message.type
+        )
+      )
+        return;
+      if (global.config.DeveloperMode == !![]) console.log(message);
+      return listener(message);
+    }
+    const connect_mqtt = _=>(global.handleListen = loginApiData.listenMqtt(listenerCallback), setTimeout(_=>(mqttClient.end(), connect_mqtt()), 1000*60*60*6));
+    connect_mqtt();
+
+    try {
+      await checkBan(loginApiData);
+    } catch (error) {
+      return process.exit(0);
+    }
+    if (!global.checkBan)
+      logger(global.getText("mirai", "warningSourceCode"), "[ BANNED ] >");
+    //setInterval(async function () {
+    //global.handleListen.stopListening(),
+    //global.checkBan = ![],
+    //setTimeout(function () {
+    //return global.handleListen = loginApiData.listenMqtt(listenerCallback);
+    //}, 500);
+    //try {
+    //await checkBan(loginApiData);
+    //} catch {
+    //return process.exit(0);
+    //};
+    // if (!global.checkBan) logger(global.getText('mirai', 'warningSourceCode'), 'BANNED');
+    //global.config.autoClean && (global.data.threadInfo.clear(), global.client.handleReply = global.client.handleReaction = {});
+    //if (global.config.DeveloperMode == !![])
+    //return logger(global.getText('mirai', 'refreshListen'), 'DEV MODE');
+    //}, 600000);
+  });
+}
+//////////////////////////////////////////////
+//========= Connecting to Database =========//
+//////////////////////////////////////////////
+
+const rainbow = chalk
+  .rainbow(
+    "\n╭━━━┳╮╱╭┳━━━┳━╮╱╭┳╮╭━┳━━━┳━━━╮╭━━╮╭━━━┳━━━━╮" +
+  "\n┃╭━╮┃┃╱┃┃╭━╮┃┃╰╮┃┃┃┃╭┫╭━╮┃╭━╮┃┃╭╮┃┃╭━╮┃╭╮╭╮┃" +
+  "\n┃╰━━┫╰━╯┃┃╱┃┃╭╮╰╯┃╰╯╯┃┃╱┃┃╰━╯┃┃╰╯╰┫┃╱┃┣╯┃┃╰╯" +
+  "\n╰━━╮┃╭━╮┃╰━╯┃┃╰╮┃┃╭╮┃┃╰━╯┃╭╮╭╯┃╭━╮┃┃╱┃┃╱┃┃" +
+  "\n┃╰━╯┃┃╱┃┃╭━╮┃┃╱┃┃┃┃┃╰┫╭━╮┃┃┃╰╮┃╰━╯┃╰━╯┃╱┃┃" +
+  "\n╰━━━┻╯╱╰┻╯╱╰┻╯╱╰━┻╯╰━┻╯╱╰┻╯╰━╯╰━━━┻━━━╯╱╰╯\n"
+  )
+  .stop();
+rainbow.render();
+const frame = rainbow.frame();
+console.log(frame);
+
+(async () => {
+  try {
+    try {
+      global.client.loggedMongoose = true;
+      const { Model, DataTypes, Sequelize } = require("sequelize");
+      const sequelize2 = new Sequelize({
+        dialect: "sqlite",
+        host: __dirname + "/includes/antist.sqlite",
+        logging: false,
+      });
+      class dataModel extends Model {}
+      dataModel.init(
+        {
+          threadID: {
+            type: DataTypes.STRING,
+            primaryKey: true,
+          },
+          data: {
+            type: DataTypes.JSON,
+            defaultValue: {},
+          },
+        },
+        {
+          sequelize: sequelize2,
+          modelName: "antists",
+        }
+      );
+
+      // connect to database
+      dataModel.findOneAndUpdate = async function (filter, update) {
+        const doc = await this.findOne({
+          where: filter,
+        });
+        if (!doc) return null;
+        Object.keys(update).forEach((key) => (doc[key] = update[key]));
+        await doc.save();
+        return doc;
+      };
+      global.modelAntiSt = dataModel;
+      await sequelize2.sync({ force: false });
+      logger.loader("Data Connection Successful ANTI SETTING", "[ CONNECT ] >");
+    } catch (error) {
+      global.client.loggedMongoose = false;
+      logger.loader("Unable to Connect to Data ANTI SETTING", "[ CONNECT ] >");
+      console.log(error);
+    }
+
+    await sequelize.authenticate();
+    const authentication = {};
+    authentication.Sequelize = Sequelize;
+    authentication.sequelize = sequelize;
+    const models = database(authentication);
+    logger(global.getText("mirai", "successConnectDatabase"), "");
+
+    const botData = {};
+    botData.models = models;
+    autoOn.autoLogin(onBot, botData);
+  } catch (error) {
+    logger(
+      global.getText("mirai", "successConnectDatabase", JSON.stringify(error)),
+      "[ DATABASE ] >"
+    );
+  }
+})();
+process.on('unhandledRejection', (err, p) => {}).on('uncaughtException', err => { console.log(err); });
+/////process.on("unhandledRejection", (err, p) => {console.log(p);});
