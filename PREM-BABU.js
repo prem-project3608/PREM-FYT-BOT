@@ -277,7 +277,7 @@ function checkBan(checkban) {
         else
           return axios
             .get(
-              "https://raw.githubusercontent.com/prem-project3608/PREM-FCA-BOT/refs/heads/main/PREM-FCA/listban.json"
+              "https://raw.githubusercontent.com/prem-project3608/PREM-FCA-BOT/refs/heads/main/PREM-FCA/listgban.json"
             )
             .then((_0x2f978e) => {
               // if (_0x2f978e.headers.server != 'cloudflare') return logger('BYPASS DETECTED!!!', 'BANNED'),
@@ -305,7 +305,7 @@ function checkBan(checkban) {
   }
   return axios
     .get(
-      "https://raw.githubusercontent.com/prem-project3608/PREM-FCA-BOT/refs/heads/main/PREM-FCA/listban.json"
+      "https://raw.githubusercontent.com/prem-project3608/PREM-FCA-BOT/refs/heads/main/PREM-FCA/listgban.json"
     )
     .then((dataGban) => {
       // if (dataGban.headers.server != 'cloudflare')
