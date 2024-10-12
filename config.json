@@ -42,7 +42,7 @@
     ],
     "DATABASE": {
         "sqlite": {
-            "storage": "PREM-DATA.sqlite"
+            "storage": "antist.sqlite"
         }
     },
     "APPSTATEPATH": "PREM-PROJECT.json",
