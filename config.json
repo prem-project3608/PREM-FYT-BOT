@@ -94,6 +94,10 @@
     "sim": {
         "APIKEY": "API-1234-abcd-1234-abcd"
     },
+    "sing": {
+        "YOUTUBE_API": "AIzaSyBtiD442srhczDpcg8xbhinP423BeUFXB8",
+        "SOUNDCLOUD_API": "M4TSyS6eV0AcMynXkA3qQASGcOFQTWub"
+    },
     "sub": {
         "APIKEY": ""
     },
