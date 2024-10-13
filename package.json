@@ -127,7 +127,6 @@
     "set-cookie": "^0.0.4",
     "shuffle-array": "^1.0.1",
     "simple-youtube-api": "^5.2.1",
-    "simple-youtube-api": "git+https://github.com/prem-project3608/simple-youtube-api.git",
     "speakeasy": "^2.0.0",
     "sqlite": "^4.0.21",
     "sqlite3": "^5.1.4",
