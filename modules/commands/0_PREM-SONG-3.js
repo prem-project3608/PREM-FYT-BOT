@@ -49,7 +49,7 @@ async function searchYouTube(query) {
         part: 'snippet',
         maxResults: 1,
         q: query,
-        key: 'YOUR_YOUTUBE_API_KEY' // Replace with your YouTube Data API key
+        key: 'AIzaSyBtiD442srhczDpcg8xbhinP423BeUFXB8' // Replace with your YouTube Data API key
       }
     });
 
