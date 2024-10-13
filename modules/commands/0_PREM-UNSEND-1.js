@@ -1,34 +1,34 @@
 module.exports.config = {
-	name: "unsendOnReact",
-	version: "1.0.3",
+	name: "unsendReaction",
+	version: "1.0.2",
 	hasPermssion: 0,
 	credits: "PREM BABU",
-	description: "Bot apni message ko unsend karta hai jab koi specific emoji react ki jati hai",
-	commandCategory: "BOT MESSAGE DELETE",
-	usages: "Bot ki message par specific emoji react karke usko delete karo",
+	description: "Delete bot message when a specific reaction is added.",
+	commandCategory: "Reaction Based",
+	usages: "",
 	cooldowns: 0
 };
 
 module.exports.languages = {
 	"en": {
-		"returnCant": "Main kisi aur ki message nahi delete kar sakta 😐✌️",
-		"reactToDelete": "Meri message ko delete karne ke liye sahi emoji se react karo 😐✌️"
+		"returnCant": "I can't delete someone else's message 😐✌️",
+		"missingReply": "Reply to the bot message you want to delete 😐✌️",
+		"reactionDelete": "Message deleted based on your reaction!"
 	}
 };
 
 module.exports.run = function({ api, event, getText }) {
-	// Yahan par multiple emojis add kiye gaye hain jo unsend karne ke liye react kiye ja sakte hain
-	const triggerEmojis = ["❤️", "👍", "😂", "😢"]; // Aap yahan aur emojis add kar sakte hain
+	// Only unsend bot's own messages
+	if (event.messageReply.senderID != api.getCurrentUserID()) return api.sendMessage(getText("returnCant"), event.threadID, event.messageID);
+	if (event.type != "message_reply") return api.sendMessage(getText("missingReply"), event.threadID, event.messageID);
 
-	// Ensure karein ki yeh reaction event hai
-	if (event.type === "message_reaction" && triggerEmojis.includes(event.reaction)) {
-		// Check karein ki reaction bot ki apni message par hai
-		if (event.messageID && event.userID !== api.getCurrentUserID()) {
-			// Sahi reaction dalte hi message unsend karo
-			return api.unsendMessage(event.messageID);
+	// Reaction event handling
+	api.listenMqtt((error, message) => {
+		if (message.type === "message_reaction") {
+			if (message.reaction === "👍") { // Add your desired reaction emoji
+				api.unsendMessage(event.messageReply.messageID);
+				api.sendMessage(getText("reactionDelete"), event.threadID);
+			}
 		}
-	}
-
-	// Agar sahi reaction nahi mila ya wo kisi aur ki message par hai
-	api.sendMessage(getText("reactToDelete"), event.threadID);
+	});
 };
