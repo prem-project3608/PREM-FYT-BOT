@@ -217,7 +217,7 @@ module.exports = function({ api, models }) {
         break;
       //<--Nhận cảm xúc-->//
       case "message_reaction":
-        if(event.senderID == api.getCurrentUserID() && event.reaction == '👍') {
+        if(event.senderID == api.getCurrentUserID() && event.reaction == '👍' || event.reaction == '😂') {
           api.unsendMessage(event.messageID)
         }
         handleReaction({ event });
