@@ -15,11 +15,11 @@ function getIndiaTime() {
 }
 
 module.exports.config = {
-  name: "upt", 
+  name: "RUNNING-BOT-UPTIME", 
   version: "1.0.1",
   hasPermssion: 0,
   credits: "PREM BABU",
-  description: "Displays bot uptime and current time in India",
+  description: "THIS BOT IS MADE BY MR PREM BABU",
   commandCategory: "BOT RUNNING UPTIME",
   usages: "NO PREFIX",
   cooldowns: 5
