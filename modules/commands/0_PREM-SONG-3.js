@@ -1,11 +1,10 @@
 const axios = require('axios');
 const fs = require('fs');
-const { exec } = require('child_process');
 const path = require('path');
-const ytdl = require('ytdl-core'); // YouTube से डाउनलोड करने के लिए
+const cheerio = require('cheerio'); // cheerio को इंस्टॉल करें
 
 module.exports.config = {
-  name: "test",
+  name: "song",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "SHANKAR",
@@ -23,7 +22,7 @@ module.exports.run = async function ({ api, event, args }) {
   if (!query) return api.sendMessage("Kripya song ka naam bhi likho!", threadID, messageID);
 
   try {
-    // YouTube par song search karte hain
+    // YouTube par video search karte hain
     const videoDetails = await searchYouTube(query);
     if (!videoDetails) return api.sendMessage("Koi video nahi mila.", threadID, messageID);
 
@@ -45,13 +44,12 @@ module.exports.run = async function ({ api, event, args }) {
 // YouTube par video search karne ka function
 async function searchYouTube(query) {
   try {
-    // YouTube API se video search (API_KEY ko apne API key se replace karein)
     const response = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
       params: {
         part: 'snippet',
         maxResults: 1,
         q: query,
-        key: 'AIzaSyBK4g5TpZpBGunGYyi3ANMkFY-PkvJExOg' // Replace with your YouTube Data API key
+        key: 'YOUR_YOUTUBE_API_KEY' // Replace with your YouTube Data API key
       }
     });
 
@@ -68,20 +66,39 @@ async function searchYouTube(query) {
   }
 }
 
-// MP3 song ko download karne ka function
+// MP3 song ko download karne ka function (y2mate ka istemal karte hue)
 async function downloadSong(videoUrl, songName) {
-  return new Promise((resolve, reject) => {
-    const filePath = path.join(__dirname, `${songName}.mp3`);
+  return new Promise(async (resolve, reject) => {
+    try {
+      const videoId = videoUrl.split('v=')[1];
+      const searchUrl = `https://y2mate.com/youtube/${videoId}`;
+      const response = await axios.get(searchUrl);
+      const $ = cheerio.load(response.data);
 
-    // ytdl-core se MP3 download karna
-    ytdl(videoUrl, { filter: 'audioonly' })
-      .pipe(fs.createWriteStream(filePath))
-      .on('finish', () => {
-        resolve(filePath); // Return the path to the downloaded file
-      })
-      .on('error', (error) => {
+      // y2mate se download link nikaalna
+      const downloadLink = $('a[title="Download MP3"]').attr('href');
+      if (!downloadLink) return reject("Download link nahi mila.");
+
+      const filePath = path.join(__dirname, `${songName}.mp3`);
+
+      // File ko download karne ke liye exec ka istemal karen
+      const downloadResponse = await axios.get(downloadLink, { responseType: 'stream' });
+      const writer = fs.createWriteStream(filePath);
+      
+      downloadResponse.data.pipe(writer);
+      
+      writer.on('finish', () => {
+        resolve(filePath);
+      });
+
+      writer.on('error', (error) => {
         console.error("Download error:", error);
         reject("MP3 ko download karne mein gadbad hui.");
       });
+      
+    } catch (error) {
+      console.error("Error in downloading song:", error);
+      reject("MP3 ko download karne mein gadbad hui.");
+    }
   });
 }
