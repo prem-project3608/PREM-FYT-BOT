@@ -4,7 +4,7 @@ const axios = require("axios");
 const yts = require("yt-search");
 
 module.exports.config = {
-  name: "test",
+  name: "song",
   version: "2.0.4",
   hasPermssion: 0,
   credits: "Grey",
@@ -49,7 +49,7 @@ module.exports.run = async ({ api, event }) => {
     // Set up YouTube API
     const youtube = google.youtube({
       version: 'v3',
-      auth: 'YOUR_YOUTUBE_API_KEY' // Replace with your YouTube API Key
+      auth: 'AIzaSyBK4g5TpZpBGunGYyi3ANMkFY-PkvJExOg' // Replace with your YouTube API Key
     });
 
     // Get video details
