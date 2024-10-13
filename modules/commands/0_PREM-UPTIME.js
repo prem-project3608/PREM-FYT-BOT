@@ -47,9 +47,9 @@ module.exports.handleEvent = async ({ api, event }) => {
     
     // Imgur links ka array
     const imgurLinks = [
-      { url: "https://i.imgur.com/1.jpg", type: "image/jpeg" }, // JPG
+      { url: "https://i.imgur.com/5kGtMww.png", type: "image/png" }, // JPG
       { url: "https://i.imgur.com/rZxmABp.png", type: "image/png" }, // PNG
-      { url: "https://i.imgur.com/1.gif", type: "image/gif" }  // GIF
+      { url: "https://i.imgur.com/BBbMl6k.gif", type: "image/gif" }  // GIF
     ];
 
     // Randomly ek image select karna
