@@ -42,7 +42,7 @@ module.exports.handleEvent = async ({ api, event }) => {
     const systemUptimeMinutes = Math.floor(uptime / 60);
     
     // Message body ko define karna
-    const randomMessage = `❁ ━━━[ 𝗨𝗣𝗧𝗜𝗠𝗘 ]━━━ ❁\n\n\n✰ UPTIME ➪ ${hours}H ${minutes}M ${seconds}S\n✰ TIME ➪ ${indiaTime}\n✰ DATE ➪ ${indiaDate}\n✰ DAY ➪ ${indiaDay}\n━━━━━━━━━━━━━━━\nMADE BY PREM BABU 🙂`;
+    const randomMessage = `❁ ━━━[ 𝗨𝗣𝗧𝗜𝗠𝗘 ]━━━ ❁\n\n\n✰ RUN ➪ ${hours}H ${minutes}M ${seconds}S\n✰ TIME ➪ ${indiaTime}\n✰ DATE ➪ ${indiaDate}\n✰ DAY ➪ ${indiaDay}\n━━━━━━━━━━━━━━━\nMADE BY PREM BABU 🙂`;
 
     // Message bhejna bina kisi attachment ke
     api.sendMessage({
