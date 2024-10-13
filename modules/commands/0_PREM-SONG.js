@@ -1,24 +1,21 @@
-const { google } = require('googleapis');
 const fs = require("fs-extra");
 const axios = require("axios");
 const yts = require("yt-search");
+const { google } = require("googleapis");
+
+// YouTube API key
+const youtubeApiKey = 'AIzaSyBK4g5TpZpBGunGYyi3ANMkFY-PkvJExOg'; // यहां अपनी YouTube API की कुंजी डालें
 
 module.exports.config = {
   name: "song",
-  version: "2.0.4",
+  version: "1.0.0",
   hasPermssion: 0,
-  credits: "Grey",
-  description: "Play a song",
+  credits: "Your Name",
+  description: "Send a song directly",
   commandCategory: "utility",
-  usages: "[title]",
+  usages: "[song title]",
   prefix: true,
-  cooldowns: 20,
-  dependencies: {
-    "fs-extra": "",
-    "request": "",
-    "axios": "",
-    "yt-search": ""
-  }
+  cooldowns: 10,
 };
 
 module.exports.run = async ({ api, event }) => {
@@ -40,7 +37,7 @@ module.exports.run = async ({ api, event }) => {
     // Search for the song on YouTube
     const searchResults = await yts(song);
     if (!searchResults.videos.length) {
-      return api.sendMessage("त्रुटि: मान्य अनुरोध नहीं है।", event.threadID, event.messageID);
+      return api.sendMessage("त्रुटि: मान्य अनुरोध नहीं है।", event.threadID);
     }
 
     const video = searchResults.videos[0];
@@ -49,7 +46,7 @@ module.exports.run = async ({ api, event }) => {
     // Set up YouTube API
     const youtube = google.youtube({
       version: 'v3',
-      auth: 'AIzaSyBK4g5TpZpBGunGYyi3ANMkFY-PkvJExOg' // Replace with your YouTube API Key
+      auth: youtubeApiKey // Use the API key defined above
     });
 
     // Get video details
@@ -58,44 +55,12 @@ module.exports.run = async ({ api, event }) => {
       id: videoId
     });
 
-    const fileName = `${event.senderID}.mp3`;
-    const filePath = __dirname + `/cache/${fileName}`;
+    const message = {
+      body: `ये रहा आपका संगीत!🥰\n\nशीर्षक: ${video.title}\nकलाकार: ${videoDetails.data.items[0].snippet.channelTitle}\n लिंक: https://www.youtube.com/watch?v=${videoId}`, // Send the song title and link
+    };
 
-    // Download the audio using the video URL directly
-    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    const response = await axios({
-      url: videoUrl,
-      method: 'GET',
-      responseType: 'stream'
-    });
-
-    // Pipe the stream to the file system
-    const stream = response.data.pipe(fs.createWriteStream(filePath));
-
-    stream.on('response', () => {
-      console.info('[DOWNLOADER]', 'Download शुरू हो रहा है!');
-    });
-
-    stream.on('end', () => {
-      console.info('[DOWNLOADER]', 'Download पूरा हो गया।');
-
-      // Check if the file is larger than 25MB
-      if (fs.statSync(filePath).size > 26214400) {
-        fs.unlinkSync(filePath);
-        return api.sendMessage('[त्रुटि] फ़ाइल 25MB से बड़ी है और नहीं भेजी जा सकती।', event.threadID);
-      }
-
-      const message = {
-        body: `ये रहा आपका संगीत!🥰\n\nशीर्षक: ${video.title}\nकलाकार: ${videoDetails.data.items[0].snippet.channelTitle}`, // Updated to use channel title from videoDetails
-        attachment: fs.createReadStream(filePath)
-      };
-
-      // Send the message with the music file
-      api.sendMessage(message, event.threadID, () => {
-        // Remove the file after sending
-        fs.unlinkSync(filePath);
-      });
-    });
+    // Send the message with the music details
+    api.sendMessage(message, event.threadID);
   } catch (error) {
     console.error('[ERROR]', error);
     api.sendMessage('कमांड को प्रोसेस करते समय एक त्रुटि हुई।', event.threadID);
