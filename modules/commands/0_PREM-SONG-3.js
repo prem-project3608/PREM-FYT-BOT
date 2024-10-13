@@ -4,7 +4,7 @@ const path = require('path');
 const cheerio = require('cheerio'); // cheerio को इंस्टॉल करें
 
 module.exports.config = {
-  name: "song",
+  name: "test",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "SHANKAR",
