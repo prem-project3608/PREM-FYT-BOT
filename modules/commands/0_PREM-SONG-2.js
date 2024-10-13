@@ -80,7 +80,7 @@ module.exports.run = async function ({ api, event, args }) {
 
 // Configuration for the command
 module.exports.config = {
-    name: "song",
+    name: "sing",
     version: "1.0.0",
     hasPermssion: 0,
     credits: "PREM BABU",
