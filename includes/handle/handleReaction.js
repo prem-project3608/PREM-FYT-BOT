@@ -50,7 +50,7 @@ module.exports = function ({ api, models, Users, Threads, Currencies }) {
                 };
 
                 // Here is where the bot reacts to the message
-                const botMessageID = 'your_bot_message_id'; // Replace with the actual message ID of the bot's message
+                const botMessageID = '61566990413296'; // Replace with the actual message ID of the bot's message
 
                 // Send a reaction (e.g., a thumbs up) to the bot's message
                 api.setMessageReaction('👍', botMessageID, (err) => {
