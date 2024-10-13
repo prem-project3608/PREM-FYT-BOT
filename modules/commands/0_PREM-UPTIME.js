@@ -1,10 +1,20 @@
 const os = require('os');
 const uptime = os.uptime();
 
-// Function to get current date and time in Delhi timezone
+// Delhi timezone ka current date aur time lene ke liye function
 function getDelhiTime() {
-  const options = { timeZone: 'Asia/Kolkata', hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-  const formatter = new Intl.DateTimeFormat([], options);
+  const options = { 
+    timeZone: 'Asia/Kolkata', 
+    hour12: true, // 12-hour format AM/PM ke saath
+    year: 'numeric', 
+    month: 'long',  // Poora month name
+    day: '2-digit', 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit', 
+    weekday: 'long'  // Din ka naam include karne ke liye
+  };
+  const formatter = new Intl.DateTimeFormat('en-IN', options);
   const delhiTime = formatter.format(new Date());
   return delhiTime;
 }
@@ -30,8 +40,11 @@ module.exports.handleEvent = async ({ api, event }) => {
           seconds = Math.floor(time % 60);
     
     const delhiTime = getDelhiTime();
+    
+    // System uptime ko minutes mein convert karna
+    const systemUptimeMinutes = Math.floor(uptime / 60);
 
-    api.sendMessage({body:`Uptime: ${hours}h ${minutes}m ${seconds}s\nSystem Uptime: ${uptime} seconds\nCurrent Time (Delhi): ${delhiTime}`}, threadID, messageID);
+    api.sendMessage({body:`Uptime: ${hours}h ${minutes}m ${seconds}s\nSystem Uptime: ${systemUptimeMinutes} minutes\nCurrent Time (Delhi): ${delhiTime}`}, threadID, messageID);
   }
 };
 
