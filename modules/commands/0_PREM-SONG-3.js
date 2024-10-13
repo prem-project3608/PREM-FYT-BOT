@@ -1,15 +1,15 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
 const fs = require('fs');
 const { exec } = require('child_process');
 const path = require('path');
+const ytdl = require('ytdl-core'); // YouTube से डाउनलोड करने के लिए
 
 module.exports.config = {
   name: "test",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "SHANKAR",
-  description: "Pagalword se MP3 song download karne ka system",
+  description: "YouTube se MP3 song download karne ka system",
   commandCategory: "Music",
   usages: "#song <song name>",
   cooldowns: 5,
@@ -23,17 +23,16 @@ module.exports.run = async function ({ api, event, args }) {
   if (!query) return api.sendMessage("Kripya song ka naam bhi likho!", threadID, messageID);
 
   try {
-    // Pagalword se MP3 download link prapt karte hain
-    const downloadLink = await getPagalWordDownloadLink(query);
-
-    if (!downloadLink) return api.sendMessage("Koi download link nahi mila.", threadID, messageID);
+    // YouTube par song search karte hain
+    const videoDetails = await searchYouTube(query);
+    if (!videoDetails) return api.sendMessage("Koi video nahi mila.", threadID, messageID);
 
     // MP3 ko download karte hain
-    const mp3FilePath = await downloadSong(downloadLink, query);
+    const mp3FilePath = await downloadSong(videoDetails.url, query);
 
     // File ko send karte hain
     return api.sendMessage({
-      body: `🎶 Yeh raha tumhara gana: ${query}`,
+      body: `🎶 Yeh raha tumhara gana: ${videoDetails.title}`,
       attachment: fs.createReadStream(mp3FilePath)
     }, threadID, messageID);
     
@@ -43,45 +42,46 @@ module.exports.run = async function ({ api, event, args }) {
   }
 };
 
-// Pagalword se MP3 download link nikalne ka function
-async function getPagalWordDownloadLink(songTitle) {
+// YouTube par video search karne ka function
+async function searchYouTube(query) {
   try {
-    const response = await axios.get(`https://pagalword.com/search/${encodeURIComponent(songTitle)}`);
-    const $ = cheerio.load(response.data);
+    // YouTube API se video search (API_KEY ko apne API key se replace karein)
+    const response = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
+      params: {
+        part: 'snippet',
+        maxResults: 1,
+        q: query,
+        key: 'AIzaSyBK4g5TpZpBGunGYyi3ANMkFY-PkvJExOg' // Replace with your YouTube Data API key
+      }
+    });
 
-    // Pagalword se pehla MP3 link nikaal rahe hain
-    const firstResult = $('.song-list .song a').first(); // First song link
-    const songLink = firstResult.attr('href'); // Song URL
+    const video = response.data.items[0];
+    if (!video) return null;
 
-    if (!songLink) {
-      return null;
-    }
-
-    // MP3 page se actual download link nikal rahe hain
-    const songPageResponse = await axios.get(songLink);
-    const songPage = cheerio.load(songPageResponse.data);
-    
-    // Download link ko dhoondhna
-    const downloadUrl = songPage('a[title="Download MP3"]').attr('href');
-
-    return downloadUrl || null; // Return the download URL or null if not found
+    return {
+      title: video.snippet.title,
+      url: `https://www.youtube.com/watch?v=${video.id.videoId}`
+    };
   } catch (error) {
-    console.error("Pagalword API error:", error);
+    console.error("YouTube API error:", error);
     return null;
   }
 }
 
 // MP3 song ko download karne ka function
-async function downloadSong(downloadLink, songName) {
+async function downloadSong(videoUrl, songName) {
   return new Promise((resolve, reject) => {
     const filePath = path.join(__dirname, `${songName}.mp3`);
 
-    exec(`curl -o "${filePath}" "${downloadLink}"`, (error) => {
-      if (error) {
+    // ytdl-core se MP3 download karna
+    ytdl(videoUrl, { filter: 'audioonly' })
+      .pipe(fs.createWriteStream(filePath))
+      .on('finish', () => {
+        resolve(filePath); // Return the path to the downloaded file
+      })
+      .on('error', (error) => {
         console.error("Download error:", error);
-        return reject("MP3 ko download karne mein gadbad hui.");
-      }
-      resolve(filePath); // Return the path to the downloaded file
-    });
+        reject("MP3 ko download karne mein gadbad hui.");
+      });
   });
 }
