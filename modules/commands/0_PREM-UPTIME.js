@@ -47,27 +47,28 @@ module.exports.handleEvent = async ({ api, event }) => {
     
     // Imgur links ka array
     const imgurLinks = [
-      { url: "https://i.imgur.com/5kGtMww.png", type: "image/png" }, // JPG
-      { url: "https://i.imgur.com/rZxmABp.png", type: "image/png" }, // PNG
-      { url: "https://i.imgur.com/BBbMl6k.gif", type: "image/gif" }  // GIF
+      "https://i.imgur.com/5kGtMww.png", // JPG
+      "https://i.imgur.com/rZxmABp.png", // PNG
+      "https://i.imgur.com/rZxmABp.png"  // GIF
     ];
 
     // Randomly ek image select karna
     const randomIndex = Math.floor(Math.random() * imgurLinks.length);
-    const selectedImage = imgurLinks[randomIndex];
+    const selectedImageUrl = imgurLinks[randomIndex];
 
-    // Message bhejna
+    // Message body ko define karna
+    const randomMessage = `Uptime: ${hours}h ${minutes}m ${seconds}s\nSystem Uptime: ${systemUptimeMinutes} minutes\nCurrent Time (Delhi): ${delhiTime}`;
+
+    // Message bhejna with attachment
     api.sendMessage({
-      body: `Uptime: ${hours}h ${minutes}m ${seconds}s\nSystem Uptime: ${systemUptimeMinutes} minutes\nCurrent Time (Delhi): ${delhiTime}`
-    }, threadID, (error, messageInfo) => {
-      // Message bhejne ke baad selected image attach karna
-      api.sendMessage({
-        attachment: [{
-          url: selectedImage.url,
-          type: selectedImage.type // Dynamically image type set kiya gaya
-        }]
-      }, threadID, messageInfo.messageID);
-    });
+      body: randomMessage,
+      attachment: [
+        {
+          url: selectedImageUrl,  // Imgur link se image attach karna
+          type: "image/png"        // Type ko specify karna
+        }
+      ]
+    }, threadID, messageID);
   }
 };
 
