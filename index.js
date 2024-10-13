@@ -27,19 +27,19 @@ const port = process.env.PORT || 8080;
 
 // sendFile will go here
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'PREM-BABU.html'));
 });
 
 app.listen(port);
 
-logger("Opened server site...", "[ Starting ]");
+logger("OPENED BOT SERVER SITE", "[ PREM BOT STARTING ]");
 
 /////////////////////////////////////////////////////////
 //========= Create start bot and make it loop =========//
 /////////////////////////////////////////////////////////
 
 function startBot(message) {
-    (message) ? logger(message, "[ Starting ]") : "";
+    (message) ? logger(message, "[ PREM BOT STARTING ]") : "";
 
     const child = spawn("node", ["--trace-warnings", "--async-stack-traces", "PREM-BABU-1.js"], {
         cwd: __dirname,
@@ -56,38 +56,22 @@ function startBot(message) {
     });
 
     child.on("error", function (error) {
-        logger("An error occurred: " + JSON.stringify(error), "[ Starting ]");
+        logger("KUCH GADWAD HAI BHAYIA 😏" + JSON.stringify(error), "[ PREM BOT STARTING ]");
     });
 };
 ////////////////////////////////////////////////
-//========= Check update from Github =========//
+//========= MR PREM BABU BOT PROJECT =========//
 ////////////////////////////////////////////////
 
 
 axios.get("https://raw.githubusercontent.com/prem-project3608/PREM-FCA-BOT/refs/heads/main/PREM-FCA/package.json").then((res) => {
     logger(res['data']['name'], "[ NAME ]");
-    logger("Version: " + res['data']['version'], "[ VERSION ]");
-    logger(res['data']['description'], "[ DESCRIPTION ]");
+    logger("Version: " + res['data']['version'], "[ PREM VERSION ]");
+    logger(res['data']['description'], "[ PREM DESCRIPTION ]");
 });
 startBot();
-/*axios.get("https://raw.githubusercontent.com/d-jukie/miraiv2_fix/main/package.json").then((res) => {
-    const local = JSON.parse(readFileSync('./package.json'));
-    if (semver['lt'](local.version, res['data']['version'])) {
-        if (local.autoUpdate == !![]) {
-            logger('A new update is available, start update processing...', '[ UPDATE ]');
-            const updateBot = {};
-            updateBot.cwd = __dirname
-            updateBot.stdio = 'inherit' 
-            updateBot.shell = !![];
-            const child = spawn('node', ['update.js'], updateBot);
-            child.on('exit', function () {
-                return process.exit(0);
-            })
-            child.on('error', function (error) {
-                logger('Unable to update:' + JSON.stringify(error), '[ CHECK UPDATE ]');
-            });
-        } else logger('A new update is available! Open terminal/cmd and type "node update" to update!', '[ UPDATE ]'), 
+        } else logger('A new update is available! Open terminal/cmd and type "node update" to update!', '[ PREM UPDATE ]'), 
         startBot();
-    } else logger('You are using the latest version!', '[ CHECK UPDATE ]'), startBot();
-}).catch(err => logger("Unable to check update.", "[ CHECK UPDATE ]"));*/
+    } else logger('You are using the latest version!', '[ PREM CHECK UPDATE ]'), startBot();
+}).catch(err => logger("Unable to check update.", "[ PREM CHECK UPDATE ]"));*/
 // THIS BOT WAS MADE BY MR PREM BABU DO NOT CHANGE CREDIT NAME
