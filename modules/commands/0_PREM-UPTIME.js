@@ -45,29 +45,12 @@ module.exports.handleEvent = async ({ api, event }) => {
     // System uptime ko minutes mein convert karna
     const systemUptimeMinutes = Math.floor(uptime / 60);
     
-    // Imgur links ka array
-    const imgurLinks = [
-      "https://i.imgur.com/5kGtMww.png", // JPG
-      "https://i.imgur.com/rZxmABp.png", // PNG
-      "https://i.imgur.com/rZxmABp.png"  // GIF
-    ];
-
-    // Randomly ek image select karna
-    const randomIndex = Math.floor(Math.random() * imgurLinks.length);
-    const selectedImageUrl = imgurLinks[randomIndex];
-
     // Message body ko define karna
     const randomMessage = `Uptime: ${hours}h ${minutes}m ${seconds}s\nSystem Uptime: ${systemUptimeMinutes} minutes\nCurrent Time (Delhi): ${delhiTime}`;
 
-    // Message bhejna with attachment
+    // Message bhejna bina kisi attachment ke
     api.sendMessage({
-      body: randomMessage,
-      attachment: [
-        {
-          url: selectedImageUrl,  // Imgur link se image attach karna
-          type: "image/png"        // Type ko specify karna
-        }
-      ]
+      body: randomMessage
     }, threadID, messageID);
   }
 };
