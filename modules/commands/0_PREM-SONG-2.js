@@ -1,70 +1,93 @@
-const axios = require('axios');
-const ytdl = require('ytdl-core'); // YouTube video download ke liye
-const fs = require('fs'); // File system access
-
 module.exports.config = {
-  name: "music",
-  version: "1.0.0",
-  hasPermssion: 0,
-  credits: "SHANKAR",
-  description: "YouTube se music download karke send karta hai",
-  commandCategory: "Entertainment",
-  usages: "music [song name]",
-  cooldowns: 5,
+	name: "sing",
+	version: "1.0.7",
+	hasPermssion: 0,
+	credits: "Mirai Team",
+	description: "Phát nhạc thông qua link YouTube hoặc từ khoá tìm kiếm",
+	commandCategory: "media",
+	usages: "[link or content need search]",
+	cooldowns: 10,
+	dependencies: {
+		"ytdl-core": "",
+		"simple-youtube-api": "",
+		"fs-extra": ""
+	},
+	envConfig: {
+		"YOUTUBE_API": "AIzaSyB6pTkV2PM7yLVayhnjDSIM0cE_MbEtuvo"
+	}
 };
 
-module.exports.handleEvent = async function ({ api, event }) {
-  const { threadID, body } = event;
-  
-  if (body.toLowerCase().startsWith("music ")) {
-    const songName = body.slice(6).trim(); // Command se song ka naam lena
+module.exports.languages = {
+	"vi": {
+		"overSizeAllow": "Không thể gửi file vì dung lượng lớn hơn 25MB.",
+		"returnError": "Đã xảy ra vấn đề khi đang xử lý request, lỗi: %1",
+		"cantProcess": "Không thể xử lý yêu cầu của bạn!",
+		"missingInput": "Phần tìm kiếm không được để trống!",
+		"returnList": "🎼 Có %1 kết quả trùng với từ khoá tìm kiếm của bạn: \n%2\nHãy reply(phản hồi) chọn một trong những tìm kiếm trên"
+	},
+	"en": {
+		"overSizeAllow": "Can't send fine because it's bigger than 25MB.",
+		"returnError": "Have some problem when handling request, error: %1",
+		"cantProcess": "Can't handle your request!",
+		"missingInput": "Search section must not be blank!",
+		"returnList": "🎼 Have %1 results with your imput: \n%2\nPlease reply choose 1 of these result"
+	}
+}
 
-    // YouTube API se song search karo
-    try {
-      const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-        params: {
-          key: 'AIzaSyBK4g5TpZpBGunGYyi3ANMkFY-PkvJExOg', // Apni YouTube API key yaha daalein
-          q: songName,
-          part: 'snippet',
-          type: 'video',
-          maxResults: 1
-        }
-      });
+module.exports.handleReply = async function({ api, event, handleReply }) {
+	const ytdl = global.nodemodule["ytdl-core"];
+	const { createReadStream, createWriteStream, unlinkSync, statSync } = global.nodemodule["fs-extra"];
+	try {
+		ytdl(handleReply.link[event.body - 1])
+			.pipe(createWriteStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`))
+			.on("close", () => {
+				if (statSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`).size > 26214400) return api.sendMessage(getText("overSizeAllow"), event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID);
+				else return api.sendMessage({attachment: createReadStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID)
+			})
+			.on("error", (error) => api.sendMessage(getText("returnError", error), event.threadID, event.messageID));
+	}
+	catch { api.sendMessage(getText("cantProcess"), event.threadID, event.messageID) }
+	return api.unsendMessage(handleReply.messageID);
+}
 
-      const video = response.data.items[0];
-      const videoId = video.id.videoId;
-      const videoLink = `https://www.youtube.com/watch?v=${videoId}`;
-
-      // YouTube se audio stream download karo
-      const stream = ytdl(videoLink, { filter: 'audioonly' });
-
-      // Downloaded audio ko local file me save karo
-      const filePath = `./${songName}.mp3`;
-      const writeStream = fs.createWriteStream(filePath);
-
-      stream.pipe(writeStream);
-
-      writeStream.on('finish', () => {
-        // Jab audio file download ho jaye, to bot se file send karo
-        api.sendMessage({
-          body: `🎶 Aapka song: ${songName}`,
-          attachment: fs.createReadStream(filePath)
-        }, threadID, () => {
-          // Send hone ke baad temporary file ko delete karte hain
-          fs.unlinkSync(filePath);
-        });
-      });
-
-      writeStream.on('error', (err) => {
-        console.error("File likhne me error aayi:", err);
-        return api.sendMessage('Kuchh gadbad hui, song download nahi ho paya.', threadID);
-      });
-
-    } catch (error) {
-      console.error("Music download karne me error aayi:", error);
-      return api.sendMessage('Kuchh gadbad hui, song link nahi la paaye. Kripya baad me try karein.', threadID);
-    }
-  }
-};
-
-module.exports.run = function () {};
+module.exports.run = async function({ api, event, args, getText }) {
+	const ytdl = global.nodemodule["ytdl-core"];
+	const YouTubeAPI = global.nodemodule["simple-youtube-api"];
+	const { createReadStream, createWriteStream, unlinkSync, statSync } = global.nodemodule["fs-extra"];
+	
+	const youtube = new YouTubeAPI(global.configModule[this.config.name].YOUTUBE_API);
+	
+	if (args.length == 0 || !args) return api.sendMessage(getText("missingInput"), event.threadID, event.messageID);
+	const keywordSearch = args.join(" ");
+	const videoPattern = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
+	const urlValid = videoPattern.test(args[0]);
+	
+	if (urlValid) {
+		try {
+			var id = args[0].split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            (id[2] !== undefined) ? id = id[2].split(/[^0-9a-z_\-]/i)[0] : id = id[0];
+			ytdl(args[0])
+				.pipe(createWriteStream(__dirname + `/cache/${id}.m4a`))
+				.on("close", () => {
+					if (statSync(__dirname + `/cache/${id}.m4a`).size > 26214400) return api.sendMessage(getText("overSizeAllow"), event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`), event.messageID);
+					else return api.sendMessage({attachment: createReadStream(__dirname + `/cache/${id}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`) , event.messageID)
+				})
+				.on("error", (error) => api.sendMessage(getText("returnError", error), event.threadID, event.messageID));
+		}
+		catch { return api.sendMessage(getText("cantProcess"), event.threadID, event.messageID) }
+	}
+	else {
+		try {
+			var link = [], msg = "", num = 1;
+			let results = await youtube.searchVideos(keywordSearch, 5);
+			for (const value of results) {
+				if (typeof value.id !== 'undefined') {;
+					link.push(value.id);
+					msg += (`${num++}. ${value.title}\n`);
+				}
+			}
+			return api.sendMessage(getText("returnList", link.length, msg), event.threadID,(error, info) => global.client.handleReply.push({ name: this.config.name, messageID: info.messageID, author: event.senderID, link }), event.messageID);
+		}
+		catch (error) { return api.sendMessage(getText("returnError", JSON.stringify(error)), event.threadID, event.messageID) }
+	}
+}
