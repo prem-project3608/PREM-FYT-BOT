@@ -13,18 +13,11 @@ module.exports.config = {
 		"fs-extra": ""
 	},
 	envConfig: {
-		"YOUTUBE_API": "AIzaSyB6pTkV2PM7yLVayhnjDSIM0cE_MbEtuvo"
+		"YOUTUBE_API": "AIzaSyBK4g5TpZpBGunGYyi3ANMkFY-PkvJExOg"
 	}
 };
 
 module.exports.languages = {
-	"vi": {
-		"overSizeAllow": "Không thể gửi file vì dung lượng lớn hơn 25MB.",
-		"returnError": "Đã xảy ra vấn đề khi đang xử lý request, lỗi: %1",
-		"cantProcess": "Không thể xử lý yêu cầu của bạn!",
-		"missingInput": "Phần tìm kiếm không được để trống!",
-		"returnList": "🎼 Có %1 kết quả trùng với từ khoá tìm kiếm của bạn: \n%2\nHãy reply(phản hồi) chọn một trong những tìm kiếm trên"
-	},
 	"en": {
 		"overSizeAllow": "Can't send fine because it's bigger than 25MB.",
 		"returnError": "Have some problem when handling request, error: %1",
