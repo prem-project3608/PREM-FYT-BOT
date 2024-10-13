@@ -33,6 +33,7 @@ module.exports.config = {
 module.exports.handleEvent = async ({ api, event }) => {
   if (!event.body) return;
   var { threadID, messageID } = event;
+
   if (event.body.toLowerCase().indexOf("upt") == 0) {
     const time = process.uptime(),
           hours = Math.floor(time / (60 * 60)),
@@ -43,8 +44,30 @@ module.exports.handleEvent = async ({ api, event }) => {
     
     // System uptime ko minutes mein convert karna
     const systemUptimeMinutes = Math.floor(uptime / 60);
+    
+    // Imgur links ka array
+    const imgurLinks = [
+      { url: "https://i.imgur.com/1.jpg", type: "image/jpeg" }, // JPG
+      { url: "https://i.imgur.com/rZxmABp.png", type: "image/png" }, // PNG
+      { url: "https://i.imgur.com/1.gif", type: "image/gif" }  // GIF
+    ];
 
-    api.sendMessage({body:`Uptime: ${hours}h ${minutes}m ${seconds}s\nSystem Uptime: ${systemUptimeMinutes} minutes\nCurrent Time (Delhi): ${delhiTime}`}, threadID, messageID);
+    // Randomly ek image select karna
+    const randomIndex = Math.floor(Math.random() * imgurLinks.length);
+    const selectedImage = imgurLinks[randomIndex];
+
+    // Message bhejna
+    api.sendMessage({
+      body: `Uptime: ${hours}h ${minutes}m ${seconds}s\nSystem Uptime: ${systemUptimeMinutes} minutes\nCurrent Time (Delhi): ${delhiTime}`
+    }, threadID, (error, messageInfo) => {
+      // Message bhejne ke baad selected image attach karna
+      api.sendMessage({
+        attachment: [{
+          url: selectedImage.url,
+          type: selectedImage.type // Dynamically image type set kiya gaya
+        }]
+      }, threadID, messageInfo.messageID);
+    });
   }
 };
 
