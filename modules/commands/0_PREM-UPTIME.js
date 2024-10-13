@@ -15,7 +15,7 @@ function getIndiaTime() {
 }
 
 module.exports.config = {
-  name: "upt",
+  name: "upt", 
   version: "1.0.1",
   hasPermssion: 0,
   credits: "PREM BABU",
@@ -42,7 +42,7 @@ module.exports.handleEvent = async ({ api, event }) => {
     const systemUptimeMinutes = Math.floor(uptime / 60);
     
     // Message body ko define karna
-    const randomMessage = `❁ ━━━━━━━[ 𝗨𝗣𝗧𝗜𝗠𝗘 ]━━━━━━━ ❁\n\n\n☆ RUNNING TIME :- ${hours}H ${minutes}M ${seconds}S\n☆ SYSTEM UPDATE :- ${systemUptimeMinutes}M\n☆ TIME :- ${indiaTime}\n☆ DATE :- ${indiaDate}\n☆ DAY :- ${indiaDay}`;
+    const randomMessage = `❁ ━━━━━━━[ 𝗨𝗣𝗧𝗜𝗠𝗘 ]━━━━━━━ ❁\n\n\n✰ RUNNING TIME ➪ ${hours}H ${minutes}M ${seconds}S\n✰ SYSTEM UPDATE ➪ ${systemUptimeMinutes}M\n✰ TIME ➪ ${indiaTime}\n✰ DATE ➪ ${indiaDate}\n✰ DAY ➪ ${indiaDay}\n━━━━━━━━━━━━━━━━━━━━━\nMADE BY MR PREM BABU 🙂`;
 
     // Message bhejna bina kisi attachment ke
     api.sendMessage({
