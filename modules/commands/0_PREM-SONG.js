@@ -43,7 +43,7 @@ module.exports.handleReply = async function ({ api, event, handleReply }) {
     const axios = require('axios')
     const { createReadStream, unlinkSync, statSync } = require("fs-extra")
     try {
-        var path = `${__dirname}/cache/1.mp3`
+        var path = `${__dirname}/cache/ara.mp3`
         var data = await downloadMusicFromYoutube('https://www.youtube.com/watch?v=' + handleReply.link[event.body -1], path);
         if (fs.statSync(path).size > 26214400) return api.sendMessage('The file cannot be sent because the capacity is greater than 25MB.', event.threadID, () => fs.unlinkSync(path), event.messageID);
         api.unsendMessage(handleReply.messageID)
@@ -68,7 +68,7 @@ module.exports.convertHMS = function(value) {
 module.exports.run = async function ({ api, event, args }) {
     if (args.length == 0 || !args) return api.sendMessage('मेरी जान गाना का नाम तो लिखो 🤐👈', event.threadID, event.messageID);
     const keywordSearch = args.join(" ");
-    var path = `${__dirname}/cache/1.mp3`
+    var path = `${__dirname}/cache/ara.mp3`
     if (fs.existsSync(path)) { 
         fs.unlinkSync(path)
     }
