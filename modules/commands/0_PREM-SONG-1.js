@@ -43,7 +43,7 @@ async function searchSpotifyTrack(trackName, token) {
   });
 
   if (searchRes.data.tracks.items.length === 0) {
-    throw new Error("hai ये गाना मुझे नही मिल रहा 😕🤞");
+    throw new Error("ये गाना मुझे नही मिल रहा 😕🤞");
   }
 
   return searchRes.data.tracks.items[0]; // Return the first track
