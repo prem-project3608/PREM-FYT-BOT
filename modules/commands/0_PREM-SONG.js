@@ -28,7 +28,7 @@ module.exports.run = async function ({ api, event, args }) {
         part: 'snippet',
         q: query,
         type: 'video',
-        key: 'AIzaSyCbuOQhSRjfdkLOXkhyEo3nzbUHvQRsgkk', // YouTube API key yaha add karein
+        key: 'AIzaSyCyAsir55O2W_UU7o2fLeCF3Yuinp0i02I', // YouTube API key yaha add karein
         maxResults: 1
       }
     });
