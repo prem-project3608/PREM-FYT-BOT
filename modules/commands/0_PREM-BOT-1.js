@@ -40,7 +40,7 @@ module.exports.handleEvent = async function({ api, event, args, Threads, Users }
   var ownerUIDs = ["100070531069371", "YOUR_OWNER_UID_2", "YOUR_OWNER_UID_3"]; // यहाँ अपने मालिक के UID डालें
 
   // Female यूजर के Facebook UID की सूची
-  var femaleUIDs = ["YOUR_FEMALE_UID_1", "YOUR_FEMALE_UID_2"]; // यहाँ female UID डालें
+  var femaleUIDs = ["61557874780091", "YOUR_FEMALE_UID_2"]; // यहाँ female UID डालें
 
   // सभी उपयोगकर्ताओं के लिए सामान्य उत्तर
   if (event.body.includes("Bot") || event.body.includes("BOT") || event.body.includes("bot") || event.body.includes("taklu") || event.body.includes("takl") || event.body.includes("Takl") || event.body.includes("TAKLU") || event.body.includes("Taklu")) {
