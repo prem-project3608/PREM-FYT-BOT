@@ -84,8 +84,11 @@ module.exports.run = async function ({ api, event, args }) {
     // Send the song with a message indicating that it's the requested song
     await api.sendMessage({
       attachment: fs.createReadStream(songPath),
-      body: `ये रहा आपका गाना! 🎵\n🎶 Title: ${songData.title}\n👤 Artists: ${songData.artists}`
+      body: `MR PREM PROJECT`
     }, threadID, messageID);
+
+    // Send an additional message to encourage listening
+    await api.sendMessage("ये लो मजे से सुनो गाना 🎧", threadID, messageID);
 
     // Clean up cached files
     await fs.remove(songPath);
