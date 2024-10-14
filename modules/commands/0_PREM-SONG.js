@@ -1,5 +1,5 @@
 const axios = require('axios');
-const ytdl = require('ytdl-core'); // ytdl-core का उपयोग
+const ytdl = require('ytdl-core');
 const fs = require('fs');
 
 module.exports.config = {
@@ -55,19 +55,31 @@ module.exports.run = async function ({ api, event, args }) {
 
     const songUrl = `https://www.youtube.com/watch?v=${song.id.videoId}`;
 
-    // Send audio
+    // Audio stream
     const audioStream = ytdl(songUrl, { filter: 'audioonly' });
-    const audioFile = `./temp/${song.snippet.title}.mp3`; // Temporary file path
+    const audioFile = `./temp/${song.snippet.title.replace(/[^a-zA-Z0-9]/g, "_")}.mp3`; // Temporary file path with safe filename
 
-    audioStream.pipe(fs.createWriteStream(audioFile));
+    // Create temp directory if not exists
+    if (!fs.existsSync('./temp')) {
+      fs.mkdirSync('./temp');
+    }
 
-    audioStream.on('finish', () => {
+    const writeStream = fs.createWriteStream(audioFile);
+    
+    audioStream.pipe(writeStream);
+
+    writeStream.on('finish', () => {
       api.sendMessage({
-        body: `🎶 Tumhara gana mil gaya!`,
+        body: `🎶 Tumhara gana mil gaya: ${song.snippet.title}`,
         attachment: fs.createReadStream(audioFile)
       }, threadID, () => {
         fs.unlinkSync(audioFile); // Clean up file after sending
       }, messageID);
+    });
+
+    writeStream.on('error', (err) => {
+      console.error("Error writing file:", err);
+      return api.sendMessage("File likhne mein gadbad hui.", threadID, messageID);
     });
 
   } catch (error) {
