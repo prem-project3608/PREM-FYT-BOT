@@ -1,86 +1,96 @@
+const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
+
+const SPOTIFY_CLIENT_ID = "41dd52e608ee4c4ba8b196b943db9f73";
+const SPOTIFY_CLIENT_SECRET = "5c7b438712b04d0a9fe2eaae6072fa16";
+
 module.exports.config = {
-	name: "sing",
-	version: "1.0.7",
-	hasPermssion: 0,
-	credits: "Mirai Team",
-	description: "Phát nhạc thông qua link YouTube hoặc từ khoá tìm kiếm",
-	commandCategory: "media",
-	usages: "[link or content need search]",
-	cooldowns: 10,
-	dependencies: {
-		"ytdl-core": "",
-		"simple-youtube-api": "",
-		"fs-extra": ""
-	},
-	envConfig: {
-		"YOUTUBE_API": "AIzaSyCqr69eX20ZtDH9q7OBcRK8ouxUOceT500"
-	}
+  name: "sing",
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "PREM BABU",
+  description: "THIS BOT IS MADE BY MR PREM BABU",
+  commandCategory: "SPOTIFY DOWNLOAD MUSIC",
+  usages: "PREFIX",
+  cooldowns: 5,
 };
 
-module.exports.languages = {
-	"en": {
-		"overSizeAllow": "Can't send fine because it's bigger than 25MB.",
-		"returnError": "Have some problem when handling request, error: %1",
-		"cantProcess": "Can't handle your request!",
-		"missingInput": "Search section must not be blank!",
-		"returnList": "🎼 Have %1 results with your imput: \n%2\nPlease reply choose 1 of these result"
-	}
+// Function to get Spotify access token
+async function getSpotifyToken() {
+  const tokenRes = await axios.post("https://accounts.spotify.com/api/token", new URLSearchParams({
+    grant_type: "client_credentials"
+  }).toString(), {
+    headers: {
+      "Authorization": `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  });
+  return tokenRes.data.access_token;
 }
 
-module.exports.handleReply = async function({ api, event, handleReply }) {
-	const ytdl = global.nodemodule["ytdl-core"];
-	const { createReadStream, createWriteStream, unlinkSync, statSync } = global.nodemodule["fs-extra"];
-	try {
-		ytdl(handleReply.link[event.body - 1])
-			.pipe(createWriteStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`))
-			.on("close", () => {
-				if (statSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`).size > 26214400) return api.sendMessage(getText("overSizeAllow"), event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID);
-				else return api.sendMessage({attachment: createReadStream(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${handleReply.link[event.body - 1]}.m4a`), event.messageID)
-			})
-			.on("error", (error) => api.sendMessage(getText("returnError", error), event.threadID, event.messageID));
-	}
-	catch { api.sendMessage(getText("cantProcess"), event.threadID, event.messageID) }
-	return api.unsendMessage(handleReply.messageID);
+// Function to search Spotify for a track
+async function searchSpotifyTrack(trackName, token) {
+  const searchRes = await axios.get(`https://api.spotify.com/v1/search`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    params: {
+      q: trackName,
+      type: "track",
+      limit: 1
+    }
+  });
+
+  if (searchRes.data.tracks.items.length === 0) {
+    throw new Error("ये गाना मुझे नही मिल रहा 😕🤞");
+  }
+
+  return searchRes.data.tracks.items[0]; // Return the first track
 }
 
-module.exports.run = async function({ api, event, args, getText }) {
-	const ytdl = global.nodemodule["ytdl-core"];
-	const YouTubeAPI = global.nodemodule["simple-youtube-api"];
-	const { createReadStream, createWriteStream, unlinkSync, statSync } = global.nodemodule["fs-extra"];
-	
-	const youtube = new YouTubeAPI(global.configModule[this.config.name].YOUTUBE_API);
-	
-	if (args.length == 0 || !args) return api.sendMessage(getText("missingInput"), event.threadID, event.messageID);
-	const keywordSearch = args.join(" ");
-	const videoPattern = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
-	const urlValid = videoPattern.test(args[0]);
-	
-	if (urlValid) {
-		try {
-			var id = args[0].split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-            (id[2] !== undefined) ? id = id[2].split(/[^0-9a-z_\-]/i)[0] : id = id[0];
-			ytdl(args[0])
-				.pipe(createWriteStream(__dirname + `/cache/${id}.m4a`))
-				.on("close", () => {
-					if (statSync(__dirname + `/cache/${id}.m4a`).size > 26214400) return api.sendMessage(getText("overSizeAllow"), event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`), event.messageID);
-					else return api.sendMessage({attachment: createReadStream(__dirname + `/cache/${id}.m4a`)}, event.threadID, () => unlinkSync(__dirname + `/cache/${id}.m4a`) , event.messageID)
-				})
-				.on("error", (error) => api.sendMessage(getText("returnError", error), event.threadID, event.messageID));
-		}
-		catch { return api.sendMessage(getText("cantProcess"), event.threadID, event.messageID) }
-	}
-	else {
-		try {
-			var link = [], msg = "", num = 1;
-			let results = await youtube.searchVideos(keywordSearch, 5);
-			for (const value of results) {
-				if (typeof value.id !== 'undefined') {;
-					link.push(value.id);
-					msg += (`${num++}. ${value.title}\n`);
-				}
-			}
-			return api.sendMessage(getText("returnList", link.length, msg), event.threadID,(error, info) => global.client.handleReply.push({ name: this.config.name, messageID: info.messageID, author: event.senderID, link }), event.messageID);
-		}
-		catch (error) { return api.sendMessage(getText("returnError", JSON.stringify(error)), event.threadID, event.messageID) }
-	}
-}
+module.exports.run = async function ({ api, event, args }) {
+  const { threadID, messageID } = event;
+  try {
+    const trackName = args.join(" ").trim();
+    if (!trackName) {
+      return api.sendMessage("मेरी जान गाने का नाम तो लिखो 🤐🤞", threadID, messageID);
+    }
+
+    // Get Spotify Access Token
+    const spotifyToken = await getSpotifyToken();
+
+    // Search for the track on Spotify
+    const track = await searchSpotifyTrack(trackName, spotifyToken);
+    const trackUrl = track.external_urls.spotify;
+
+    // Inform user that the song is being downloaded
+    await api.sendMessage(`🔄 कृपया प्रतीक्षा करें, आपका गाना डाउनलोड हो रहा है...`, threadID, messageID);
+
+    // Fetch song download details
+    const res = await axios.get(`https://for-devs.onrender.com/api/spotify/download?url=${encodeURIComponent(trackUrl)}&apikey=r-e377e74a78b7363636jsj8ffb61ce`);
+    const songData = res.data;
+
+    if (!songData || !songData.downloadUrl) {
+      return api.sendMessage(`Unable to download song for "${trackName}". Please try again.`, threadID, messageID);
+    }
+
+    const songPath = path.join(__dirname, 'cache', `${songData.id}.mp3`);
+
+    // Download the song
+    const songResponse = await axios.get(songData.downloadUrl, { responseType: 'arraybuffer' });
+    await fs.outputFile(songPath, songResponse.data);
+
+    // Send the song with title and artist
+    await api.sendMessage({
+      attachment: fs.createReadStream(songPath),
+      body: `🎵 Title: ${songData.title}\n👤 Artists: ${songData.artists}`
+    }, threadID, messageID);
+
+    // Clean up cached files
+    await fs.remove(songPath);
+  } catch (error) {
+    console.error("Error:", error);
+    return api.sendMessage(`An error occurred: ${error.message}`, threadID, messageID);
+  }
+};
