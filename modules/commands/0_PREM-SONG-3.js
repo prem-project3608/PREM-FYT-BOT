@@ -12,8 +12,8 @@ module.exports.config = {
 };
 
 // यूट्यूब API क्लाइंट ID और सीक्रेट यहाँ डालें
-const CLIENT_ID = "YOUR_CLIENT_ID"; // अपना क्लाइंट ID यहाँ डालें
-const CLIENT_SECRET = "YOUR_CLIENT_SECRET"; // अपना सीक्रेट यहाँ डालें
+const CLIENT_ID = "432688177635-obff7tpu4c3p7mepb43euoljv7nu6gm9.apps.googleusercontent.com"; // अपना क्लाइंट ID यहाँ डालें
+const CLIENT_SECRET = "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"; // अपना सीक्रेट यहाँ डालें
 
 async function getAccessToken() {
   try {
