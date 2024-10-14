@@ -1,80 +1,117 @@
-const fs = require("fs-extra"),
-    axios = require("axios")
+  const axios = require('axios');
+  const fs = require('fs');
 
-var r = ["QEXSJd62","WKd4XzHX","FI6bX3kC"];
-const api = r[Math.floor(Math.random() * r.length)]
+  const isURL = u => /^http(|s):\/\//.test(u);
 
-module.exports.config = {
-    name: "autodown",
-    version: "1.0.0",
-    hasPermssion: 4,
-    credits: "Thiệu Trung Kiên",
-    description: "Tự động tải xuống ảnh/video trong nhóm",
-    commandCategory: "group",
-    usages: "autodown",
-    cooldowns: 5
-}
-module.exports.run = async function () { }
+  exports.handleEvent = async function(o) {
+      try {
+          const str = o.event.body;
+          const send = msg => o.api.sendMessage(msg, o.event.threadID, o.event.messageID);
+          const head = app => `==『 AUTODOWN ${app.toUpperCase()} 』==\n────────────────`;
+       // const head = app => '';
 
-module.exports.handleEvent = async function ({ api, event }) {
-    if (this.checkLink(event.body)) {
-        var { type, url } = this.checkLink(event.body);
-        this.downLoad(url, type, api, event);
+          if (isURL(str)) {
+              if (/fb|facebook/.test(str)) {
+                  const json = await infoPostFb(str);
+                  const body = `${head('FACEBOOK')}\n- Tiêu Đề: ${json.message}`;
+                  const fil = type => json.attachment.filter($=>$.__typename == type);
+                  const photo = fil('Photo');
+                  const video = fil('Video');
+
+                  const attachment = [];
+                  for (const i of photo) {
+                      try {
+                          const img = i.photo_image || i.image || {};
+                          attachment.push(await streamURL(img.uri, 'jpg'));
+                      } catch {
+                          continue;
+                      }
+                  }
+                  if (attachment.length > 0) {
+                      await send({
+                          body, attachment
+                      });
+                  }
+
+                  for (const i of video) {
+                      try {
+                          send({
+                              body, attachment: await streamURL(i.browser_native_hd_url || i.browser_native_sd_url, 'mp4'),
+                          });
+                      } catch {
+                          continue;
+                      }
+                  }
+              } 
+        /* TỰ ĐỘNG TẢI ẢNH HOẶC VIDEO TIKTOK */ 
+        
+        /* TỰ ĐỘNG TẢI ẢNH HOẶC VIDEO YOUTUBE */ 
+        
+        /* TỰ ĐỘNG TẢI ẢNH HOẶC VIDEO IBB */ 
+        else if (/ibb\.co/.test(str)) {
+           send({body: `${head('IMGBB')}\n`,attachment: await streamURL(str, str.split('.').pop()) })
+                }
+        /* TỰ ĐỘNG TẢI ẢNH HOẶC VIDEO IMGUR */ 
+        else if (/imgur\.com/.test(str)) {
+                  send({body: `${head('IMGUR')}\n`,
+                      attachment: await streamURL(str, str.split('.').pop())
+                  })
+              } 
+        /*AUTODOWN CAPCUT VIIDEO */
+        else if (/capcut\.com/.test(str)) {
+                  var res = (await axios.get(`https://api-0703.0703-opa.repl.co/capcut?url=${str}`))
+  const title = res.data.title;
+  const description = res.data.description;
+  const usage = res.data.usage;
+  const link = res.data.videoUrl;
+                    send({body: `${head('CAPCUT')}\n→ Tiêu Đề: ${title}\n→ Description : ${description}\n→ Lượt Xem : ${usage}\n`,attachment: await streamURL(link, 'mp4')})
+                  }
+        /* TỰ ĐỘNG TẢI ẢNH, VIDEO, AUDIO CỦA FILE CATBOX*/ 
+        else if(/catbox\.moe/.test(str)){
+        send({body: `${head('FILE-CATBOX')}\n`,attachment: await streamURL(str, str.split('.').pop()) })
     }
-}
+        /* TỰ ĐỘNG TẢI ẢNH HOẶC NHẠC SOUNDCLOUD */ 
+        
+        /* TỰ ĐỘNG TẢI NHẠC ZINGMP3 */ 
+        
+        /* TỰ ĐỘNG TẢI ẢNH HOẶC VIDEO PINTEREST */ 
+        else if (/(^https:\/\/)((www)\.)?(pinterest|pin)*\.(com|it)\//.test(str)) {
+                  const res = await axios.get(`https://api.imgbb.com/1/upload?key=588779c93c7187148b4fa9b7e9815da9&image=${str}`);
+                  send({
+                      body: `${head('PINTEREST')}\n- link: ${res.data.data.image.url}`, attachment: await streamURL(res.data.data.image.url, 'jpg')});
+              } 
+        /* TỰ ĐỘNG TẢI ẢNH HOẶC VIDEO INSTAGRAM */ 
+       
+          }
 
-module.exports.downLoad = function (url, type, api, event) {
-    var time = Date.now();
-    var path = __dirname + `/cache/${time}.${type}`;
-    this.getLink(url).then(res => {
-        if (type == 'mp4') url = res.result.video.hd || res.result.video.sd || res.result.video.nowatermark || res.result.video.watermark;
-        else if (type == 'mp3') url = res.result.music.play_url
-        axios({
-            method: "GET",
-            url: url,
-            responseType: "arraybuffer"
-        }).then(res => {
-            fs.writeFileSync(path, Buffer.from(res.data, "utf-8"));
-            if (fs.statSync(path).size / 1024 / 1024 > 2225) return api.sendMessage("File quá lớn, không thể gửi", event.threadID, () => fs.unlinkSync(path), event.messageID);
-            api.sendMessage({
-                attachment: fs.createReadStream(path)
-            }, event.threadID, () => fs.unlinkSync(path), event.messageID);
-        });
-    }).catch(err => console.log("Lỗi AUTODOWN"));
-}
+      } catch(e) {
+          console.log('Error', e);
+      }
+  };
+  exports.run = () => {};
+  exports.config = {
+      name: 'autodownVip',
+      version: '1',
+      hasPermssion: 0,
+      credits: 'Công Nam',
+      description: '',
+      commandCategory: 'Tiện Ích',
+      usages: [],
+      cooldowns: 1
+  };
 
-module.exports.getLink = function (url) {
-    return new Promise((resolve, reject) => {
-        axios({
-            method: "GET",
-            url: `https://nguyenmanh.name.vn/api/autolink?url=${url}&apikey=${api}`
-        }).then(res => resolve(res.data)).catch(err => reject(err));
-    });
-}
+  function streamURL(url, type) {
+      return axios.get(url, {
+          responseType: 'arraybuffer'
+      }).then(res => {
+          const path = __dirname + `/cache/${Date.now()}.${type}`;
+          fs.writeFileSync(path, res.data);
+          setTimeout(p => fs.unlinkSync(p), 1000 * 60, path);
+          return fs.createReadStream(path);
+      });
+  }
 
-module.exports.checkLink = function (url) {
-    const regex = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
-    const found = (url).match(regex);
-    var media = ['vt' ,'tiktok', 'facebook', 'douyin', 'youtube', 'youtu', 'twitter', 'instagram', 'kuaishou', 'fb']
-    if (this.isVaildUrl(String(found))) {
-        if (media.some(item => String(found).includes(item))) {
-            return {
-                type: "mp4",
-                url: String(found)
-            };
-        }
-        else if (String(found).includes("soundcloud") || String(found).includes("zingmp3")) {
-            return {
-                type: "mp3",
-                url: String(found)
+  function infoPostFb(url) {
+      return axios.get(`https://duongkum999.codes/fb/info-post?url=${url}`).then(res => res.data);
             }
-        }
-    }
-    return !1;
-}
-
-module.exports.isVaildUrl = function (url) {
-    var regex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
-    if (url.match(regex) == null) return !1;
-    return !0;
-}
+  1
