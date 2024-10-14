@@ -22,7 +22,7 @@ function getIndiaTime() {
 }
 
 module.exports.config = {
-  name: "RUNNING-BOT-UPTIME", 
+  name: "BOT-UPTIME", 
   version: "1.0.1",
   hasPermssion: 0,
   credits: "PREM BABU",
