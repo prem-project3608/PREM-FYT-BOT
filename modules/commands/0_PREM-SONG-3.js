@@ -24,7 +24,7 @@ module.exports.run = async function ({ api, event, args }) {
 
   try {
     // SoundCloud API se song search karte hain
-    const response = await axios.get('https://api.soundcloud.com/tracks', {
+    const response = await axios.get('https://developers.soundcloud.com/docs/api/explorer/open-api', {
       params: {
         client_id: CLIENT_ID,
         q: query,
