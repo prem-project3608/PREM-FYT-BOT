@@ -12,7 +12,7 @@ module.exports.config = {
 };
 
 // यूट्यूब API कुंजी यहाँ डालें
-const YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY";
+const YOUTUBE_API_KEY = "AIzaSyCyAsir55O2W_UU7o2fLeCF3Yuinp0i02I";
 
 module.exports.run = async function ({ api, event, args }) {
   const { threadID, messageID } = event;
