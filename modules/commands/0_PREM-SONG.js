@@ -3,11 +3,11 @@ const fs = require("fs-extra");
 const path = require("path");
 
 module.exports.config = {
-  name: "ytmusic",
+  name: "sing",
   version: "1.1.0",
   hasPermssion: 0,
-  credits: "SHANKAR",
-  description: "YouTube se song ka naam search karke MP3 download kar ke deta hai",
+  credits: "PREM BABU",
+  description: "YouTube",
   commandCategory: "Music",
   usages: "ytmusic <song name>",
   cooldowns: 5,
