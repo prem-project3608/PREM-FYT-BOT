@@ -1,104 +1,83 @@
 const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
-const cheerio = require('cheerio'); // cheerio को इंस्टॉल करें
+const qs = require('qs');
 
 module.exports.config = {
-  name: "test",
+  name: "music",
   version: "1.0.0",
   hasPermssion: 0,
-  credits: "SHANKAR",
-  description: "YouTube se MP3 song download karne ka system",
+  credits: "PREM BABU",
+  description: "Spotify se song search kar ke deta hai",
   commandCategory: "Music",
-  usages: "#song <song name>",
+  usages: "music <song name>",
   cooldowns: 5,
 };
 
-module.exports.run = async function ({ api, event, args }) {
-  const { threadID, messageID } = event;
+const SPOTIFY_CLIENT_ID = "41dd52e608ee4c4ba8b196b943db9f73";
+const SPOTIFY_CLIENT_SECRET = "5c7b438712b04d0a9fe2eaae6072fa16";
 
-  // User input se song ka naam lete hain
-  const query = args.join(" ");
-  if (!query) return api.sendMessage("Kripya song ka naam bhi likho!", threadID, messageID);
+async function getSpotifyToken() {
+  const tokenUrl = 'https://accounts.spotify.com/api/token';
+  const data = qs.stringify({
+    grant_type: 'client_credentials'
+  });
+
+  const headers = {
+    headers: {
+      'Authorization': 'Basic ' + Buffer.from(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET).toString('base64'),
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  };
 
   try {
-    // YouTube par video search karte hain
-    const videoDetails = await searchYouTube(query);
-    if (!videoDetails) return api.sendMessage("Koi video nahi mila.", threadID, messageID);
-
-    // MP3 ko download karte hain
-    const mp3FilePath = await downloadSong(videoDetails.url, query);
-
-    // File ko send karte hain
-    return api.sendMessage({
-      body: `🎶 Yeh raha tumhara gana: ${videoDetails.title}`,
-      attachment: fs.createReadStream(mp3FilePath)
-    }, threadID, messageID);
-    
+    const response = await axios.post(tokenUrl, data, headers);
+    return response.data.access_token;
   } catch (error) {
-    console.error("Error:", error);
-    return api.sendMessage("Kuch gadbad hui hai.", threadID, messageID);
-  }
-};
-
-// YouTube par video search karne ka function
-async function searchYouTube(query) {
-  try {
-    const response = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
-      params: {
-        part: 'snippet',
-        maxResults: 1,
-        q: query,
-        key: 'AIzaSyBtiD442srhczDpcg8xbhinP423BeUFXB8' // Replace with your YouTube Data API key
-      }
-    });
-
-    const video = response.data.items[0];
-    if (!video) return null;
-
-    return {
-      title: video.snippet.title,
-      url: `https://www.youtube.com/watch?v=${video.id.videoId}`
-    };
-  } catch (error) {
-    console.error("YouTube API error:", error);
+    console.error('Error fetching Spotify token:', error.response ? error.response.data : error.message);
     return null;
   }
 }
 
-// MP3 song ko download karne ka function (y2mate ka istemal karte hue)
-async function downloadSong(videoUrl, songName) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const videoId = videoUrl.split('v=')[1];
-      const searchUrl = `https://y2mate.com/youtube/${videoId}`;
-      const response = await axios.get(searchUrl);
-      const $ = cheerio.load(response.data);
+module.exports.run = async function ({ api, event, args }) {
+  const { threadID, messageID } = event;
 
-      // y2mate se download link nikaalna
-      const downloadLink = $('a[title="Download MP3"]').attr('href');
-      if (!downloadLink) return reject("Download link nahi mila.");
+  const query = args.join(" ");
+  if (!query) {
+    return api.sendMessage("Kripya song ka naam bhi likho!", threadID, messageID);
+  }
 
-      const filePath = path.join(__dirname, `${songName}.mp3`);
-
-      // File ko download karne ke liye exec ka istemal karen
-      const downloadResponse = await axios.get(downloadLink, { responseType: 'stream' });
-      const writer = fs.createWriteStream(filePath);
-      
-      downloadResponse.data.pipe(writer);
-      
-      writer.on('finish', () => {
-        resolve(filePath);
-      });
-
-      writer.on('error', (error) => {
-        console.error("Download error:", error);
-        reject("MP3 ko download karne mein gadbad hui.");
-      });
-      
-    } catch (error) {
-      console.error("Error in downloading song:", error);
-      reject("MP3 ko download karne mein gadbad hui.");
+  try {
+    // Get Spotify access token
+    const token = await getSpotifyToken();
+    if (!token) {
+      return api.sendMessage('Spotify se token lene me gadbad hui!', threadID, messageID);
     }
-  });
-}
+
+    // Spotify API se song search karte hain
+    const response = await axios.get('https://api.spotify.com/v1/search', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      params: {
+        q: query,
+        type: 'track',
+        limit: 1
+      }
+    });
+
+    if (!response.data.tracks.items.length) {
+      return api.sendMessage("Sorry, koi result nahi mila.", threadID, messageID);
+    }
+
+    const song = response.data.tracks.items[0];
+    const songTitle = song.name;
+    const songUrl = song.external_urls.spotify;
+    const artists = song.artists.map(artist => artist.name).join(', ');
+
+    // Song details and link send karenge
+    return api.sendMessage(`🎶 Tumhara gana mil gaya!\n\n🎵 Song: ${songTitle}\n👨‍🎤 Artist: ${artists}\n🔗 Listen here: ${songUrl}`, threadID, messageID);
+
+  } catch (error) {
+    console.error("Spotify API error:", error.response ? error.response.data : error.message);
+    return api.sendMessage('Spotify se song laane me gadbad hui: ' + (error.response ? error.response.data : error.message), threadID, messageID);
+  }
+};
