@@ -7,9 +7,12 @@ function getIndiaTime() {
   const optionsTime = { hour12: true, timeZone: 'Asia/Kolkata' };
   const optionsDate = { timeZone: 'Asia/Kolkata' };
 
-  const time = currentDate.toLocaleTimeString('en-IN', optionsTime);
+  let time = currentDate.toLocaleTimeString('en-IN', optionsTime);
   const date = currentDate.toLocaleDateString('en-IN', optionsDate);
   const day = currentDate.toLocaleString('en-IN', { weekday: 'long', timeZone: 'Asia/Kolkata' });
+
+  // AM/PM ko capital letters mein convert karna
+  time = time.replace('am', 'AM').replace('pm', 'PM');
 
   return { time, date, day };
 }
