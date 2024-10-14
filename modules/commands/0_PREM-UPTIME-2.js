@@ -52,8 +52,8 @@ module.exports.handleEvent = async ({ api, event }) => {
     const randomMessage = `❁ ━━━[ 𝗨𝗣𝗧𝗜𝗠𝗘 ]━━━ ❁\n\n\n✰ 𝗥𝗨𝗡 ➪ ${hours}ʜ ${minutes}ᴍ ${seconds}ꜱ\n✰ 𝗧𝗜𝗠𝗘 ➪ ${indiaTime}\n✰ 𝗗𝗔𝗧𝗘 ➪ ${indiaDate}\n✰ 𝗗𝗔𝗬 ➪ ${indiaDay}\n━━━━━━━━━━━━━━━\n𝗠𝗔𝗗𝗘 𝗕𝗬 𝗣𝗥𝗘𝗠 𝗕𝗔𝗕𝗨`;
 
     // Imgur image URL
-    const imageUrl = "https://i.imgur.com/NyM1MnV.gif"; // यहाँ अपनी Imgur इमेज का URL डालें
-    const outputImagePath = 'output_image.gif'; // रिसाइज़ की गई इमेज का पथ
+    const imageUrl = "https://i.imgur.com/PhvtL6L.jpeg"; // यहाँ अपनी Imgur इमेज का URL डालें
+    const outputImagePath = 'output_image.jpeg'; // रिसाइज़ की गई इमेज का पथ
 
     // इमेज को डाउनलोड करना
     const response = await axios({
