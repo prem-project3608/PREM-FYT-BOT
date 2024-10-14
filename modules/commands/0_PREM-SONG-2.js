@@ -57,15 +57,15 @@ module.exports.run = async function ({ api, event, args }) {
       return api.sendMessage("मेरी जान गाने का नाम तो लिखो 🤐🤞", threadID, messageID);
     }
 
+    // Inform the user that the song is being downloaded
+    await api.sendMessage("आपका गाना डाउनलोड हो रहा है, कृपया इंतज़ार करें... 🎶", threadID, messageID);
+
     // Get Spotify Access Token
     const spotifyToken = await getSpotifyToken();
 
     // Search for the track on Spotify
     const track = await searchSpotifyTrack(trackName, spotifyToken);
     const trackUrl = track.external_urls.spotify;
-
-    // Inform user that the song is being downloaded
-    await api.sendMessage(`🔄 कृपया प्रतीक्षा करें, आपका गाना डाउनलोड हो रहा है...`, threadID, messageID);
 
     // Fetch song download details
     const res = await axios.get(`https://for-devs.onrender.com/api/spotify/download?url=${encodeURIComponent(trackUrl)}&apikey=r-e377e74a78b7363636jsj8ffb61ce`);
@@ -81,7 +81,7 @@ module.exports.run = async function ({ api, event, args }) {
     const songResponse = await axios.get(songData.downloadUrl, { responseType: 'arraybuffer' });
     await fs.outputFile(songPath, songResponse.data);
 
-    // Send the song with title and artist
+    // Send the song without cover
     await api.sendMessage({
       attachment: fs.createReadStream(songPath),
       body: `🎵 Title: ${songData.title}\n👤 Artists: ${songData.artists}`
