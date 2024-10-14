@@ -58,7 +58,7 @@ module.exports.run = async function ({ api, event, args }) {
     }
 
     // Send a message to indicate the song is being downloaded
-    api.sendMessage("Wait karo, apka gana download ho raha hai... 🎶", threadID);
+    api.sendMessage("इंतजार करो आपका गाना डॉउनलोड हो रहा है 🙂🤞", threadID);
 
     // Get Spotify Access Token
     const spotifyToken = await getSpotifyToken();
