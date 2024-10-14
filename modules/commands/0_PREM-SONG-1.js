@@ -9,10 +9,10 @@ module.exports.config = {
   name: "song",
   version: "1.0.0",
   hasPermssion: 0,
-  credits: "SHANKAR",
-  description: "Search and download songs from Spotify",
-  commandCategory: "Music",
-  usages: "music <song name>",
+  credits: "PREM BABU",
+  description: "THIS BOT IS MADE BY MR PREM BABU",
+  commandCategory: "SPOTIFT DANWLOND MUSIC",
+  usages: "PREFIX",
   cooldowns: 5,
 };
 
@@ -43,7 +43,7 @@ async function searchSpotifyTrack(trackName, token) {
   });
 
   if (searchRes.data.tracks.items.length === 0) {
-    throw new Error("No track found with the given name.");
+    throw new Error("hai ये गाना मुझे नही मिल रहा 😕🤞");
   }
 
   return searchRes.data.tracks.items[0]; // Return the first track
@@ -54,7 +54,7 @@ module.exports.run = async function ({ api, event, args }) {
   try {
     const trackName = args.join(" ").trim();
     if (!trackName) {
-      return api.sendMessage("गाना नाम तो लिख लो बाबू 😒.", threadID, messageID);
+      return api.sendMessage("मेरी जान गाने का नाम तो लिखो 🤐🤞", threadID, messageID);
     }
 
     // Get Spotify Access Token
