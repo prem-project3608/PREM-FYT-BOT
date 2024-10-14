@@ -9,7 +9,7 @@ function getIndiaTime() {
 
   let time = currentDate.toLocaleTimeString('en-IN', optionsTime);
   const date = currentDate.toLocaleDateString('en-IN', optionsDate);
-  const day = currentDate.toLocaleString('en-IN', { weekday: 'long', timeZone: 'Asia/Kolkata' });
+  const day = currentDate.toLocaleString('en-IN', { weekday: 'long', timeZone: 'Asia/Kolkata' }).toUpperCase(); // Capital letters mein convert kiya
 
   // AM/PM ko capital letters mein convert karna
   time = time.replace('am', 'AM').replace('pm', 'PM');
