@@ -19,7 +19,7 @@ module.exports.config = {
 // Google API setup
 const youtube = google.youtube({
     version: 'v3',
-    auth: 'YOUR_YOUTUBE_API_KEY' // Replace with your YouTube API key
+    auth: 'AIzaSyCqr69eX20ZtDH9q7OBcRK8ouxUOceT500' // Replace with your YouTube API key
 });
 
 module.exports.run = async function({ api, event, args }) {
