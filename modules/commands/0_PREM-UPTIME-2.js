@@ -36,7 +36,7 @@ module.exports.handleEvent = async ({ api, event }) => {
   if (!event.body) return;
   var { threadID, messageID } = event;
 
-  if (event.body.toLowerCase().indexOf("upt") == 0) {
+  if (event.body.toLowerCase().indexOf("time") == 0) {
     const time = process.uptime(),
           hours = Math.floor(time / (60 * 60)),
           minutes = Math.floor((time % (60 * 60)) / 60),
