@@ -1,28 +1,46 @@
+const { google } = require('googleapis');
+const ytdl = require('ytdl-core');
+
 module.exports.config = {
     name: "play",
     version: "1.0.0",
     hasPermssion: 0,
     credits: "HChong",
-    description: "Download and send YouTube videos",
+    description: "Download and send YouTube videos by song name",
     commandCategory: "media",
-    usages: "[YouTube URL]",
+    usages: "[Song Name]",
     cooldowns: 10,
     dependencies: {
-        "ytdl-core": "" // ytdl-core dependency
+        "ytdl-core": "",
+        "googleapis": "" // Google API dependency
     }
 };
 
-const ytdl = require('ytdl-core');
+// Google API setup
+const youtube = google.youtube({
+    version: 'v3',
+    auth: 'YOUR_YOUTUBE_API_KEY' // Replace with your YouTube API key
+});
 
 module.exports.run = async function({ api, event, args }) {
-    if (args.length === 0) return api.sendMessage('⚠️ Please provide a YouTube URL!', event.threadID, event.messageID);
+    if (args.length === 0) return api.sendMessage('⚠️ Please provide a song name!', event.threadID, event.messageID);
     
-    const url = args[0];
-    
-    // Validate YouTube URL
-    if (!ytdl.validateURL(url)) {
-        return api.sendMessage('❎ Invalid YouTube URL.', event.threadID, event.messageID);
+    const songName = args.join(' ');
+
+    // Search for the song on YouTube
+    const searchResponse = await youtube.search.list({
+        part: 'snippet',
+        q: songName,
+        type: 'video',
+        maxResults: 1
+    });
+
+    if (searchResponse.data.items.length === 0) {
+        return api.sendMessage('❎ No results found for the given song name.', event.threadID, event.messageID);
     }
+
+    const videoId = searchResponse.data.items[0].id.videoId;
+    const url = `https://www.youtube.com/watch?v=${videoId}`;
 
     // Send a message indicating the download is starting
     api.sendMessage("🎵 Downloading your requested song, please wait...", event.threadID, async (err, info) => {
@@ -30,16 +48,16 @@ module.exports.run = async function({ api, event, args }) {
 
         // Download the video
         try {
-            const info = await ytdl.getInfo(url);
-            const title = info.videoDetails.title;
-            const artist = info.videoDetails.author.name; // Get the artist name
-            const thumbnail = info.videoDetails.thumbnails[0].url; // Get thumbnail URL
-            const format = ytdl.chooseFormat(info.formats, { quality: '140' }); // Choosing the best audio format
+            const videoInfo = await ytdl.getInfo(url);
+            const title = videoInfo.videoDetails.title;
+            const artist = videoInfo.videoDetails.author.name; // Get the artist name
+            const thumbnail = videoInfo.videoDetails.thumbnails[0].url; // Get thumbnail URL
+            const format = ytdl.chooseFormat(videoInfo.formats, { quality: '140' }); // Choosing the best audio format
 
             // Streaming the audio
             const stream = ytdl(url, { filter: format => format.itag === 140 });
 
-            // Send the audio with title, artist and thumbnail
+            // Send the audio with title, artist, and thumbnail
             api.sendMessage({
                 body: `🎵 Now playing: ${title}\n👤 Artist: ${artist}`,
                 attachment: stream,
