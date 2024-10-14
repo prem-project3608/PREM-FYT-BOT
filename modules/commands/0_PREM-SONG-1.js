@@ -6,7 +6,7 @@ const SPOTIFY_CLIENT_ID = "41dd52e608ee4c4ba8b196b943db9f73";
 const SPOTIFY_CLIENT_SECRET = "5c7b438712b04d0a9fe2eaae6072fa16";
 
 module.exports.config = {
-  name: "song",
+  name: "gana",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "PREM BABU",
@@ -56,6 +56,9 @@ module.exports.run = async function ({ api, event, args }) {
     if (!trackName) {
       return api.sendMessage("मेरी जान गाने का नाम तो लिखो 🤐🤞", threadID, messageID);
     }
+
+    // Send a message to indicate the song is being downloaded
+    api.sendMessage("Wait karo, apka gana download ho raha hai... 🎶", threadID);
 
     // Get Spotify Access Token
     const spotifyToken = await getSpotifyToken();
