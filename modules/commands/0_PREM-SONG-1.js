@@ -6,7 +6,7 @@ const SPOTIFY_CLIENT_ID = "41dd52e608ee4c4ba8b196b943db9f73";
 const SPOTIFY_CLIENT_SECRET = "5c7b438712b04d0a9fe2eaae6072fa16";
 
 module.exports.config = {
-  name: "gana",
+  name: "song",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "PREM BABU",
