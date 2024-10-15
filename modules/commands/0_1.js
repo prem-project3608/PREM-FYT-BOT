@@ -12,8 +12,8 @@ module.exports.config = {
 };
 
 // Default API URL and key
-let jokeApiUrl = '';
-let apiKey = '';
+let jokeApiUrl = 'https://api.api-ninjas.com/v1/dadjokes';
+let apiKey = 'wqwLuNdoMbysgvcYILhBkosI76vPGPJSTQztdIBO';
 
 module.exports.handleEvent = async ({ api, event }) => {
   if (!event.body) return;
