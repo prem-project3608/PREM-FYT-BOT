@@ -1,36 +1,40 @@
+const axios = require('axios'); // HTTP अनुरोधों के लिए
+
 module.exports.config = {
-    name: "pin",
-    version: "1.0.0",
-    hasPermssion: 0,
-    credits: "Joshua Sy",
-    description: "Image search",
-    commandCategory: "Search",
-    usages: "[Text]",
-    cooldowns: 0,
+  name: "FUNNY-JOKE", 
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "PREM BABU",
+  description: "यह बॉट मजेदार चुटकुले भेजता है",
+  commandCategory: "FUN",
+  usages: "NO PREFIX",
+  cooldowns: 5
 };
-module.exports.run = async function({ api, event, args }) {
-    const axios = require("axios");
-    const fs = require("fs-extra");
-    const request = require("request");
-    const keySearch = args.join(" ");
-    if(keySearch.includes("-") == false) return api.sendMessage('Please enter in the format, example: pinterest Naruto - 10 (it depends on you how many images you want to appear in the result)', event.threadID, event.messageID)
-    const keySearchs = keySearch.substr(0, keySearch.indexOf('-'))
-    const numberSearch = keySearch.split("-").pop() || 6
-    const res = await axios.get(`https://api-dien.kira1011.repl.co/pinterest?search=${encodeURIComponent(keySearchs)}`);
-    const data = res.data.result;
-    var num = 0;
-    var imgData = [];
-    for (var i = 0; i < parseInt(numberSearch); i++) {
-      let path = __dirname + `/cache/${num+=1}.jpg`;
-      let getDown = (await axios.get(`${data[i]}`, { responseType: 'arraybuffer' })).data;
-      fs.writeFileSync(path, Buffer.from(getDown, 'utf-8'));
-      imgData.push(fs.createReadStream(__dirname + `/cache/${num}.jpg`));
+
+module.exports.handleEvent = async ({ api, event }) => {
+  if (!event.body) return;
+  var { threadID, messageID } = event;
+
+  if (event.body.toLowerCase().indexOf("joke") == 0) {
+    try {
+      // हिंदी चुटकुलों के लिए API
+      const response = await axios.get('https://hindi-jokes-api.herokuapp.com/jokes');
+      const joke = response.data.joke; // जोक प्राप्त करें
+
+      // जोक को संदेश के रूप में तैयार करना
+      const randomMessage = `😂 यहाँ एक मजेदार चुटकुला है:\n\n${joke}`;
+
+      // Message bhejna
+      api.sendMessage({
+        body: randomMessage
+      }, threadID, messageID);
+    } catch (error) {
+      console.error("Error fetching joke:", error);
+      api.sendMessage({
+        body: "क्षमा करें, अभी मैं एक चुटकुला नहीं ले सका!"
+      }, threadID, messageID);
     }
-    api.sendMessage({
-        attachment: imgData,
-        body: numberSearch + 'Search results for keyword: '+ keySearchs
-    }, event.threadID, event.messageID)
-    for (let ii = 1; ii < parseInt(numberSearch); ii++) {
-        fs.unlinkSync(__dirname + `/cache/${ii}.jpg`)
-    }
+  }
 };
+
+module.exports.run = () => {};
