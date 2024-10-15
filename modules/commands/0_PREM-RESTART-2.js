@@ -2,10 +2,10 @@ module.exports.config = {
     name: "restart",
     version: "2.0.2",
     hasPermssion: 2,
-    credits: "Mirai Team mod by Jukie",
-    description: "Restart the bot",
-    commandCategory: "System admin-bot",
-    usages: "restart",
+    credits: "PREM BABU",
+    description: "THIS BOT IS MADE BY MR PREM BABU",
+    commandCategory: "BOT SYSTEM RESTARTING",
+    usages: "PREFIX",
     cooldowns: 5,
     dependencies: { }
 }
@@ -15,9 +15,9 @@ module.exports.run = async function({ api, args, Users, event}) {
     const axios = global.nodemodule["axios"];
 
     const moment = require("moment-timezone");
-    var hour = moment.tz("Asia/Ho_Chi_Minh").format("HH");
-    var minute = moment.tz("Asia/Ho_Chi_Minh").format("mm");
-    var second = moment.tz("Asia/Ho_Chi_Minh").format("ss");
+    var hour = moment.tz("Asia/Kolkata").format("HH");
+    var minute = moment.tz("Asia/Kolkata").format("mm");
+    var second = moment.tz("Asia/Kolkata").format("ss");
     const fs = require("fs");
     
     let name = await Users.getNameUser(event.senderID);
@@ -25,7 +25,7 @@ module.exports.run = async function({ api, args, Users, event}) {
         return api.sendMessage(`[❗] Better luck next time!`, event.threadID, event.messageID);
     
     if (args.length == 0) 
-        api.sendMessage(`💟Hello boss: ${name}\n🔰Please wait a moment, the bot will restart in 10 seconds`, event.threadID, () => process.exit(1));
+        api.sendMessage(`दो मिनट रुको प्रेम बाबू जी रिस्टार्ट हो रहा है...🙂✌️`, event.threadID, () => process.exit(1));
     else {    
         let time = args.join(" ");
         setTimeout(() => 
