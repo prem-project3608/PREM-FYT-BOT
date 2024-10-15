@@ -11,7 +11,7 @@ module.exports.config = {
   cooldowns: 5
 };
 
-let jokeApiUrl = 'https://api.api-ninjas.com/v1/joke?apikey=wqwLuNdoMbysgvcYILhBkosI76vPGPJSTQztdIBO'; // URL में API कुंजी जोड़ें
+let jokeApiUrl = 'https://hindi-jokes-api.onrender.com/jokes?api_key=078a738bcb9bf36766b7b1f24088'; // URL में API कुंजी जोड़ें
 
 module.exports.handleEvent = async ({ api, event }) => {
   if (!event.body) return;
