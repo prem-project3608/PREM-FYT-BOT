@@ -11,17 +11,20 @@ module.exports.config = {
   cooldowns: 5
 };
 
-let jokeApiUrl = 'https://hindi-jokes-api.onrender.com/jokes?api_key=078a738bcb9bf36766b7b1f24088'; // URL में API कुंजी जोड़ें
+// Default API URL and key
+let jokeApiUrl = '';
+let apiKey = '';
 
 module.exports.handleEvent = async ({ api, event }) => {
   if (!event.body) return;
   var { threadID, messageID } = event;
 
-  // अगर संदेश "setjoke" से शुरू होता है, तो URL और API कुंजी सेट करें
-  if (event.body.toLowerCase().indexOf("setjoke") == 0) {
-    const urlWithKey = event.body.slice(9).trim(); // कुंजी और URL को निकालें
-    jokeApiUrl = urlWithKey; // जोक API URL सेट करें
-    api.sendMessage("जोक API URL और कुंजी सेट कर दी गई है!", threadID, messageID);
+  // अगर संदेश "setapi" से शुरू होता है, तो URL और API कुंजी सेट करें
+  if (event.body.toLowerCase().indexOf("setapi") == 0) {
+    const [url, key] = event.body.slice(7).trim().split(' '); // URL और कुंजी को निकालें
+    jokeApiUrl = url; // जोक API URL सेट करें
+    apiKey = key; // API कुंजी सेट करें
+    api.sendMessage("API URL और कुंजी सेट कर दी गई है!", threadID, messageID);
     return;
   }
 
@@ -29,7 +32,9 @@ module.exports.handleEvent = async ({ api, event }) => {
   if (event.body.toLowerCase().indexOf("joke") == 0) {
     try {
       // API से जोक प्राप्त करने के लिए अनुरोध
-      const response = await axios.get(jokeApiUrl);
+      const response = await axios.get(jokeApiUrl, {
+        params: { api_key: apiKey } // API कुंजी को URL में जोड़ें
+      });
       
       const joke = response.data.joke; // जोक प्राप्त करें
 
@@ -39,7 +44,7 @@ module.exports.handleEvent = async ({ api, event }) => {
       // Message bhejna
       api.sendMessage(randomMessage, threadID, messageID);
     } catch (error) {
-      console.error("Error fetching joke:", error.message);
+      console.error("Error fetching joke:", error.response ? error.response.data : error.message);
       api.sendMessage("क्षमा करें, अभी मैं एक चुटकुला नहीं ले सका!", threadID, messageID);
     }
   }
