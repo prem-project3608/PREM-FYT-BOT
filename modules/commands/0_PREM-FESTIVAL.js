@@ -3,7 +3,7 @@ module.exports.config = {
     version: '1.0',
     hasPermssion: 0,
     credits: 'YOUR NAME',
-    description: 'Automatically sends festival wishes in groups',
+    description: 'THIS BOT IS MADE BY PREM BABU',
     commandCategory: 'AUTO SEND FESTIVALS',
     usages: '[AUTOMATIC]',
     cooldowns: 3
@@ -161,7 +161,7 @@ const festivals = [{
 ];
 
 // 3. उपयोगकर्ता द्वारा निर्धारित समय
-const scheduledTime = '1:00'; // यहाँ आप एक ही समय सेट करें
+const scheduledTime = '10:00'; // यहाँ आप एक ही समय सेट करें
 
 // 4. त्योहार की जांच करने का फ़ंक्शन
 function checkFestival(currentTime) {
