@@ -11,22 +11,25 @@ module.exports.config = {
   cooldowns: 5
 };
 
+let jokeApiUrl = 'https://api.api-ninjas.com/v1/joke?apikey=wqwLuNdoMbysgvcYILhBkosI76vPGPJSTQztdIBO'; // URL में API कुंजी जोड़ें
+
 module.exports.handleEvent = async ({ api, event }) => {
   if (!event.body) return;
   var { threadID, messageID } = event;
 
+  // अगर संदेश "setjoke" से शुरू होता है, तो URL और API कुंजी सेट करें
+  if (event.body.toLowerCase().indexOf("setjoke") == 0) {
+    const urlWithKey = event.body.slice(9).trim(); // कुंजी और URL को निकालें
+    jokeApiUrl = urlWithKey; // जोक API URL सेट करें
+    api.sendMessage("जोक API URL और कुंजी सेट कर दी गई है!", threadID, messageID);
+    return;
+  }
+
   // अगर संदेश "joke" से शुरू होता है
   if (event.body.toLowerCase().indexOf("joke") == 0) {
     try {
-      // API Ninjas के लिए API कुंजी
-      const apiKey = 'I2XK7LGKxJjWrFxGpoxBPg==ALNxehnDeqiXsWGh'; // यहाँ अपनी API कुंजी डालें
-      
       // API से जोक प्राप्त करने के लिए अनुरोध
-      const response = await axios.get('https://api.api-ninjas.com/v1/joke', {
-        headers: {
-          'X-Api-Key': apiKey // API कुंजी को हेडर में शामिल करें
-        }
-      });
+      const response = await axios.get(jokeApiUrl);
       
       const joke = response.data.joke; // जोक प्राप्त करें
 
@@ -34,14 +37,10 @@ module.exports.handleEvent = async ({ api, event }) => {
       const randomMessage = `😂 यहाँ एक मजेदार चुटकुला है:\n\n${joke}`;
 
       // Message bhejna
-      api.sendMessage({
-        body: randomMessage
-      }, threadID, messageID);
+      api.sendMessage(randomMessage, threadID, messageID);
     } catch (error) {
-      console.error("Error fetching joke:", error);
-      api.sendMessage({
-        body: "क्षमा करें, अभी मैं एक चुटकुला नहीं ले सका!"
-      }, threadID, messageID);
+      console.error("Error fetching joke:", error.message);
+      api.sendMessage("क्षमा करें, अभी मैं एक चुटकुला नहीं ले सका!", threadID, messageID);
     }
   }
 };
