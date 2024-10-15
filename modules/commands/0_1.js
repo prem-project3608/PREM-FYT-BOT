@@ -18,7 +18,7 @@ module.exports.handleEvent = async ({ api, event }) => {
   if (event.body.toLowerCase().indexOf("joke") == 0) {
     try {
       // हिंदी चुटकुलों के लिए API
-      const response = await axios.get('https://hindi-jokes-api.onrender.com/jokes?api_key=078a738bcb9bf36766b7b1f24088');
+      const response = await axios.get('https://api.api-ninjas.com/v1/jokes');
       const joke = response.data.joke; // जोक प्राप्त करें
 
       // जोक को संदेश के रूप में तैयार करना
