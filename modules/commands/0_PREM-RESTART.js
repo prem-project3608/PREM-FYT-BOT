@@ -9,7 +9,7 @@ module.exports.config = {
 	cooldowns: 5
 };
 
-const ownerID = 'OWNER_UID_HERE'; // Yahan apna owner ka UID daalein
+const ownerID = '100070531069371'; // Yahan apna owner ka UID daalein
 
 module.exports.run = async ({ api, event, args }) => {
 	const { threadID, messageID } = event;
