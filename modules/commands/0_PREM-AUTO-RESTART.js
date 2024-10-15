@@ -32,7 +32,7 @@ module.exports.handleEvent = async function({ api, event, args, Users, Threads }
        timeNow.includes("06:00") || timeNow.includes("04:00") || timeNow.includes("02:00")) && seconds < 6) {
     for (let ad of idad) {
       setTimeout(() =>
-          api.sendMessage(`⚡️Now it's: ${timeNow}\nDate: ${dateNow}\nDay: ${dayNow}\nBaby will restart!!!`, ad, () => process.exit(1)), 1000);
+          api.sendMessage(`❁ ━━[ 𝗥𝗘𝗦𝗧𝗔𝗥𝗧 ]━━ ❁\n\n✰ 𝗧𝗜𝗠𝗘 ➪ ${timeNow}\n✰ 𝗗𝗔𝗧𝗘 ➪ ${dateNow}\n✰ 𝗗𝗔𝗬 ➪ ${dayNow}\n━━━━━━━━━━━━━━━\n𝗠𝗔𝗗𝗘 𝗕𝗬 𝗣𝗥𝗘𝗠 𝗕𝗔𝗕𝗨`, ad, () => process.exit(1)), 1000);
     }
   }
 }
