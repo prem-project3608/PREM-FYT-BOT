@@ -1,40 +1,32 @@
-const axios = require("axios");
-class Imgur {
-  constructor() {
-    this.clientId = "fc9369e9aea767c", this.client = axios.create({
-      baseURL: "https://api.imgur.com/3/",
-      headers: {
-        Authorization: `Client-ID ${this.clientId}`
-      }
-    })
-  }
-  async uploadImage(url) {
-    return (await this.client.post("image", {
-      image: url
-    })).data.data.link
-  }
+module.exports.config = {
+    name: "restart",
+    version: "2.0.2",
+    hasPermssion: 2,
+    credits: "Mirai Team mod by Jukie",
+    description: "Khởi động lai bot",
+    commandCategory: "Hệ thống admin-bot",
+    usages: "restart",
+    cooldowns: 5,
+    dependencies: { }
 }
-class Modules extends Imgur {
-  constructor() {
-    super()
-  }
-  get config() {
-    return {
-      name: "img",
-      description: "Upload image to imgur",
-      version: "1.0.0",
-      credits: "Thiệu Trung Kiên",
-      cooldown: 5,
-      usage: "imgur <url>",
-      commandCategory: "Công cụ",
-      hasPermssion: 0
-    }
-  }
-  run = async ({ api, event }) => {
-    var array = [];
-    if ("message_reply" != event.type || event.messageReply.attachments.length < 0) return api.sendMessage("[⚜️]➜ Vui lòng reply vào bức ảnh bạn cần tải lên", event.threadID, event.messageID);
-    for (let { url } of event.messageReply.attachments) await this.uploadImage(url).then((res => array.push(res))).catch((err => console.log(err)));
-    return api.sendMessage(`[ 𝗜𝗠𝗚𝗨𝗥 𝗨𝗣𝗟𝗢𝗔𝗗 ]\n➝ 𝗧𝗵𝗮̀𝗻𝗵 𝗰𝗼̂𝗻𝗴: ${array.length} ảnh\n➝ 𝗧𝗵𝗮̂́𝘁 𝗯𝗮̣𝗶: ${array.length - event.messageReply.attachments.length}\n➝ Link ảnh:\n${array.join("\n")}`, event.threadID, event.messageID)
-  }
+ 
+module.exports.run = async function({ api, args, Users, event}) {
+const { threadID, messageID } = event;
+const axios = global.nodemodule["axios"];
+
+const moment = require("moment-timezone");
+    var gio = moment.tz("Asia/Ho_Chi_Minh").format("HH");
+    var phut = moment.tz("Asia/Ho_Chi_Minh").format("mm");
+    var giay = moment.tz("Asia/Ho_Chi_Minh").format("ss");
+const fs = require("fs");
+    let name = await Users.getNameUser(event.senderID)
+  if (event.senderID != 100070531069371) return api.sendMessage(`[❗] Chúc bạn may mắn lần sau:))`, event.threadID, event.messageID)
+if(args.length == 0) api.sendMessage(`💟Chào cậu chủ: ${name}\n🔰Cậu chủ vui lòng chờ trong giây lát, hệ thông bot sẽ khởi động lại sau 10s`,event.threadID, () =>process.exit(1))
+else{    
+let time = args.join(" ");
+setTimeout(() =>
+api.sendMessage(`🔮Bot sẽ khỏi động lại sau: ${gio}s\n⏰Bây giờ là: ${gio}:${phut}:${giay} `, threadID), 0)
+setTimeout(() =>
+api.sendMessage("⌛Đang bắt đầu quá trình khỏi động lại",event.threadID, () =>process.exit(1)), 1000*`${time}`);
 }
-module.exports = new Modules;
+}
