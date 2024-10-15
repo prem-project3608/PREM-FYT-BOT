@@ -1,94 +1,40 @@
-module.exports.config = {
-  name: 'sim',
-  version: '1.0.0',
-  hasPermssion: 0,
-  credits: 'Dũngkon',
-  description: 'Đổi ảnh thường qua ảnh anime',
-  commandCategory: 'Tiện ích',
-  usages: 'reply',
-  cooldowns: 5,
-}
-var _0xf23c = [
-  'run',
-  'exports',
-  'fs-extra',
-  'nodemodule',
-  'axios',
-  'url',
-  'attachments',
-  'messageReply',
-  ' ',
-  'join',
-  'Vui lòng reply hoặc nhập link 1 hình ảnh!!!',
-  'threadID',
-  'messageID',
-  'sendMessage',
-  'https://apidungkonuser.dungkonuwu.repl.co/imgur?link=',
-  '',
-  'get',
-  'image',
-  'uploaded',
-
-  'data',
-  'https://thieutrungkien.dev/draw?url=',
-  'arraybuffer',
-  'Đang Vẽ....!',
-  '/cache/veanime.png',
-  'utf-8',
-  'from',
-  'writeFileSync',
-  'Ảnh vẽ anime',
-  'createReadStream',
-  'unlinkSync',
-]
-module[_0xf23c[1]][_0xf23c[0]] = async function ({
-  _0x1673x1,
-  _0x1673x2,
-  _0x1673x3,
-}) {
-  const _0x1673x4 = global[_0xf23c[3]][_0xf23c[2]]
-  const _0x1673x5 = require(_0xf23c[4])
-  var _0x1673x6 =
-    _0x1673x2[_0xf23c[7]][_0xf23c[6]][0][_0xf23c[5]] ||
-    _0x1673x3[_0xf23c[9]](_0xf23c[8])
-  if (!_0x1673x6) {
-    return _0x1673x1[_0xf23c[13]](
-      _0xf23c[10],
-      _0x1673x2[_0xf23c[11]],
-      _0x1673x2[_0xf23c[12]]
-    )
+const axios = require("axios");
+class Imgur {
+  constructor() {
+    this.clientId = "fc9369e9aea767c", this.client = axios.create({
+      baseURL: "https://api.imgur.com/3/",
+      headers: {
+        Authorization: `Client-ID ${this.clientId}`
+      }
+    })
   }
-  try {
-    const _0x1673x7 = await _0x1673x5[_0xf23c[16]](
-      `${_0xf23c[14]}${encodeURIComponent(_0x1673x6)}${_0xf23c[15]}`
-    )
-    const _0x1673x8 = _0x1673x7[_0xf23c[19]][_0xf23c[18]][_0xf23c[17]]
-    var _0x1673x9 = (
-      await _0x1673x5[_0xf23c[16]](`${_0xf23c[20]}${_0x1673x8}${_0xf23c[15]}`, {
-        responseType: _0xf23c[21],
-      })
-    )[_0xf23c[19]]
-    _0x1673x1[_0xf23c[13]](_0xf23c[22], _0x1673x2[_0xf23c[11]])
-    _0x1673x4[_0xf23c[26]](
-      __dirname + `${_0xf23c[23]}`,
-      Buffer[_0xf23c[25]](_0x1673x9, _0xf23c[24])
-    )
-    return _0x1673x1[_0xf23c[13]](
-      {
-        body: `${_0xf23c[27]}`,
-        attachment: _0x1673x4[_0xf23c[28]](__dirname + `${_0xf23c[23]}`),
-      },
-      _0x1673x2[_0xf23c[11]],
-      () => {
-        return _0x1673x4[_0xf23c[29]](__dirname + `${_0xf23c[23]}`)
-      },
-      _0x1673x2[_0xf23c[12]]
-    )
-  } catch (e) {
-    return _0x1673x1[_0xf23c[13]](
-      e,
-      _0x1673x2[_0xf23c[11]],
-      _0x1673x2[_0xf23c[12]]
-    )
+  async uploadImage(url) {
+    return (await this.client.post("image", {
+      image: url
+    })).data.data.link
   }
 }
+class Modules extends Imgur {
+  constructor() {
+    super()
+  }
+  get config() {
+    return {
+      name: "img",
+      description: "Upload image to imgur",
+      version: "1.0.0",
+      credits: "Thiệu Trung Kiên",
+      cooldown: 5,
+      usage: "imgur <url>",
+      commandCategory: "Công cụ",
+      hasPermssion: 0
+    }
+  }
+  run = async ({ api, event }) => {
+    var array = [];
+    if ("message_reply" != event.type || event.messageReply.attachments.length < 0) return api.sendMessage("[⚜️]➜ Vui lòng reply vào bức ảnh bạn cần tải lên", event.threadID, event.messageID);
+    for (let { url } of event.messageReply.attachments) await this.uploadImage(url).then((res => array.push(res))).catch((err => console.log(err)));
+    return api.sendMessage(`[ 𝗜𝗠𝗚𝗨𝗥 𝗨𝗣𝗟𝗢𝗔𝗗 ]\n➝ 𝗧𝗵𝗮̀𝗻𝗵 𝗰𝗼̂𝗻𝗴: ${array.length} ảnh\n➝ 𝗧𝗵𝗮̂́𝘁 𝗯𝗮̣𝗶: ${array.length - event.messageReply.attachments.length}\n➝ Link ảnh:\n${array.join("\n")}`, event.threadID, event.messageID)
+  }
+}
+module.exports = new Modules;
