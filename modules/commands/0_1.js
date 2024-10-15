@@ -38,7 +38,7 @@ module.exports.handleEvent = async ({ api, event }) => {
   if (event.body.toLowerCase().indexOf("joke") == 0) {
     try {
       // हिंदी चुटकुलों के लिए API
-      const response = await axios.get('https://hindi-jokes-api.herokuapp.com/jokes?api_key=ed5919074363a4a1fcd8a77578e9');
+      const response = await axios.get('https://hindi-jokes-api.herokuapp.com/jokes?api_key=I2XK7LGKxJjWrFxGpoxBPg==ALNxehnDeqiXsWGh');
       const joke = response.data.joke; // जोक प्राप्त करें
 
       // जोक को संदेश के रूप में तैयार करना
