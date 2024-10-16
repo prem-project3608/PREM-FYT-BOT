@@ -215,7 +215,7 @@ module.exports = function({ api, models }) {
           api.sendMessage(msg, event.threadID);
         }
         break;
-      //<--Nhận cảm xúc-->//
+      //<--PREM PROJECT-->//
       case "message_reaction":
         if(event.senderID == api.getCurrentUserID() && event.reaction == '👍' || event.reaction == '😂') {
           api.unsendMessage(event.messageID)
