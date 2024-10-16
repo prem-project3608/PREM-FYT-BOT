@@ -1,12 +1,8 @@
-﻿//////////////////////////////////////////////////
-//    Yêu cầu tất cả các nhu cầu sử dụng biến   //
-//////////////////////////////////////////////////
-
 const { readdirSync, readFileSync, writeFileSync, existsSync, unlinkSync, rm } = require("fs-extra");
 const { join, resolve } = require("path");
 const { execSync } = require('child_process');
 const logger = require("./utils/log.js");
-//const login = require("fca-shadow");
+//const login = require("PREM-FCA-BOT");
 const login = require("PREM-FCA-BOT");
 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies
 const listbuiltinModules = require('module').builtinModules
@@ -28,23 +24,23 @@ global.client = new Object({
   getTime: function(option) {
     switch (option) {
       case 'seconds':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('ss')}`
+        return `${moment.tz('Asia/Kolkata').format('ss')}`
       case 'minutes':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('mm')}`
+        return `${moment.tz('Asia/Kolkata').format('mm')}`
       case 'hours':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('HH')}`
+        return `${moment.tz('Asia/Kolkata').format('HH')}`
       case 'date':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('DD')}`
+        return `${moment.tz('Asia/Kolkata').format('DD')}`
       case 'month':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('MM')}`
+        return `${moment.tz('Asia/Kolkata').format('MM')}`
       case 'year':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('YYYY')}`
+        return `${moment.tz('Asia/Kolkata').format('YYYY')}`
       case 'fullHour':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('HH:mm:ss')}`
+        return `${moment.tz('Asia/Kolkata').format('HH:mm:ss')}`
       case 'fullYear':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('DD/MM/YYYY')}`
+        return `${moment.tz('Asia/Kolkata').format('DD/MM/YYYY')}`
       case 'fullTime':
-        return `${moment.tz('Asia/Ho_Chi_minh').format('HH:mm:ss DD/MM/YYYY')}`
+        return `${moment.tz('Asia/Kolkata').format('HH:mm:ss DD/MM/YYYY')}`
     }
   },
 })
@@ -75,11 +71,7 @@ global.account = new Object()
 //========== Connect sever uptime ==========//
 //////////////////////////////////////////////
 
-//               bên index.js               //
-
-//////////////////////////////////////////////////////////////
-// Mã hóa, giải mã trạng thái & & lấy mã thông báo Facebook //
-//////////////////////////////////////////////////////////////
+//               index.js               //
 async function encryptState(data, key) {
   let hashEngine = crypto.createHash('sha256'),
     hashKey = hashEngine.update(key).digest()
@@ -138,25 +130,25 @@ function decryptState(data, key) {
 }
 
 ///////////////////////////////////////////////////
-//========= Tìm và lấy biến từ Cấu hình =========//
+//======== THIS BOT WAS MADE BY PREM BABU =======//
 ///////////////////////////////////////////////////
 var configValue
 try {
   global.client.configPath = join(global.client.mainPath, 'config.json')
   configValue = require(global.client.configPath)
-  logger.loader('Đã tìm thấy file config.json!')
+  logger.loader('THIS BOT IS MADE BY PREM BABU ✅')
 } catch {
-  logger.loader('Không tìm thấy file config.json', '[ LỖI ]')
+  logger.loader('THIS BOT IS MADE BY PREM BABU ❎', '[ PREM PROJECT ]')
 }
 try {
   for (const key in configValue) global.config[key] = configValue[key]
-  logger.loader('Tải thành công cấu hình Config!')
+  logger.loader('THIS BOT IS MADE BY PREM BABU ✅')
 } catch {
-  logger.loader("Không thể tải cấu hình tệp Config", '[ LỖI ]')
+  logger.loader("THIS BOT IS MADE BY PREM BABU ❎", '[ PREM PROJECT ]')
 }
 
 /////////////////////////////////////////
-//      Tải ngôn ngữ cho chúng tôi     //
+//      BOT OWNER BY MR PREM BABU      //
 /////////////////////////////////////////
 const { Sequelize, sequelize } = require('./includes/database')
 const langFile = (readFileSync(`${__dirname}/languages/${global.config.language || "en"}.lang`, {
@@ -195,20 +187,20 @@ try {
   logger.loader(global.getText('mirai', 'notFoundPathAppstate'), 'error')
 }
 if (global.config.version != '16.7.0') {
-  logger('Phiên bản sử dụng không hợp lệ!', '[ KIỂM TRA PHIÊN BẢN ]')
+  logger('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]')
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Đăng nhập tài khoản, bắt đầu Nghe Sự kiện && Nhận tự động Appstate từ cấu hình //
+////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 async function uptime() {
   const datauptime = require('./config.json')
   datauptime.UPTIME = process.uptime() + datauptime.UPTIME
   writeFileSync(global.client.configPath, JSON.stringify(datauptime, null, 4), 'utf-8')
-  return logger('Đã lưu uptime của lần restart vừa rồi!', '[ UPTIME ]')
+  return logger('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]')
 }
 async function loginAppstate() {
-  const login = require('fca-horizon-remastered'),
+  const login = require('PREM-FCA-BOT'),
     dataaccountbot = require('./config.json'),
     accountbot = {
       logLevel: 'silent',
@@ -224,7 +216,7 @@ async function loginAppstate() {
   login(autologin, Dataaccountbot, async (autologinError, autologinDone) => {
     if (global.config.autoRestart != 0) {
       setTimeout(() => {
-        logger("Tiến hành khởi động lại bot ", "[ KHỞI ĐỘNG LẠI ]");
+        logger("THIS BOT IS MADE BY PREM BABU 🙂", "[ PREM PROJECT ]");
         return process.exit(1)
       }, global.config.autoRestart * 1000)
     }
@@ -233,12 +225,12 @@ async function loginAppstate() {
       switch (autologinError.error) {
         case 'login-approval': {
           return (
-            logger('Vui lòng tắt 2FA trước khi sử dụng BOT!', '[ 2FA ]'),
+            logger('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]'),
             process.exit(0)
           )
         }
         default:
-          logger('Không thể tiến hành đăng nhập qua mật khẩu, vui lòng thay thế appstate hoặc mật khẩu để tiếp tục!', '[ LỖI ]')
+          logger('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]')
           return process.exit(0)
       }
     }
@@ -246,7 +238,7 @@ async function loginAppstate() {
     return (
       writeFileSync('./' + dataaccountbot.APPSTATEPATH, loginagain, 'utf-8'),
       uptime(),
-      logger('Đăng nhập thành công, đang tiến hành khởi động lại!', '[ ĐĂNG NHẬP ]')
+      logger('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]')
     )
   })
 }
@@ -255,66 +247,18 @@ function onBot({ models }) {
   loginData.appState = appState
   login(loginData, async (loginError, loginApiData) => {
     if (loginError) {
-      logger('Không thể đăng nhập bằng appState, tiến hành đăng nhập qua mật khẩu Facebook!', '[ LỖI ]')
+      logger('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]')
       var loginauto = await loginAppstate()
       loginauto
       await new Promise((reset) => setTimeout(reset, 7000))
-      logger('Bắt đầu khởi động lại!', '[ KHỞI ĐỘNG LẠI ]')
+      logger('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]')
       process.exit(1)
     }
     global.client.api = loginApiData
     const fbstate = loginApiData.getAppState();
     loginApiData.setOptions(global.config.FCAOption);
-    // let d = loginApiData.getAppState();
-    // let ck = JSON.stringify(d, null, '\x09')
-    // d = JSON.stringify(d, null, '\x09');
-    // var _token = await loginApiData.httpGet("https://business.facebook.com/business_locations/")
-    // var url = "https://business.facebook.com/business_locations/"
-    // if (_token.indexOf("for (;;);") != -1) {
-    //   _token = JSON.parse(_token.split("for (;;);")[1])
-    //   var url = "https://business.facebook.com" + _token.redirect
-    // }
-    // var token = await getToken(loginApiData, url)
-    // if (token != true) {
-    //   global.account.accessToken = token
-    //   global.account.cookie = fbstate.map(i => i = i.key + "=" + i.value).join(";");
-    //   logger.loader('Lấy access token thành công!', 'ACCESS_TOKEN')
-    // } else {
-    //   logger.loader('Không thể lấy ACCESS_TOKEN, vui lòng thay OTPKEY vào config!', 'ACCESS_TOKEN')
-    // }
-    // async function getToken(api, url) {
-    //   var resolveFunc = function() { };
-    //   var returnPromise = new Promise(function(resolve) {
-    //     resolveFunc = resolve;
-    //   });
-    //   api.httpGet(url).then(async (res) => {
-    //     var token = /EAAG([^"]+)/.exec(res)
-    //     if (token == null) {
-    //       var totp = require("totp-generator")
-    //       var _2fa = (global.config.OTPKEY).replace(/\s+/g, '').toLowerCase();
-    //       var form = {
-    //         approvals_code: totp(_2fa),
-    //         save_device: true
-    //       }
-    //       var bypass2FA = await api.httpPost("https://business.facebook.com/security/twofactor/reauth/enter/", form)
-    //       bypass2FA = JSON.parse(bypass2FA.split("for (;;);")[1])
-    //       if (bypass2FA.payload.codeConfirmed == false) return false
-    //       var get2FA = await api.httpGet(url)
-    //       var token = /EAAG([^"]+)/.exec(get2FA)
-    //       return resolveFunc("EAAG" + token[1])
-    //     }
-    //     return resolveFunc("EAAG" + token[1])
-    //   })
-    //   return returnPromise
-    // }
-    // if ((process.env.REPL_OWNER || process.env.PROCESSOR_IDENTIFIER) && global.config.encryptSt) {
-    //   d = await global.utils.encryptState(d, process.env.REPL_OWNER || process.env.PROCESSOR_IDENTIFIER);
-    //   writeFileSync(appStateFile, d)
-    // }
-    // else {
-    //   writeFileSync(appStateFile, d)
-    // }
-
+    ////////////////////////////////////////////////
+    ////////////////////////////////////////////////
     global.client.timeStart = new Date().getTime(),
       function() {
         const listCommand = readdirSync(global.client.mainPath + '/modules/commands').filter(command => command.endsWith('.js') && !command.includes('example') && !global.config.commandDisabled.includes(command));
@@ -380,9 +324,9 @@ function onBot({ models }) {
             }
             if (module.handleEvent) global.client.eventRegistered.push(module.config.name);
             global.client.commands.set(module.config.name, module);
-            // logger(` ${module.config.name} succes`, "[ COMMAND ]");
+            // logger(` ${module.config.name} succes`, "[ PREM PROJECT ]");
           } catch (error) {
-            logger(` Code Lệnh ${(command)} Không Thể Tải!`, "[ COMMAND ]");
+            logger(`${(command)}`, "[ PREM PROJECT ]");
           };
         }
       }(),
@@ -500,7 +444,7 @@ function getdatatoken(done) {
 }
 
 //////////////////////////////////////////////
-//======= Kết nối với Cơ sở dữ liệu ========//
+//============= PREM PROJECT  ==============//
 //////////////////////////////////////////////
 (async () => {
   try {
@@ -540,11 +484,11 @@ function getdatatoken(done) {
       }
       global.modelAntiSt = dataModel;
       await sequelize2.sync({ force: false });
-      logger.loader('Kết nối thành công dữ liệu ANTI SETTING', '[ CONNECT ]');
+      logger.loader('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]');
     }
     catch (error) {
       global.client.loggedMongoose = false;
-      logger.loader('Không thể kết nối dữ liệu ANTI SETTING', '[ CONNECT ]');
+      logger.loader('THIS BOT IS MADE BY PREM BABU 🙂', '[ PREM PROJECT ]');
       console.log(error);
     }
 
@@ -553,12 +497,12 @@ function getdatatoken(done) {
     authentication.Sequelize = Sequelize;
     authentication.sequelize = sequelize;
     const models = require('./includes/database/model')(authentication);
-    logger(global.getText('mirai', 'successConnectDatabase'), '[ DATABASE ]');
+    logger(global.getText('mirai', 'successConnectDatabase'), '[ PREM PROJECT ]');
     const botData = {};
     botData.models = models
     onBot(botData);
   } catch (error) {
-    logger(global.getText('mirai', 'successConnectDatabase', JSON.stringify(error)), '[ CƠ SỞ DỮ LIỆU ]')
+    logger(global.getText('mirai', 'successConnectDatabase', JSON.stringify(error)), '[ PREM PROJECT ]')
   }
   if (global.config.autoClear != 0) {
     const fileV = [];
@@ -570,11 +514,11 @@ function getdatatoken(done) {
           fs.unlinkSync(`./modules/commands/cache/` + fileD)
         }
         catch {
-          logger("Lỗi khi xóa tập tin: " + fileD, "[ LỖI ]")
+          logger("THIS BOT IS MADE BY PREM BABU 🙂 " + fileD, "[ PREM PROJECT ]")
         }
       }
     };
-    logger(`Đã xóa các tập tin có đuôi: ${fileV.join(", ")}`, "[ DỌN DẸP ]")
+    logger(`THIS BOT IS MADE BY PREM BABU 🙂 ${fileV.join(", ")}`, "[ PREM PROJECT ]")
   }
 })()
 
