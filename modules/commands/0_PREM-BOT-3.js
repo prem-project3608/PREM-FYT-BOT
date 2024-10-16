@@ -164,12 +164,12 @@ const emojiResponses = {
 };
 
 module.exports.config = {
-  name: "emojiReply",
+  name: "PREM-BOT-3",
   version: "1.0.0",
   hasPermssion: 0,
-  credits: "SHANKAR SUMAN",
-  description: "Reply to specific emojis",
-  commandCategory: "No command marks needed",
+  credits: "PREM BABU",
+  description: "THIS BOT IS MADE BY MR PREM BABU",
+  commandCategory: "IMOJI REPLY",
   cooldowns: 0,
 };
 
