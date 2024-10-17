@@ -152,6 +152,7 @@
     "wikijs": "^6.4.0",
     "ws": "^8.13.0",
     "youtube-search-api": "^1.2.2",
+    "yt-search": "^2.12.1",
     "ytdl": "^1.4.1",
     "ytdl-mp3": "^5.0.0",
     "ytdl-core": "^4.11.5"
