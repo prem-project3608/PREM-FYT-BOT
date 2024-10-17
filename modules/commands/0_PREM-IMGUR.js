@@ -1,4 +1,4 @@
-const API_KEY = "YOUR_API_KEY_HERE"; // यहाँ पर अपनी API कुंजी डालें
+const API_KEY = "https://api.imgur.com/oauth2/authorize?response_type=token&client_id=1e9d0bad8e66dcb"; // यहाँ पर अपनी API कुंजी डालें
 
 module.exports.config = {
     name: "imgur",
@@ -25,7 +25,7 @@ module.exports.run = async ({ api, event }) => {
             image: ZiaRein // Imgur API को इमेज भेजें
         }, {
             headers: {
-                'Authorization': `Client-ID ${API_KEY}` // यहाँ API कुंजी का उपयोग करें
+                'Authorization': `Bearer ${API_KEY}` // यहाँ पूरा URL का उपयोग करें
             }
         });
 
