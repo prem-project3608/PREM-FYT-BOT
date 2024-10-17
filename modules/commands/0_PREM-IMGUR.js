@@ -2,41 +2,21 @@ module.exports.config = {
     name: "imgur",
     version: "1.0.0",
     hasPermssion: 0,
-    credits: "jordanofficial",
-    description: "imgur upload",
-    commandCategory: "link",
-    usages: `Please reply to image\n\nHow to use?\n${global.config.PREFIX}imgur [reply] <img>\n\nExample:\n${global.config.PREFIX}imgur <img reply>\n`,
-    cooldowns: 1,
+    credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
+    description: "",
+    commandCategory: "Game",
+    usages: "[reply]",
+    cooldowns: 5,
     dependencies: {
-        "axios": "",
+      "axios": ""
     }
 };
 
 module.exports.run = async ({ api, event }) => {
-    const axios = global.nodemodule['axios'];
-    var ZiaRein = event.messageReply.attachments[0].url || args.join(" ");
-    
-    if (!ZiaRein) 
-        return api.sendMessage(`Please reply to image\n\nHow to use?\n${global.config.PREFIX}imgur [reply] <img>\n\nExample:\n${global.config.PREFIX}imgur <img reply>\n\nCreated by: ZiaRein`, event.threadID, event.messageID);
-    
-    // Imgur API URL
-    const imgurAPIUrl = "https://api.imgur.com/3/image";
-    const apiKey = "1e9d0bad8e66dcb"; // यहां अपने API की डालें
-    
-    try {
-        const res = await axios.post(imgurAPIUrl, {
-            image: ZiaRein,
-            type: "url"
-        }, {
-            headers: {
-                Authorization: `Client-ID ${apiKey}`
-            }
-        });
-        
-        var ZiaReinn = res.data.data.link; // Uploaded image URL
-        return api.sendMessage(ZiaReinn, event.threadID, event.messageID);
-        
-    } catch (error) {
-        return api.sendMessage(`Error uploading image: ${error.response.data.message}`, event.threadID, event.messageID);
-    }
+const axios = global.nodemodule['axios'];  
+var linkanh = event.messageReply.attachments[0].url || args.join(" ");
+    if(!linkanh) return api.sendMessage('Please reply or enter a link 1 image!!!', event.threadID, event.messageID)
+const res = await axios.get(`https://imgur-api-by-koja.xx0xkoja.repl.co/imgur?link=${encodeURIComponent(linkanh)}`);    
+var img = res.data.uploaded.image;
+    return api.sendMessage(`${img}`, event.threadID, event.messageID);
 }
