@@ -20,7 +20,7 @@
     "UPTIME": 180167.04491070402,
     "autoRestart": 0,
     "commandDisabled": [
-        "cap.js"
+        "PREM-BABU.js"
     ],
     "eventDisabled": [
         "",
