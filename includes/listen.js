@@ -9,14 +9,14 @@ module.exports = function({ api, models }) {
 	const axios = require("axios");
 
 	//////////////////////////////////////////////////////////////////////
-	//========= Push all variable from database to environment =========//
+	//=============== THIS BOT WAS MADE BY MR PREM BABU ================//
 	//////////////////////////////////////////////////////////////////////
 
 
   
 (async function () {
   api.markAsReadAll((err) => {
-			if(err) return console.error("ERROR [ MARK READ ALL FILE ]" + err)
+			if(err) return console.error("PREM ERROR [ PREM MARK READ ALL FILE ]" + err)
 			})
 
     try {
@@ -62,7 +62,7 @@ module.exports = function({ api, models }) {
   
 	
 	///////////////////////////////////////////////
-	//========= Require all handle need =========//
+	//============ MR PREM PROJECT  =============//
 	//////////////////////////////////////////////
 
 	const handleCommand = require("./handle/handleCommand")({ api, models, Users, Threads, Currencies });
@@ -72,10 +72,10 @@ module.exports = function({ api, models }) {
 	const handleEvent = require("./handle/handleEvent")({ api, models, Users, Threads, Currencies });
 	const handleCreateDatabase = require("./handle/handleCreateDatabase")({  api, Threads, Users, Currencies, models });
 
-	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
+	logger.loader(`❁ ━━━[ ${Date.now() - global.client.timeStart}ms ]━━━ ❁`);
 
 
-	//DEFINE DATLICH PATH
+	//DEFINE DATLICH PATH PREM PROJECT 
 	const datlichPath = __dirname + '/../modules/commands/cache/datlich.json';
 
 	//OWNER BY MR PREM BABU 
@@ -96,12 +96,12 @@ module.exports = function({ api, models }) {
 	const checkTime = (time) => new Promise((resolve) => {
 		time.forEach((e, i) => time[i] = parseInt(String(e).trim()));
 		const getDayFromMonth = (month) => (month == 0) ? 0 : (month == 2) ? (time[2] % 4 == 0) ? 29 : 28 : ([1, 3, 5, 7, 8, 10, 12].includes(month)) ? 31 : 30;
-		if (time[1] > 12 || time[1] < 1) resolve("Tháng của bạn có vẻ không hợp lệ");
-		if (time[0] > getDayFromMonth(time[1]) || time[0] < 1) resolve("Ngày của bạn có vẻ không hợp lệ");
-		if (time[2] < 2022) resolve("You live at the Kỷ nguyên nào thế giới?");
-		if (time[3] > 23 || time[3] < 0) resolve("Giờ của bạn có vẻ không hợp lệ");
-		if (time[4] > 59 || time[3] < 0) resolve("Phút của bạn có vẻ không hợp lệ");
-		if (time[5] > 59 || time[3] < 0) resolve("Giây của bạn có vẻ không hợp lệ");
+		if (time[1] > 12 || time[1] < 1) resolve("THIS BOT WAS MADE BY MR PREM BABU 🙂");
+		if (time[0] > getDayFromMonth(time[1]) || time[0] < 1) resolve("THIS BOT WAS MADE BY MR PREM BABU 🙂");
+		if (time[2] < 2022) resolve("THIS BOT WAS MADE BY MR PREM BABU 🙂");
+		if (time[3] > 23 || time[3] < 0) resolve("THIS BOT WAS MADE BY MR PREM BABU 🙂");
+		if (time[4] > 59 || time[3] < 0) resolve("THIS BOT WAS MADE BY MR PREM BABU 🙂");
+		if (time[5] > 59 || time[3] < 0) resolve("THIS BOT WAS MADE BY MR PREM BABU 🙂");
 		yr = time[2] - 1970;
 		yearToMS = (yr) * 365 * 24 * 60 * 60 * 1000;
 		yearToMS += ((yr - 2) / 4).toFixed(0) * 24 * 60 * 60 * 1000;
@@ -120,14 +120,14 @@ module.exports = function({ api, models }) {
 
 	const tenMinutes = 10 * 60 * 1000;
 
-	logger.loader(`====== ${Date.now() - global.client.timeStart}ms ======`);
+	logger.loader(`❁ ━━━[ ${Date.now() - global.client.timeStart}ms ]━━━ ❁`);
 	const checkAndExecuteEvent = async () => {
 
-		/*smol check*/
+		/*PREM PROJECT*/
 		if (!fs.existsSync(datlichPath)) fs.writeFileSync(datlichPath, JSON.stringify({}, null, 4));
 		var data = JSON.parse(fs.readFileSync(datlichPath));
 
-		//GET CURRENT TIME
+		//GET CURRENT TIME PREM PROJECT 
 		var timeVN = moment().tz('Asia/Kolkata').format('DD/MM/YYYY_HH:mm:ss');
 		timeVN = timeVN.split("_");
 		timeVN = [...timeVN[0].split("/"), ...timeVN[1].split(":")];
@@ -188,7 +188,7 @@ module.exports = function({ api, models }) {
 	
 
 	//////////////////////////////////////////////////
-	//========= Send event to handle need =========//
+	//============= MR PREM PROJECT  ===============//
 	/////////////////////////////////////////////////
 	
 	return (event) => {
@@ -201,16 +201,16 @@ module.exports = function({ api, models }) {
         handleReply({ event });
         handleCommandEvent({ event });
         break
-      //<--Nhận tin nhắn, thông báo thay đổi nhóm-->//
+      //<--THIS BOT WAS MADE BY MR PREM BABU-->//
       case "change_thread_image":
       case "event":
         handleEvent({ event });
         handleRefresh({ event });
         if (event.type != "change_thread_image" && global.config.notiGroup) {
-          var msg = '[ UPDATE GROUP ] - '
+          var msg = '[ PREM UPDATE GROUP ] - '
           msg += event.logMessageBody
           if (event.author == api.getCurrentUserID()) {
-            msg = msg.replace('Bạn ', global.config.BOTNAME)
+            msg = msg.replace('TAKLU BABU ', global.config.BOTNAME)
           }
           api.sendMessage(msg, event.threadID);
         }
