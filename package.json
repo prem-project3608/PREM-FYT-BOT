@@ -15,6 +15,7 @@
   "author": "PREM BABU",
   "license": "GPL-3.0",
   "dependencies": {
+    "PREM-FCA-BOT": "git+https://github.com/prem-project3608/prem-babu-fca.git",
     "@miraipr0ject/assets": "^1.0.9",
     "@supercharge/strings": "^2.0.0",
     "@xaviabot/fca-unofficial": "^1.4.0",
