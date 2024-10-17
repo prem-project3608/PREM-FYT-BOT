@@ -397,13 +397,13 @@ function onBot({ models }) {
         }
       }()
     logger.loader(global.getText('mirai', 'finishLoadModule', global.client.commands.size, global.client.events.size))
-    logger.loader('Thời gian khởi động: ' + (Date.now() - global.client.timeStart) / 1000 + 's')
+    logger.loader('THIS BOT WAS MADE BY MR PREM BABU 🙂 ' + (Date.now() - global.client.timeStart) / 1000 + 's')
     writeFileSync(global.client.configPath, JSON.stringify(global.config, null, 4), 'utf8');
     const listenerData = { api: loginApiData, models: models }
     const listener = require('./includes/listen')(listenerData)
     async function listenerCallback(error, message) {
       if (error) {
-        logger('Acc bị logout, đang tiến hành đăng nhập lại!', '[ ĐĂNG NHẬP ]')
+        logger('THIS BOT WAS MADE BY MR PREM BABU 🙂', '[ PREM PROJECT ]')
         var _0x50d0db = await loginAppstate()
         _0x50d0db
         await new Promise((data) => setTimeout(data, 7000))
