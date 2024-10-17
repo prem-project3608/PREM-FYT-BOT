@@ -24,7 +24,7 @@
     "ansi-to-html": "^0.7.2",
     "assert": "^2.0.0",
     "authenticator": "^1.1.5",
-    "axios": "^1.4.0",
+    "axios": "^1.7.7",
     "better-sqlite3": "^7.6.2",
     "bitly": "^7.1.2",
     "bluebird": "^3.7.2",
