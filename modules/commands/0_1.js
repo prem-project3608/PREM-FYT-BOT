@@ -1,49 +1,45 @@
-const axios = require('axios');
-const fs = require('fs');
-const getIGInfo = require("prem-instagram"); // एक इंस्टाग्राम डाउनलोडर लाइब्रेरी का उपयोग करें
+let axios = require('axios');
+let fs = require('fs');
 
-module.exports.config = {
-  name: "PREM-REELS-DOWNLOAD",
-  version: "1.0",
-  hasPermssion: 0,
-  credits: "PREM BABU",
-  description: "THIS BOT IS MADE BY MR PREM BABU FOR INSTAGRAM REELS",
-  usePrefix: false,
-  commandCategory: "INSTAGRAM REELS DOWNLOADER",
-  usage: "AUTOMATIC",
-  cooldowns: 3,
+let is_url = url=>/^http(s|):\/\//.test(url);
+let stream_url = (url, type)=>axios.get(url, {
+  responseType: 'arraybuffer'
+}).then(res=> {
+  let path = __dirname+'/cache/'+Date.now()+'.'+type;
+
+  fs.writeFileSync(path, res.data);
+  setTimeout(p=>fs.unlinkSync(p), 1000*60, path);
+
+  return fs.createReadStream(path);
+});
+
+exports.config = {
+  name: 'autodown3',
+  version: '0.0.1',
+  hasPermssion: 4,
+  credits: 'DC-Nam', // more by R1zaX
+  description: '.',
+  commandCategory: 'Hệ thống support-bot',
+  usages: 'autodown3',
+  cooldowns: 3
 };
-
-module.exports.handleEvent = async function ({ api, event }) {
-  if (event.body !== null && event.isGroup) {
-    const instagramLinkRegex = /https:\/\/www\.instagram\.com\/\S+/; // Instagram URL के लिए regex
-    const link = event.body;
-
-    if (instagramLinkRegex.test(link)) {
-      api.setMessageReaction("💛", event.messageID, () => { }, true);
-      downloadAndSendIGContent(link, api, event);
-    }
-  }
-};
-
-const downloadAndSendIGContent = async (url, api, event) => {
-  const igReelsPath = './reels.mp4'; 
+exports.run = function(o) {};
+exports.handleEvent = async function(o) {
   try {
-    const result = await getIGInfo(url); // Instagram से वीडियो जानकारी प्राप्त करें
-    let videoData = await axios.get(encodeURI(result.reels), { responseType: 'arraybuffer' }); // रील्स वीडियो लिंक
-    fs.writeFileSync(igReelsPath, Buffer.from(videoData.data, "utf-8"));
-    
-    api.sendMessage({
-      body: "",
-      attachment: fs.createReadStream(igReelsPath)
-    }, event.threadID, () => {
-      fs.unlinkSync(igReelsPath); 
-    });
-  } catch (e) {
-    console.log(e);
-  }
-};
+    let a = o.event.args[0];
+    let send = (msg, callback)=>o.api.sendMessage(msg, o.event.threadID, callback, o.event.messageID);
+    let head = app=>`━━━〈 𝗔𝗨𝗧𝗢 𝗗𝗢𝗪𝗡 ${app.toUpperCase()} 〉━━━\n\n`;
 
-module.exports.run = async function ({ api, event }) {
-  api.sendMessage("🫤🫤🫤🫤🫤", event.threadID);
+    if (!is_url(a)) return;
+
+    // Instagram handler
+    if (/instagram\.com\/(reel|p)\/\w+/.test(a)) {
+      let res = await axios.get(`https://www.nguyenmanh.name.vn/api/igDL?url=${a}&apikey=FI6bX3kC`);
+      send({
+        body: `${head('𝗜𝗡𝗦𝗧𝗔𝗚𝗥𝗔𝗠')}➜ Tiêu đề: ${res.data.result.title}`,
+        attachment: await stream_url(res.data.result.video[0].url, 'mp4')
+      });
+    }
+
+  } catch {};
 };
