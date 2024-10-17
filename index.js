@@ -6,17 +6,10 @@ const semver = require("semver");
 const logger = require("./utils/log");
 
 /////////////////////////////////////////////
-//========= Check node.js version =========//
+//========= PREM VERSION NODE.JS ==========//
 /////////////////////////////////////////////
-
-// const nodeVersion = semver.parse(process.version);
-// if (nodeVersion.major < 13) {
-//     logger(`Your Node.js ${process.version} is not supported, it required Node.js 13 to run bot!`, "error");
-//     return process.exit(0);
-// };
-
 ///////////////////////////////////////////////////////////
-//========= Create website for dashboard/uptime =========//
+//=========== THIS BOT IS MADE BY PREM BABU  ============//
 ///////////////////////////////////////////////////////////
 
 const express = require('express');
@@ -25,7 +18,7 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
-// sendFile will go here
+// PREM BABU HTML
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'PREM-BABU.html'));
 });
@@ -35,7 +28,7 @@ app.listen(port);
 logger("Opened server site...", "[ PREM PROJECT STARTING ]");
 
 /////////////////////////////////////////////////////////
-//========= Create start bot and make it loop =========//
+//========= THIS BOT CREATER BY MR PREM BABU  =========//
 /////////////////////////////////////////////////////////
 
 function startBot(message) {
@@ -60,7 +53,7 @@ function startBot(message) {
     });
 };
 ////////////////////////////////////////////////
-//========= Check update from Github =========//
+//========= PREM UPDATE FROM GITHUB  =========//
 ////////////////////////////////////////////////
 
 
