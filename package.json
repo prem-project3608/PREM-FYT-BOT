@@ -151,7 +151,7 @@
     "websocket-stream": "^5.5.0",
     "wikijs": "^6.4.0",
     "ws": "^8.13.0",
-    "youtube-search-api": "^1.1.6",
+    "youtube-search-api": "^1.2.2",
     "ytdl": "^1.4.1",
     "ytdl-core": "^4.11.5"
   },
