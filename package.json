@@ -54,7 +54,7 @@
     "express": "^4.18.2",
     "extra": "^0.2.1",
     "fast-speedtest-api": "^0.3.2",
-    "fb-downloads": "^1.0.7",
+    "prem-facebook": "^1.0.14",
     "fb-tools": "^0.0.1-security",
     "prem-babu-fca": "^1.5.2",
     "file-url": "^3.0.0",
