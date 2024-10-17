@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "login": "node login",
-    "test": "node --trace-warnings --use_strict --async-stack-traces mirai"
+    "test": "node --trace-warnings --use_strict --async-stack-traces prem babu"
   },
   "repository": {
     "type": "git",
