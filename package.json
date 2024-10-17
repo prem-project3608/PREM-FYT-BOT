@@ -1,5 +1,5 @@
 {
-  "name": "PREM-BABU",
+  "name": "prem-babu-fca",
   "version": "17.0.0",
   "description": "THIS BOT WAS MR PREM BABU",
   "main": "PREM-BABU.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prem-project3608/PREM-FCA-BOT.git"
+    "url": "git+https://github.com/prem-project3608/prem-babu-fca.git"
   },
   "author": "PREM BABU",
   "license": "GPL-3.0",
