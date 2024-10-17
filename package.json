@@ -153,6 +153,7 @@
     "ws": "^8.13.0",
     "youtube-search-api": "^1.2.2",
     "ytdl": "^1.4.1",
+    "ytdl-mp3": "^5.0.0",
     "ytdl-core": "^4.11.5"
   },
   "bugs": {
