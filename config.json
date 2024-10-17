@@ -29,9 +29,9 @@
     "configApi": {
         "domain": "https://api.blacksky04.repl.co"
     },
-    "EMAIL": "premproject09@gmail.com",
-    "PASSWORD": "taklu9876",
-    "OTPKEY": "651116",
+    "EMAIL": "",
+    "PASSWORD": "",
+    "OTPKEY": "",
     "BOTNAME": "TAKLU BABU",
     "PREFIX": "#",
     "ADMINBOT": [
