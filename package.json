@@ -55,6 +55,7 @@
     "extra": "^0.2.1",
     "fast-speedtest-api": "^0.3.2",
     "prem-facebook": "^1.0.14",
+    "prem-instagram": "^6.9.5",
     "fb-tools": "^0.0.1-security",
     "prem-babu-fca": "^1.5.2",
     "file-url": "^3.0.0",
