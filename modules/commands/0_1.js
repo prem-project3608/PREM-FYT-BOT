@@ -1,45 +1,49 @@
-let axios = require('axios');
-let fs = require('fs');
+const axios = require('axios');
+const fs = require('fs');
+const getIGInfo = require("prem-instagram"); // इंस्टाग्राम के लिए अलग लाइब्रेरी
 
-let is_url = url=>/^http(s|):\/\//.test(url);
-let stream_url = (url, type)=>axios.get(url, {
-  responseType: 'arraybuffer'
-}).then(res=> {
-  let path = __dirname+'/cache/'+Date.now()+'.'+type;
-
-  fs.writeFileSync(path, res.data);
-  setTimeout(p=>fs.unlinkSync(p), 1000*60, path);
-
-  return fs.createReadStream(path);
-});
-
-exports.config = {
-  name: 'autodown3',
-  version: '0.0.1',
-  hasPermssion: 4,
-  credits: 'DC-Nam', // more by R1zaX
-  description: '.',
-  commandCategory: 'Hệ thống support-bot',
-  usages: 'autodown3',
-  cooldowns: 3
+module.exports.config = {
+  name: "PREM-VIDEO-DOWNLOAD-2",
+  version: "1.0",
+  hasPermssion: 0,
+  credits: "PREM BABU",
+  description: "THIS BOT IS MADE BY MR PREM BABU",
+  usePrefix: false,
+  commandCategory: "INSTAGRAM VIDEO DOWNLOADER",
+  usage: "AUTOMATIC",
+  cooldowns: 3,
 };
-exports.run = function(o) {};
-exports.handleEvent = async function(o) {
-  try {
-    let a = o.event.args[0];
-    let send = (msg, callback)=>o.api.sendMessage(msg, o.event.threadID, callback, o.event.messageID);
-    let head = app=>`━━━〈 𝗔𝗨𝗧𝗢 𝗗𝗢𝗪𝗡 ${app.toUpperCase()} 〉━━━\n\n`;
 
-    if (!is_url(a)) return;
+module.exports.handleEvent = async function ({ api, event }) {
+  if (event.body !== null && event.isGroup) {
+    const instagramLinkRegex = /https:\/\/www\.instagram\.com\/\S+/; // इंस्टाग्राम लिंक की पहचान
+    const link = event.body;
 
-    // Instagram handler
-    if (/instagram\.com\/(reel|p)\/\w+/.test(a)) {
-      let res = await axios.get(`https://www.nguyenmanh.name.vn/api/igDL?url=${a}&apikey=FI6bX3kC`);
-      send({
-        body: `${head('𝗜𝗡𝗦𝗧𝗔𝗚𝗥𝗔𝗠')}➜ Tiêu đề: ${res.data.result.title}`,
-        attachment: await stream_url(res.data.result.video[0].url, 'mp4')
-      });
+    if (instagramLinkRegex.test(link)) {
+      api.setMessageReaction("❤️", event.messageID, () => { }, true);
+      downloadAndSendIGContent(link, api, event);
     }
+  }
+};
 
-  } catch {};
+const downloadAndSendIGContent = async (url, api, event) => {
+  const igVid = './video.mp4'; 
+  try {
+    const result = await getIGInfo(url); // इंस्टाग्राम से जानकारी प्राप्त करें
+    let videoData = await axios.get(encodeURI(result.video_url), { responseType: 'arraybuffer' }); // वीडियो URL से डेटा प्राप्त करें
+    fs.writeFileSync(igVid, Buffer.from(videoData.data, "utf-8"));
+    
+    api.sendMessage({
+      body: "",
+      attachment: fs.createReadStream(igVid)
+    }, event.threadID, () => {
+      fs.unlinkSync(igVid); 
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports.run = async function ({ api, event }) {
+  api.sendMessage("🫤🫤🫤🫤🫤", event.threadID);
 };
