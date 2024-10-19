@@ -39,7 +39,7 @@ module.exports.run = async function ({ api, event, args }) {
         form.append('size', 'auto');
         form.append('image_file', fs.createReadStream(savePath));
 
-        const apiKey = 'your-remove-bg-api-key'; // Add your Remove BG API key here
+        const apiKey = 'E7Qbj7YsoyHmqwfNp9x74a96'; // Add your Remove BG API key here
         const response = await axios.post('https://api.remove.bg/v1.0/removebg', form, {
             headers: { ...form.getHeaders(), 'X-Api-Key': apiKey },
             responseType: 'arraybuffer'
