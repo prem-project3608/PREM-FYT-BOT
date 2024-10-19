@@ -1,58 +1,64 @@
-const axios = require('axios');
-const FormData = require('form-data');
-const fs = require('fs-extra');
-const path = require('path');
-const { image } = require('image-downloader');
+const axios = require("axios");
 
-module.exports.config = {
-    name: 'Remove Background from photo',
-    version: '1.1.1',
-    hasPermssion: 0,
-    credits: 'Prem babu',
-    description: 'Remove Background from any photo you reply to',
-    commandCategory: 'Tool',
-    usages: 'Reply with a photo to use this command',
-    cooldowns: 2,
-    dependencies: { 'form-data': '', 'image-downloader': '' }
-};
+class RemoveBg {
+  constructor() {
+    this.apiKey = "E7Qbj7YsoyHmqwfNp9x74a96"; // यहाँ अपनी API की डालें
+    this.client = axios.create({
+      baseURL: "https://api.remove.bg/v1.0/",
+      headers: {
+        "X-Api-Key": this.apiKey,
+        "Content-Type": "application/json"
+      }
+    });
+  }
 
-module.exports.run = async function ({ api, event, args }) {
-    const threadID = event.threadID;
-    const messageID = event.messageID;
-    
-    if (!event.messageReply || !event.messageReply.attachments || event.messageReply.attachments.length === 0) {
-        return api.sendMessage("You must reply to a photo.", threadID, messageID);
+  async removeBackground(imageUrl) {
+    const response = await this.client.post("removebg", {
+      image_url: imageUrl,
+      size: "auto"
+    });
+    return response.data.result_b64;
+  }
+}
+
+class Modules extends RemoveBg {
+  constructor() {
+    super();
+  }
+
+  get config() {
+    return {
+      name: "removebg",
+      description: "Remove background from an image",
+      version: "1.0.0",
+      credits: "SHANKAR SUMAN",
+      cooldown: 5,
+      usage: "removebg <url>",
+      commandCategory: "Công cụ",
+      hasPermssion: 0
+    };
+  }
+
+  run = async ({ api, event }) => {
+    if (event.type !== "message_reply" || event.messageReply.attachments.length < 1) {
+      return api.sendMessage("[⚜️]➜ कृपया उस फोटो का जवाब दें, जिसका बैकग्राउंड हटाना है।", event.threadID, event.messageID);
     }
 
-    if (event.messageReply.attachments[0].type !== 'photo') {
-        return api.sendMessage("This is not an image.", threadID, messageID);
+    const array = [];
+
+    for (let { url } of event.messageReply.attachments) {
+      try {
+        const result = await this.removeBackground(url);
+        array.push(result);
+      } catch (err) {
+        console.log(err);
+        return api.sendMessage("[⚜️]➜ बैकग्राउंड हटाने में एक त्रुटि हुई।", event.threadID, event.messageID);
+      }
     }
 
-    const imageUrl = event.messageReply.attachments[0].url;
-    const savePath = path.resolve(__dirname, 'photo.png');
-    
-    try {
-        // Download image
-        await image({ url: imageUrl, dest: savePath });
+    // परिणाम के साथ संदेश भेजें
+    return api.sendMessage(`[ 𝗥𝗘𝗠𝗢𝗩𝗘𝗕𝗚 𝗥𝗘𝗦𝗨𝗟𝗧 ]\n➝ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀: ${array.length} इमेज में बैकग्राउंड हटाया गया\n➝ इमेज लिंक:\n${array.join("\n")}`, event.threadID, event.messageID);
+  }
+}
 
-        const form = new FormData();
-        form.append('size', 'auto');
-        form.append('image_file', fs.createReadStream(savePath));
-
-        const apiKey = 'E7Qbj7YsoyHmqwfNp9x74a96'; // Add your Remove BG API key here
-        const response = await axios.post('https://api.remove.bg/v1.0/removebg', form, {
-            headers: { ...form.getHeaders(), 'X-Api-Key': apiKey },
-            responseType: 'arraybuffer'
-        });
-
-        if (response.status !== 200) throw new Error(`Request failed: ${response.statusText}`);
-
-        fs.writeFileSync(savePath, response.data);
-        api.sendMessage({ attachment: fs.createReadStream(savePath) }, threadID, () => {
-            fs.unlinkSync(savePath);
-        });
-    } catch (error) {
-        console.log("Error:", error);
-        api.sendMessage("Error removing background from image.", threadID, messageID);
-    }
-};
+module.exports = new Modules();
