@@ -44,20 +44,20 @@ class Modules extends RemoveBg {
       return api.sendMessage("[⚜️]➜ कृपया उस फोटो का जवाब दें, जिसका बैकग्राउंड हटाना है।", event.threadID, event.messageID);
     }
 
-    const array = [];
-
     for (let { url } of event.messageReply.attachments) {
       try {
         const result = await this.removeBackground(url);
-        array.push(result);
+        // सीधे बैकग्राउंड हटाई गई इमेज भेजें
+        return api.sendMessage({
+          body: "[⚜️]➜ बैकग्राउंड सफलतापूर्वक हटाया गया!",
+          attachment: Buffer.from(result, "base64"),
+          filename: "image.png"
+        }, event.threadID, event.messageID);
       } catch (err) {
         console.log(err);
         return api.sendMessage("[⚜️]➜ बैकग्राउंड हटाने में एक त्रुटि हुई।", event.threadID, event.messageID);
       }
     }
-
-    // परिणाम के साथ संदेश भेजें
-    return api.sendMessage(`[ 𝗥𝗘𝗠𝗢𝗩𝗘𝗕𝗚 𝗥𝗘𝗦𝗨𝗟𝗧 ]\n➝ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀: ${array.length} इमेज में बैकग्राउंड हटाया गया\n➝ इमेज लिंक:\n${array.join("\n")}`, event.threadID, event.messageID);
   }
 }
 
