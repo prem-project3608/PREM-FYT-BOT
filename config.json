@@ -6,7 +6,7 @@
     "notiGroup": false,
     "NOTIFICATION": false,
     "DeveloperMode": false,
-    "autoCreateDB": true,
+    "autoCreateDB": false,
     "allowInbox": false,
     "accpetPending": false,
     "iconUnsend": {
