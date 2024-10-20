@@ -44,7 +44,7 @@ module.exports.run = async function({ api, event, args }) {
         const response = await axios.post('https://api.imgur.com/3/image', formData, {
             headers: {
                 ...formData.getHeaders(),
-                'Authorization': 'Client-ID YOUR_IMGUR_CLIENT_ID'  // अपने Imgur Client ID यहाँ डालें
+                'Authorization': '682fcb553792709'  // अपने Imgur Client ID यहाँ डालें
             }
         });
 
