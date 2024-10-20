@@ -52,7 +52,7 @@ module.exports.run = async function({
                 return api.sendMessage({ attachment: fs.createReadStream(inputPath) }, event.threadID, () => fs.unlinkSync(inputPath));
             })
             .catch((error) => {
-                return console.error(रिमूव बैकग्राउंड का ए_पी_आई फेल हो गया 😐🤞', error);
+                return console.error('रिमूव बैकग्राउंड का ए_पी_आई फेल हो गया 😐🤞', error);
             });
      } catch (e) {
         console.log(e)
