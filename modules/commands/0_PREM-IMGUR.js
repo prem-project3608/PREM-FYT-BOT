@@ -1,62 +1,48 @@
 module.exports.config = {
-    name: 'imgur',
-    version: '1.1.1',
+    name: "imgur",
+    version: "1.0.0",
     hasPermssion: 0,
-    credits: 'PREM BABU',
-    description: 'THIS BOT IS MADE BY PREM BABU',
-    commandCategory: 'UPLOAD TO IMGUR',
-    usages: 'REPLY IMAGE OR URL',
-    cooldowns: 2,
-    dependencies: {
-        'axios': '',
-        'form-data': '',
-        'image-downloader': ''
-    }
+    credits: "Deku (Modified by you)",
+    description: "imgur upload using OAuth2",
+    commandCategory: "imgur",
+    usages: "[reply to image]",
+    cooldowns: 5
 };
 
-const axios = require('axios');
-const FormData = require('form-data');
-const fs = require('fs-extra');
-const path = require('path');
-const { image } = require('image-downloader');
+module.exports.run = async ({ api, event }) => {
+    const axios = require('axios');
 
-module.exports.run = async function({ api, event, args }) {
-    try {
-        if (event.type !== "message_reply") 
-            return api.sendMessage("अरे यार किसी एक इमेज को रिप्लाई देके कमांड दो 😏✋", event.threadID, event.messageID);
+    // Replace these with your actual client ID and client secret from Imgur
+    const client_id = 'YOUR_CLIENT_ID';
+    const client_secret = 'YOUR_CLIENT_SECRET';
 
-        api.sendMessage("एक मिनट रुको दोस्त 🙂🤞", event.threadID, event.messageID);
-        
-        if (!event.messageReply.attachments || event.messageReply.attachments.length == 0) 
-            return api.sendMessage("आपने कोई इमेज नहीं भेजी।", event.threadID, event.messageID);
-        
-        if (event.messageReply.attachments[0].type != "photo") 
-            return api.sendMessage("सॉरी दोस्त, ये इमेज नहीं है। 😐🤞", event.threadID, event.messageID);
-
-        const content = event.messageReply.attachments[0].url;
-        const inputPath = path.resolve(__dirname, 'cache', `photo.png`);
-        
-        await image({ url: content, dest: inputPath });
-
-        const formData = new FormData();
-        formData.append('image', fs.createReadStream(inputPath));
-
-        const response = await axios.post('https://api.imgur.com/oauth2/authorize', formData, {
-            headers: {
-                ...formData.getHeaders(),
-                'Authorization': '682fcb553792709'  // अपने Imgur Client ID यहाँ डालें
-            }
-        });
-
-        if (response.status === 200) {
-            const imgurLink = response.data.data.link;
-            api.sendMessage(`यहाँ आपका इमेज लिंक है: ${imgurLink}`, event.threadID, () => fs.unlinkSync(inputPath));
-        } else {
-            api.sendMessage("इमेज अपलोड करने में कोई समस्या आई है।", event.threadID, event.messageID);
+    // Token generation request without qs
+    const tokenResponse = await axios.post('https://api.imgur.com/oauth2/token', {
+        client_id: client_id,
+        client_secret: client_secret,
+        grant_type: 'client_credentials'
+    }, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
+    });
 
-    } catch (e) {
-        console.log(e);
-        return api.sendMessage(`बैकग्राउंड रिमूव करने में कोई ईशु आ गया है 😐🤞`, event.threadID, event.messageID);
+    const accessToken = tokenResponse.data.access_token;
+
+    var link = event.messageReply.attachments[0].url;
+    if (!link) {
+        return api.sendMessage('Please reply to an image.', event.threadID, event.messageID);
     }
-}
+
+    // Upload image using the access token
+    const imageUploadResponse = await axios.post('https://api.imgur.com/3/image', {
+        image: link
+    }, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    var result = imageUploadResponse.data.data.link;
+    return api.sendMessage(result, event.threadID, event.messageID);
+};
