@@ -2,21 +2,19 @@ module.exports.config = {
     name: "imgur",
     version: "1.0.0",
     hasPermssion: 0,
-    credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-    description: "",
-    commandCategory: "Game",
-    usages: "[reply]",
-    cooldowns: 5,
-    dependencies: {
-      "axios": ""
-    }
+    credits: "Deku",
+    description: "imgur upload",
+    commandCategory: "imgur",
+    usages: "[reply to image]",
+    cooldowns: 5
 };
-
+ 
 module.exports.run = async ({ api, event }) => {
-const axios = global.nodemodule['axios'];  
-var linkanh = event.messageReply.attachments[0].url || args.join(" ");
-    if(!linkanh) return api.sendMessage('Please reply or enter a link 1 image!!!', event.threadID, event.messageID)
-const res = await axios.get(`https://imgur-api-by-koja.xx0xkoja.repl.co/imgur?link=${encodeURIComponent(linkanh)}`);    
-var img = res.data.uploaded.image;
-    return api.sendMessage(`${img}`, event.threadID, event.messageID);
+const axios = require('axios');
+var link = event.messageReply.attachments[0].url || args.join(" ");
+    if(!link) return api.sendMessage('Please reply to image.', event.threadID, event.messageID)
+const res = await axios.get(`https://sim.ainz-project.repl.co/others/imgur?link=${encodeURIComponent(link)}`);    
+var result = res.data.uploaded.image;
+    return api.sendMessage(result, event.threadID, event.messageID);
+ 
 }
