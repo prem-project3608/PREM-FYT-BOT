@@ -30,7 +30,7 @@ module.exports.run = async function({
         if (event.messageReply.attachments[0].type != "photo") return api.sendMessage("❌ | This Media is not available", event.threadID, event.messageID);
 
         const content = (event.type == "message_reply") ? event.messageReply.attachments[0].url : args.join(" ");
-        const prApi = ["Z11uYqFqZtu4sE4oVhnw9JPa"]; // यहाँ अपनी API कुंजी डालें
+        const apiKeys = ['y5K9ssQnhr8sB9Tp4hrMsLtU', 's6d6EanXm7pEsck9zKjgnJ5u', 'GJkFyR3WdGAwn8xW5MDYAVWf', 'ymutgb6hEYEDR6xUbfQUiPri', 'm6AhtWhWJBAPqZzy5BrvMmUp']; // यहाँ अपनी API कुंजी डालें
         const url = 'https://api.remove.bg/v1/removebg'; // remove.bg का URL
         const inputPath = path.resolve(__dirname, 'cache', `photo.png`);
         
@@ -49,7 +49,7 @@ module.exports.run = async function({
             responseType: 'arraybuffer',
             headers: {
                 ...formData.getHeaders(),
-                'X-Api-Key': prApi[Math.floor(Math.random() * prApi.length)],
+                'X-Api-Key': apiKeys[Math.floor(Math.random() * apiKeys.length)],
             },
             encoding: null
         })
