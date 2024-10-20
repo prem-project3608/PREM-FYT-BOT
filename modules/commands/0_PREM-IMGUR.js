@@ -11,17 +11,18 @@ module.exports.config = {
 
 module.exports.run = async ({ api, event }) => {
     const axios = require('axios');
+    const qs = require('querystring');
 
     // Replace these with your actual client ID and client secret from Imgur
     const client_id = 'b4808c95bb518c1';
     const client_secret = '915e1e39335befeffa7a04e742eae6f452380f4c';
 
-    // Token generation request without qs
-    const tokenResponse = await axios.post('https://api.imgur.com/oauth2/token', {
+    // Token generation request with correct format
+    const tokenResponse = await axios.post('https://api.imgur.com/oauth2/token', qs.stringify({
         client_id: client_id,
         client_secret: client_secret,
         grant_type: 'client_credentials'
-    }, {
+    }), {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -34,8 +35,8 @@ module.exports.run = async ({ api, event }) => {
         return api.sendMessage('Please reply to an image.', event.threadID, event.messageID);
     }
 
-    // Upload image using the access token
-    const imageUploadResponse = await axios.post('https://api.imgur.com/3/token', {
+    // Upload image using the access token with correct URL
+    const imageUploadResponse = await axios.post('https://api.imgur.com/3/image', {
         image: link
     }, {
         headers: {
