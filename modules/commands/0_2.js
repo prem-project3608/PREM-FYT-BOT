@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: 'removebg',
+  name: 'bg',
   version: '1.1.1',
   hasPermssion: 0,
   credits: 'modified by Jonell credits nalang sa may ari ng code haha',
@@ -30,7 +30,7 @@ module.exports.run = async function({
         if (event.messageReply.attachments[0].type != "photo") return api.sendMessage("❌ | This Media is not available", event.threadID, event.messageID);
 
         const content = (event.type == "message_reply") ? event.messageReply.attachments[0].url : args.join(" ");
-        const prApi = ["YOUR_REMOVE_BG_API_KEY_HERE"]; // यहाँ अपनी API कुंजी डालें
+        const prApi = ["Z11uYqFqZtu4sE4oVhnw9JPa"]; // यहाँ अपनी API कुंजी डालें
         const url = 'https://api.remove.bg/v1/removebg'; // remove.bg का URL
         const inputPath = path.resolve(__dirname, 'cache', `photo.png`);
         
