@@ -15,12 +15,14 @@ module.exports.run = async function ({ api, event, args, Users }) {
     }
   
     var ep = event.participantIDs;
-    let msg = "List of all members' UID in this group:\n\n"; // मुख्य शीर्षक
+    let msg = "❁ ━━━[ 𝗨𝗜𝗗 𝗔𝗟𝗟 ]━━━ ❁\n\n"; // मुख्य शीर्षक
 
     for (let m = 0; m < ep.length; m++) {
         const name = await Users.getNameUser(ep[m]);
-        msg += `${m + 1}. ${name} [ ${ep[m]} ]\n____________________________\n`; // नया फॉर्मेट
+        msg += `✰ ${name} ➪ ${ep[m]}\n━━━━━━━━━━━━━━━\n`; // नया फॉर्मेट
     }
+
+    msg += "━━━━━━━━━━━━━━━━━\n𝗠𝗔𝗗𝗘 𝗕𝗬 𝗣𝗥𝗘𝗠 𝗕𝗔𝗕𝗨"; // अंतिम संदेश
 
     reply(msg);
 };
