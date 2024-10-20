@@ -27,7 +27,7 @@ module.exports.run = async function({
         if (event.messageReply.attachments[0].type != "photo") return api.sendMessage("सॉरी दोस्त ये इमेज का बैकग्राउंड रिमूव नही हो सकता 😐🤞", event.threadID, event.messageID);
 
         const content = (event.type == "message_reply") ? event.messageReply.attachments[0].url : args.join(" ");
-        const prApi = ["1d24068fc42c06cbd86b40e241edd71d2c8a3215"]
+        const prApi = ["8968b441784234f1f0ebf1ef5ff8f0bb73d9215f"]
         const inputPath = path.resolve(__dirname, 'cache', `photo.png`);
          await image({
         url: content, dest: inputPath
