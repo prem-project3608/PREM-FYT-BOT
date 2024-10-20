@@ -16,7 +16,7 @@ module.exports.config = {
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs-extra');
-const path = require('path');
+const path = require('path, prApi');
 const {image} = require('image-downloader');
 
 module.exports.run = async function({
