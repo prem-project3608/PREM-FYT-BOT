@@ -41,7 +41,7 @@ module.exports.run = async function({ api, event, args }) {
         const formData = new FormData();
         formData.append('image', fs.createReadStream(inputPath));
 
-        const response = await axios.post('https://api.imgur.com/3/image', formData, {
+        const response = await axios.post('https://api.imgur.com/oauth2/authorize', formData, {
             headers: {
                 ...formData.getHeaders(),
                 'Authorization': '682fcb553792709'  // अपने Imgur Client ID यहाँ डालें
