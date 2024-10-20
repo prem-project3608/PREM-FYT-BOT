@@ -1,11 +1,11 @@
 module.exports.config = {
-  name: 'bg',
+  name: 'remo',
   version: '1.1.1',
   hasPermssion: 0,
-  credits: 'modified by Jonell credits nalang sa may ari ng code haha',
-  description: 'Edit photo',
-  commandCategory: 'Tools',
-  usages: 'Reply images or url images',
+  credits: 'PREM BABU',
+  description: 'THIS BOT IS MADE BY PREM BABU',
+  commandCategory: 'REMOVE BACKGROUND IMAGES',
+  usages: 'REPLY IMAGE OR URL',
   cooldowns: 2,
   dependencies: {
        'form-data': '',
@@ -22,9 +22,9 @@ module.exports.run = async function({
     api, event, args
 }){
     try {
-        if (event.type !== "message_reply") return api.sendMessage("🖼️ | You must to reply the photo you want to removed bg", event.threadID, event.messageID); api.sendMessage("🖼 | Removing Background Picture your provide. Please Wait....", event.threadID, event.messageID);
-        if (!event.messageReply.attachments || event.messageReply.attachments.length == 0) return api.sendMessage("✅ | Removed Background Has Been Successfully ", event.threadID, event.messageID);
-        if (event.messageReply.attachments[0].type != "photo") return api.sendMessage("❌ | This Media is not available", event.threadID, event.messageID);
+        if (event.type !== "message_reply") return api.sendMessage("अरे यार किसी एक इमेज को रिप्लाई देके कमांड दो 😏✋", event.threadID, event.messageID); api.sendMessage("एक मिनट रुको दोस्त 🙂🤞", event.threadID, event.messageID);
+        if (!event.messageReply.attachments || event.messageReply.attachments.length == 0) return api.sendMessage("ये लो दोस्त बैकग्राउंड को रिमूव कर दिया 🙂🤞", event.threadID, event.messageID);
+        if (event.messageReply.attachments[0].type != "photo") return api.sendMessage("सॉरी दोस्त ये इमेज का बैकग्राउंड रिमूव नही हो सकता 😐🤞", event.threadID, event.messageID);
 
         const content = (event.type == "message_reply") ? event.messageReply.attachments[0].url : args.join(" ");
         const prApi = ["1d24068fc42c06cbd86b40e241edd71d2c8a3215"]
@@ -52,10 +52,10 @@ module.exports.run = async function({
                 return api.sendMessage({ attachment: fs.createReadStream(inputPath) }, event.threadID, () => fs.unlinkSync(inputPath));
             })
             .catch((error) => {
-                return console.error('Failed Removedbg commands api', error);
+                return console.error(रिमूव बैकग्राउंड का ए_पी_आई फेल हो गया 😐🤞', error);
             });
      } catch (e) {
         console.log(e)
-        return api.sendMessage(`Error Api Removed Background Command`, event.threadID, event.messageID);
+        return api.sendMessage(`बैकग्राउंड रिमूव करने में कोई ईशु आ गया है 😐🤞`, event.threadID, event.messageID);
   }
          }
