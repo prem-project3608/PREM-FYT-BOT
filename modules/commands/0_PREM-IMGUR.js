@@ -1,7 +1,7 @@
 module.exports.config = {
     name: "imgur",
     version: "1.0.0",
-    hasPermission: 0,
+    hasPermssion: 0,
     credits: "Deku (Modified by you)",
     description: "imgur upload using OAuth2",
     commandCategory: "imgur",
