@@ -4,7 +4,6 @@ const http = require("http");
 const axios = require("axios");
 const semver = require("semver");
 const logger = require("./utils/log");
-const imgurCommand = require('./modules/command/imgur');
 
 /////////////////////////////////////////////
 //========= PREM VERSION NODE.JS ==========//
