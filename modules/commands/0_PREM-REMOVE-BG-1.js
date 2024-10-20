@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: 'remo',
+  name: 'png',
   version: '1.1.1',
   hasPermssion: 0,
   credits: 'PREM BABU',
