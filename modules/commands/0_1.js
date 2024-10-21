@@ -1,40 +1,37 @@
-const axios = require("axios");
-class Imgur {
-  constructor() {
-    this.clientId = "b4808c95bb518c1", this.client = axios.create({
-      baseURL: "https://api.imgur.com/3/",
-      headers: {
-        Authorization: `Client-ID ${this.clientId}`
-      }
-    })
-  }
-  async uploadImage(url) {
-    return (await this.client.post("image", {
-      image: url
-    })).data.data.link
-  }
-}
-class Modules extends Imgur {
-  constructor() {
-    super()
-  }
-  get config() {
-    return {
-      name: "pic",
-      description: "Upload image to imgur",
-      version: "1.0.0",
-      credits: "SHANKAR SUMAN",
-      cooldown: 5,
-      usage: "imgur <url>",
-      commandCategory: "Công cụ",
-      hasPermssion: 0
+module.exports.config = {
+    name: "pic",
+    version: "1.0.0",
+    hasPermssion: 0,
+    credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
+    description: "Image search",
+    commandCategory: "Search",
+    usePrefix: false,
+    usages: "[Text]",
+    cooldowns: 0,
+};
+module.exports.run = async function({ api, event, args }) {
+    const axios = require("axios");
+    const fs = require("fs-extra");
+    const request = require("request");
+    const keySearch = args.join(" ");
+    if(keySearch.includes("-") == false) return api.sendMessage('Please enter in the format, example: pinterest Priyansh - 10 (it depends on you how many images you want to appear in the result)', event.threadID, event.messageID)
+    const keySearchs = keySearch.substr(0, keySearch.indexOf('-'))
+    const numberSearch = keySearch.split("-").pop() || 6
+    const res = await axios.get(`https://api-dien.kira1011.repl.co/pinterest?search=${encodeURIComponent(keySearchs)}`);
+    const data = res.data.data;
+    var num = 0;
+    var imgData = [];
+    for (var i = 0; i < parseInt(numberSearch); i++) {
+      let path = __dirname + `/cache/${num+=1}.jpg`;
+      let getDown = (await axios.get(`${data[i]}`, { responseType: 'arraybuffer' })).data;
+      fs.writeFileSync(path, Buffer.from(getDown, 'utf-8'));
+      imgData.push(fs.createReadStream(__dirname + `/cache/${num}.jpg`));
     }
-  }
-  run = async ({ api, event }) => {
-    var array = [];
-    if ("message_reply" != event.type || event.messageReply.attachments.length < 0) return api.sendMessage("[⚜️]➜ Please reply to the photo you need to upload.", event.threadID, event.messageID);
-    for (let { url } of event.messageReply.attachments) await this.uploadImage(url).then((res => array.push(res))).catch((err => console.log(err)));
-    return api.sendMessage(`[ 𝗜𝗠𝗚𝗨𝗥 𝗨𝗣𝗟𝗢𝗔𝗗 ]\n➝ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀: ${array.length} ảnh\n➝ 𝗙𝗮𝗶𝗹𝘂𝗿𝗲: ${array.length - event.messageReply.attachments.length}\n➝ Image link:\n${array.join("\n")}`, event.threadID, event.messageID)
-  }
-}
-module.exports = new Modules;
+    api.sendMessage({
+        attachment: imgData,
+        body: numberSearch + 'Search results for keyword: '+ keySearchs
+    }, event.threadID, event.messageID)
+    for (let ii = 1; ii < parseInt(numberSearch); ii++) {
+        fs.unlinkSync(__dirname + `/cache/${ii}.jpg`)
+    }
+};
