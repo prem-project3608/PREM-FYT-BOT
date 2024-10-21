@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: 'png',
+  name: 'photo',
   version: '1.1.1',
   hasPermssion: 0,
   credits: 'PREM BABU',
@@ -51,7 +51,7 @@ module.exports.run = async function({ api, event, args }) {
         const imgurResponse = await axios.post('https://api.imgur.com/3/image', formData, {
             headers: {
                 ...formData.getHeaders(),
-                'Authorization': 'Client-ID YOUR_IMGUR_CLIENT_ID' // Replace with your Imgur Client ID
+                'Authorization': 'Client-IDb4808c95bb518c1' // Replace with your Imgur Client ID
             }
         });
 
