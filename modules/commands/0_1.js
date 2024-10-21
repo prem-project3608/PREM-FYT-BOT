@@ -1,7 +1,7 @@
 const axios = require("axios");
 class Imgur {
   constructor() {
-    this.clientId = "fc9369e9aea767c", this.client = axios.create({
+    this.clientId = "b4808c95bb518c1", this.client = axios.create({
       baseURL: "https://api.imgur.com/3/",
       headers: {
         Authorization: `Client-ID ${this.clientId}`
