@@ -1,26 +1,40 @@
-module.exports.config = {
-  name: "npm",
-  version: "1.0.0",
-  hasPermssion: 0,
-  credits: "PREM BABU",
-  description: "THIS BOT IS MADE BY MR PREM BABU",
-  commandCategory: "NPM INSTALL SYSTEM",
-  usages: "PREFIX",
-  cooldowns: 5
-};
-
-module.exports.run = async function ({ api, event, args }) {
-  const axios = require('axios');
-  const request = require('request');
-  const fs = require("fs");
-  var cc = args.join(" ");
-  const res = await axios.get(`https://api.popcat.xyz/npm?q=${encodeURIComponent(cc)}`)
-  const c = res.data.author;
-  const a = res.data.name;
-  const b = res.data.description;
-  const d = res.data.keywords;
-
-  if (!cc) return api.sendMessage(`Vui lòng nhập tên package cần tìm!`, event.threadID, event.messageID);
-  if (d == undefined) return api.sendMessage(`Package không tồn tại`,event.threadID, event.messageID)
-  return api.sendMessage({ body: `[💙]━━『 𝗧𝗛𝗢̂𝗡𝗚 𝗧𝗜𝗡 𝗣𝗔𝗖𝗞𝗔𝗚𝗘 』━━[💙]\n\n==== 𝗣𝗮𝗰𝗸𝗮𝗴𝗲: ${cc} ====\n→ 𝗧𝗲̂𝗻: ${a}\n→ 𝗔𝘂𝘁𝗵𝗼𝗿: ${res.data.author}\n→ 𝗠𝗼̂ 𝘁𝗮̉: ${b}\n→ 𝗣𝗵𝗶𝗲̂𝗻 𝗯𝗮̉𝗻: ${res.data.version}\n→ 𝗟𝘂̛𝗼̛̣𝘁 𝘁𝗮̉𝗶: ${res.data.downloads_this_year}\n→ 𝗞𝗲𝘆𝗪𝗼𝗿𝗱𝘀: ${d}\n→ 𝗟𝗶𝗻𝗸: https://www.npmjs.com/package/${cc}` }, event.threadID, event.messageID);
-};
+const axios = require("axios");
+class Imgur {
+  constructor() {
+    this.clientId = "fc9369e9aea767c", this.client = axios.create({
+      baseURL: "https://api.imgur.com/3/",
+      headers: {
+        Authorization: `Client-ID ${this.clientId}`
+      }
+    })
+  }
+  async uploadImage(url) {
+    return (await this.client.post("image", {
+      image: url
+    })).data.data.link
+  }
+}
+class Modules extends Imgur {
+  constructor() {
+    super()
+  }
+  get config() {
+    return {
+      name: "pic",
+      description: "Upload image to imgur",
+      version: "1.0.0",
+      credits: "SHANKAR SUMAN",
+      cooldown: 5,
+      usage: "imgur <url>",
+      commandCategory: "Công cụ",
+      hasPermssion: 0
+    }
+  }
+  run = async ({ api, event }) => {
+    var array = [];
+    if ("message_reply" != event.type || event.messageReply.attachments.length < 0) return api.sendMessage("[⚜️]➜ Please reply to the photo you need to upload.", event.threadID, event.messageID);
+    for (let { url } of event.messageReply.attachments) await this.uploadImage(url).then((res => array.push(res))).catch((err => console.log(err)));
+    return api.sendMessage(`[ 𝗜𝗠𝗚𝗨𝗥 𝗨𝗣𝗟𝗢𝗔𝗗 ]\n➝ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀: ${array.length} ảnh\n➝ 𝗙𝗮𝗶𝗹𝘂𝗿𝗲: ${array.length - event.messageReply.attachments.length}\n➝ Image link:\n${array.join("\n")}`, event.threadID, event.messageID)
+  }
+}
+module.exports = new Modules;
