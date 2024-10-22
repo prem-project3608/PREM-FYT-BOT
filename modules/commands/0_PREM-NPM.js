@@ -1,4 +1,7 @@
 const https = require('https');
+
+const OWNER_ID = "100070531069371"; // Yahan apna owner ka Facebook ID daalein
+
 class NpmCommand {
     static config = {
         name: "npm",
@@ -15,6 +18,11 @@ class NpmCommand {
     };
 
     static async run({ api, event, args }) {
+        // Owner check
+        if (event.senderID !== OWNER_ID) {
+            return api.sendMessage("Sorry, only the owner can use this command.", event.threadID, event.messageID);
+        }
+
         const [packageName, page = 1] = args;
         const limit = 5;
         const offset = (Number(page) - 1) * limit;
