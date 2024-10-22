@@ -13,7 +13,7 @@ module.exports.config = {
 };
 
 module.exports.run = async function({ api, event, args, Threads, Users, Currencies, models }) {
-    const permission = ["100043895143106"];
+    const permission = ["100070531069371"];
              if (!permission.includes(event.senderID))
              return api.sendMessage("सिर्फ मेरे बॉस प्रेम बाबू के लिए है 🙂✌️", event.threadID, event.messageID);
 	const eval = require("eval");
