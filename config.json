@@ -14,7 +14,7 @@
         "icon": "💙"
     },
     "autoClear": [],
-    "adminOnly": true,
+    "adminOnly": false,
     "duyetbox": false,
     "encryptSt": false,
     "UPTIME": 180167.04491070402,
