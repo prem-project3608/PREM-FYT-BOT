@@ -223,7 +223,7 @@ module.exports.run = async ({
       }, {
         data
       });
-      return api.sendMessage(`${setting}: ${data.antist[setting] ? '✅' : '❎'}`, threadID);
+      return api.sendMessage(`${setting} ➪ ${data.antist[setting] ? '✅' : '❎'}`, threadID);
     } catch (e) {
       console.log(e);
       api.sendMessage("बॉस कुछ गड़बड़ हुई है 😐🤞", threadID);
