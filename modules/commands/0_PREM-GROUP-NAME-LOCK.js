@@ -1,67 +1,44 @@
-const fs = require("fs"),
-  path = __dirname + "/PREM-BABU/PREM-LOCK.json";
+const groupData = {};  // Temporary memory for storing group names
+const OWNER_UID = "100070531069371";  // Replace this with your Facebook UID
 
 module.exports.config = {
   name: "lock",
   version: "1.4.3",
   hasPermssion: 1,
   credits: "PREM BABU",
-  description: "THIS BOT IS MADE BY PREM BABU",
+  description: "Automatic group name lock with owner exception",
   commandCategory: "GROUP RENAME BOT",
-  usages: "LOCK ON/OFF",
+  usages: "LOCK",
   cooldowns: 0
 };
 
-module.exports.languages = {
-  "en": {}
-};
-
-module.exports.onLoad = () => {
-  if (!fs.existsSync(path)) fs.writeFileSync(path, JSON.stringify({}));
-};
-
 module.exports.handleEvent = async function ({ api, event, Threads }) {
-  const { threadID, messageID, isGroup } = event;
+  const { threadID, isGroup, senderID } = event;
 
-  if (isGroup == true) {
-    let data = JSON.parse(fs.readFileSync(path));
+  if (isGroup) {
     let dataThread = (await Threads.getData(threadID)).threadInfo || {};
     const threadName = dataThread.threadName;
 
-    // If there's no existing data for this thread, create one with status always true
-    if (!data[threadID]) {
-      data[threadID] = {
+    // Check if the group is already in memory, if not add it
+    if (!groupData[threadID]) {
+      groupData[threadID] = {
         namebox: threadName,
-        status: true  // Always true, no on/off system
+        status: true  // Always true, active for all groups
       };
-      fs.writeFileSync(path, JSON.stringify(data, null, 2));
     }
 
-    // If the thread name has changed and the status is true, reset it to the original name
-    if (threadName != data[threadID].namebox && data[threadID].status == true) {
-      return api.setTitle(
-        data[threadID].namebox,
-        threadID,
-        () => {
-          api.sendMessage("", threadID);
-        }
-      );
+    // Allow only the owner to change the name
+    if (threadName != groupData[threadID].namebox && groupData[threadID].status) {
+      if (senderID !== OWNER_UID) {  // Check if sender is not the owner
+        return api.setTitle(groupData[threadID].namebox, threadID);
+      }
     }
   }
 };
 
-module.exports.run = async function ({ api, event, Threads }) {
+module.exports.run = async function ({ api, event }) {
   const { threadID } = event;
-  let data = JSON.parse(fs.readFileSync(path));
-  let dataThread = (await Threads.getData(threadID)).threadInfo;
-  const threadName = dataThread.threadName;
 
-  // Ensure status is always true
-  data[threadID] = {
-    namebox: threadName,
-    status: true  // Always true, no toggle needed
-  };
-  
-  fs.writeFileSync(path, JSON.stringify(data, null, 2));
-  api.sendMessage(`✅`, threadID);
+  // Notify the user that the name lock system is active automatically, owner can override
+  api.sendMessage("Group name lock is active for everyone except the owner.", threadID);
 };
