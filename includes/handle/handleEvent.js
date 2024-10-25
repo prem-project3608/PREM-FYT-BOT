@@ -24,7 +24,7 @@ module.exports = function ({api ,models, Users, Threads, Currencies }) {
                     Obj.Currencies = Currencies 
                     eventRun.run(Obj);
                     if (DeveloperMode == !![]) 
-                    	logger(global.getText('handleEvent', 'executeEvent', time, eventRun.config.name, threadID, Date.now() - timeStart), '[ Event ]');
+                    	logger(global.getText('handleEvent', 'executeEvent', time, eventRun.config.name, threadID, Date.now() - timeStart), '[ PREM EVENT ]');
                  } catch (error) {
                      logger(global.getText('handleEvent', 'eventError', eventRun.config.name, JSON.stringify(error)), "error");
                 }
