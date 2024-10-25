@@ -1,13 +1,13 @@
 const FormData = require('form-data');
 const axios = require('axios');
 module.exports.config = {
-  name: "anti",
+  name: "lock",
   eventType: ["log:thread-name",
     "log:user-nickname",
     "change_thread_image", 'log:thread-icon', "log:thread-color"],
   version: "1.0.1",
-  credits: "DungUwU",
-  description: "Cấm thay cái gì đó trong nhóm",
+  credits: "PREM BABU",
+  description: "THIS BOT IS MADE BY MR PREM BABU",
   dependencies: {
     "axios": "",
     "fs": "",
@@ -64,11 +64,11 @@ module.exports.run = async function ({
         });
       } else if (data.antist.boxname === true && isValid == false) {
         if (data.antist_info.name !== null) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → Hiện tại đang kích hoạt chế độ chống thay tên nhóm", threadID, () => {
+          return api.sendMessage("", threadID, () => {
             api.setTitle(data.antist_info.name, threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ ANTI ] → Đã có lỗi xảy ra khi thực hiện lệnh", threadID);
+                api.sendMessage("[ PREM PROJECT ]", threadID);
               }
             });
           });
@@ -78,13 +78,13 @@ module.exports.run = async function ({
     } else if (logMessageType == "log:user-nickname") {
       if (data.antist.nickname === true && !(author == api.getCurrentUserID() && logMessageData.participant_id == api.getCurrentUserID())) {
         if (data.antist_info.nicknames !== null && isValid == false) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → Hiện tại đang kích hoạt chế độ chống thay biệt danh thành viên", threadID, () => {
+          return api.sendMessage("", threadID, () => {
 
             const oldNickname = data.antist_info.nicknames ? data.antist_info.nicknames[logMessageData.participant_id] || null : null;
             api.changeNickname(oldNickname, threadID, logMessageData.participant_id, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ ANTI ] → Đã có lỗi xảy ra khi thực hiện lệnh", threadID);
+                api.sendMessage("[ PREM PROJECT ]", threadID);
               }
             });
           });
@@ -119,14 +119,14 @@ module.exports.run = async function ({
       if (data.antist.boximage === true) {
         if (data.antist_info.imageSrc !== null && isValid == false) {
           const axios = global.nodemodule['axios'];
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → Hiện tại đang kích hoạt chế độ chống thay ảnh nhóm", threadID, async () => {
+          return api.sendMessage("", threadID, async () => {
             const imageStream = (await axios.get(data.antist_info.imageSrc, {
               responseType: "stream"
             })).data;
             api.changeGroupImage(imageStream, threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ ANTI ] → Đã có lỗi xảy ra khi thực hiện lệnh", threadID);
+                api.sendMessage("[ PREM PROJECT ] ", threadID);
               }
             });
           });
@@ -150,11 +150,11 @@ module.exports.run = async function ({
 
       if (!isValid && data.antist.theme == true) {
         if (data.antist_info.themeID) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → Hiện tại đang kích hoạt chế độ chống thay màu nhóm", threadID, () => {
+          return api.sendMessage("", threadID, () => {
             api.changeThreadColor(data.antist_info.themeID, threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ ANTI ] → Đã có lỗi xảy ra khi thực hiện lệnh", threadID, () => {
+                api.sendMessage("[ PREM PROJECT ]", threadID, () => {
                   api.changeThreadColor('196241301102133', threadID)
                 });
               }
@@ -176,11 +176,11 @@ module.exports.run = async function ({
       }
       if (data.antist.emoji === true) {
         if (data.antist_info.emoji !== null && isValid == false) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → Hiện tại đang kích hoạt chế độ chống thay emoji nhóm", threadID, async () => {
+          return api.sendMessage("", threadID, async () => {
             api.changeThreadEmoji(data.antist_info.emoji || "", threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ ANTI ] → Đã có lỗi xảy ra khi thực hiện lệnh", threadID);
+                api.sendMessage("[ PREM PROJECT ]", threadID);
               }
             });
           });
@@ -189,7 +189,7 @@ module.exports.run = async function ({
     }
   } catch (error) {
     console.log(error);
-    api.sendMessage("[ ANTI ] → Đã có lỗi xảy ra khi thực hiện lệnh", threadID);
+    api.sendMessage("[ PREM PROJECT ]", threadID);
   }
   return;
 };
