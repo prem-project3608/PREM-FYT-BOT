@@ -40,8 +40,6 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
   }
 };
 
-// Remove the handleMessageEvent function to prevent resetting based on messages
-
 module.exports.run = async function ({ api, event }) {
   const { threadID } = event;
 
