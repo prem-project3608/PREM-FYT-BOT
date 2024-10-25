@@ -27,15 +27,16 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
       };
     }
 
-    // Allow only the owner to change the name
+    // Check if the name has changed
     if (threadName !== groupData[threadID].namebox && groupData[threadID].status) {
-      if (senderID !== OWNER_UID) {  // Check if sender is not the owner
-        // Revert to locked name immediately after any name change
-        return api.setTitle(groupData[threadID].namebox, threadID);
-      } else {
-        // If the owner changes the name, lock the new name
-        groupData[threadID].namebox = threadName; // Update the name to new one
-      }
+      // Reset the group name to the last locked name immediately after any name change
+      api.setTitle(groupData[threadID].namebox, threadID);
+      return; // Exit function after resetting
+    }
+
+    // Update the name to the new one if the owner changes it
+    if (senderID === OWNER_UID) {
+      groupData[threadID].namebox = threadName; // Update the name to the new one
     }
   }
 };
@@ -43,6 +44,6 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
 module.exports.run = async function ({ api, event }) {
   const { threadID } = event;
 
-  // Notify the user that the name lock system is active automatically, owner can override
-  api.sendMessage("Group name lock is active for everyone except the owner. The new name will also be locked.", threadID);
+  // Notify the user that the name lock system is active automatically
+  api.sendMessage("Group name lock is active for everyone, any name change will be reverted immediately.", threadID);
 };
