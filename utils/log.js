@@ -1,37 +1,36 @@
 const chalk = require('chalk');
+function randomColor() {
+    var color = "";
+    for (var i = 0; i < 3; i++) {
+        var sub = Math.floor(Math.random() * 256).toString(16);
+        color += (sub.length == 1 ? "0" + sub : sub);
+    } 
+   return "#" + color;
+};
 module.exports = (data, option) => {
 	switch (option) {
 		case "warn":
-			console.log(chalk.bold.hex("#FF0000").bold('PREM ERROR ❯') + data);
+				console.log(chalk.bold.hex("#ff0000").bold('PREM PROJECT ❯ ') + data);
 			break;
 		case "error":
-			console.log(chalk.bold.hex("#FF0000").bold('PREM ERROR ❯') + data);
-     break;
-		default:			        
-      var job = ["#FFA500","#FFFF00","#00FF00","#0000FF", "#4B0082","#A020F0"];
-    var random = 
-job[Math.floor(Math.random() * job.length)]
-                        console.log(chalk.bold.hex(random).bold(`PREM PROJECT ❯ `) + data);
+			console.log(chalk.bold.hex("#ff0000").bold('PREM PROJECT ❯ ') + data);
+			break;
+		default:
+				console.log(chalk.bold.hex(randomColor()).bold(`${option} » `) + data);
 			break;
 	}
 }
 
 module.exports.loader = (data, option) => {
-	switch (option) {   
-		case "success":
-			console.log(chalk.bold.hex("#00FF00").bold('PREM PROJECT ❯ ') + data);
-			break;
-		case "warn":
-			console.log(chalk.bold.hex("#FF0000").bold('PREM PROJECT ❯ ') + data);
+	switch (option) {
+    case "warn":
+			console.log(chalk.bold.hex(randomColor()).bold("PREM PROJECT ❯ ") + chalk.bold.hex("#8B8878").bold(data))
 			break;
 		case "error":
-			console.log(chalk.bold.hex("#FF0000").bold('PREM PROJECT ❯ ') + data);
+		console.log(chalk.bold.hex(randomColor()).bold("PREM PROJECT ❯ ") + data);
 			break;
-		default:
-      var job = ["#FFA500","#FFFF00","#00FF00","#0000FF", "#4B0082","#A020F0"];
-    var random = 
-job[Math.floor(Math.random() * job.length)]
-			console.log(chalk.bold.hex(random).bold(`PREM PROJECT ❯ `) + data);
+    default:
+			console.log(chalk.bold.hex(randomColor()).bold("PREM PROJECT ❯ ") + chalk.bold.hex(randomColor()).bold(data));
 			break;
 	}
-                  }
+}
