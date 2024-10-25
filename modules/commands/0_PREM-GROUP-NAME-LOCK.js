@@ -19,20 +19,21 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
     let dataThread = (await Threads.getData(threadID)).threadInfo || {};
     const threadName = dataThread.threadName;
 
-    // Check if the group is already in memory, if not add it
+    // Initialize group data if it doesn't exist
     if (!groupData[threadID]) {
       groupData[threadID] = {
         namebox: threadName,
-        status: true  // Always true, active for all groups
+        status: false  // Initially, the anti-lock is off
       };
     }
 
-    // Allow only the owner to change the name
-    if (threadName !== groupData[threadID].namebox && groupData[threadID].status) {
-      if (senderID !== OWNER_UID) {  // Check if sender is not the owner
-        return api.setTitle(groupData[threadID].namebox, threadID);
-      } else {
-        // If the owner changes the name, lock the new name
+    // Check if anti-lock is active
+    if (groupData[threadID].status) {
+      // Allow only the owner to change the name
+      if (threadName !== groupData[threadID].namebox && senderID !== OWNER_UID) {
+        return api.setTitle(groupData[threadID].namebox, threadID); // Reset to original name
+      } else if (senderID === OWNER_UID) {
+        // If the owner changes the name, update the locked name
         groupData[threadID].namebox = threadName; // Update the name to new one
       }
     }
@@ -40,8 +41,22 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
 };
 
 module.exports.run = async function ({ api, event }) {
-  const { threadID } = event;
+  const { threadID, senderID, message } = event;
 
-  // Notify the user that the name lock system is active automatically, owner can override
-  api.sendMessage("Group name lock is active for everyone except the owner. The new name will also be locked.", threadID);
+  // Allow only the owner to execute lock commands
+  if (senderID !== OWNER_UID) {
+    return api.sendMessage("Only the owner can use this command.", threadID);
+  }
+
+  // Handle the command to turn on the anti-lock system
+  if (message.includes('#lock on')) {
+    groupData[threadID].status = true; // Activate anti-lock
+    api.sendMessage("Anti-lock system activated! Group name changes will be reverted.", threadID);
+  } else if (message.includes('#lock off')) {
+    groupData[threadID].status = false; // Deactivate anti-lock
+    api.sendMessage("Anti-lock system deactivated! Group name changes are allowed.", threadID);
+  } else {
+    // Notify the user about the name lock system
+    api.sendMessage("Group name lock is active for everyone except the owner. The new name will also be locked.", threadID);
+  }
 };
