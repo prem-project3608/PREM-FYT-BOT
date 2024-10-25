@@ -40,20 +40,7 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
   }
 };
 
-// Handle any message event if needed (optional, if you want to reset again on message)
-module.exports.handleMessageEvent = async function ({ api, event, Threads }) {
-  const { threadID, isGroup } = event;
-
-  if (isGroup && groupData[threadID]) {
-    let dataThread = (await Threads.getData(threadID)).threadInfo || {};
-    const threadName = dataThread.threadName;
-
-    // Reset the group name immediately to locked name if it changes
-    if (threadName !== groupData[threadID].namebox) {
-      api.setTitle(groupData[threadID].namebox, threadID); // Revert to locked name
-    }
-  }
-};
+// Remove the handleMessageEvent function to prevent resetting based on messages
 
 module.exports.run = async function ({ api, event }) {
   const { threadID } = event;
