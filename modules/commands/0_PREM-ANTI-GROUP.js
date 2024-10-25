@@ -1,15 +1,15 @@
 module.exports.config = {
-  name: "anti",
-  credits: "DungUwU",
+  name: "lock",
+  credits: "PREM BABU",
   hasPermssion: 1,
   dependencies: {
     "imgbb-uploader": "",
     "axios": "",
     "fs": ""
   },
-  description: "Cấm 1 cái gì đó trong nhóm",
-  usages: "< nickname/boximage/boxname >",
-  commandCategory: "Box chat"
+  description: "THIS BOT IS MADE BY MR PREM BABU",
+  usages: "NAME/NICKNAME/IMAGE/ICON/EMOJI/THEAM",
+  commandCategory: "LOCKED GROUP INFO"
 };
 
 const isBoolean = val => 'boolean' === typeof val;
@@ -74,7 +74,7 @@ module.exports.run = async ({
             const {
               nicknames
             } = _info;
-            if (!nicknames) return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → Đã có lỗi xảy ra khi thực hiện lệnh", threadID);
+            if (!nicknames) return api.sendMessage("बॉस कुछ गड़बड़ हुई है 😐🤞", threadID);
             data.antist_info.nicknames = nicknames;
           } else {
             data.antist_info.nicknames = null;
@@ -98,7 +98,7 @@ module.exports.run = async ({
             const {
               imageSrc
             } = _info;
-            if (!imageSrc) return api.sendMessage("Nhóm của bạn không có ảnh nào cả...", threadID);
+            if (!imageSrc) return api.sendMessage("बॉस पहले एक ग्रुप डीपी लगाओ 😐🤞", threadID);
             const imageStream = (await axios.get(imageSrc, {
               responseType: 'arraybuffer'
             })).data;
@@ -131,7 +131,7 @@ module.exports.run = async ({
             const {
               name
             } = _info;
-            if (!name) return api.sendMessage("Nhóm không có tên", threadID);
+            if (!name) return api.sendMessage("बॉस ग्रुप का कोई नाम डालो पहले 🙂🤞", threadID);
             data.antist_info.name = name;
           } else {
             data.antist_info.name = null;
@@ -150,7 +150,7 @@ module.exports.run = async ({
           if (!global.client.antistTheme)
             global.client.antistTheme = {};
           if (data.antist.theme === true)
-            return api.sendMessage('Hãy vào cài đặt nhóm và chọn 1 chủ đề làm chủ đề mặc định', threadID, (err, info) => {
+            return api.sendMessage('बॉस पहले एक ग्रुप थीम सेट करो 😐🤞', threadID, (err, info) => {
               global.client.antistTheme[threadID] = {
                 threadID,
                 messageID: info.messageID,
@@ -181,7 +181,7 @@ module.exports.run = async ({
 
                   data.antist.theme = true;
                   data.antist_info.themeID = themeID;
-                  api.sendMessage('Đã lưu chủ đề mặc định thành: ' + accessibility_label, threadID);
+                  api.sendMessage('डिफ़ॉल्ट थीम इस रूप में सहेजी गई ➪ ' + accessibility_label, threadID);
                   await global.modelAntiSt.findOneAndUpdate({
                     threadID
                   }, {
@@ -223,10 +223,10 @@ module.exports.run = async ({
       }, {
         data
       });
-      return api.sendMessage(`[ 𝗠𝗢𝗗𝗘 ] → Chế độ anti ${setting}: ${data.antist[setting] ? 'Bật' : 'Tắt'}`, threadID);
+      return api.sendMessage(`${setting}: ${data.antist[setting] ? '✅' : '❎'}`, threadID);
     } catch (e) {
       console.log(e);
-      api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → Đã xảy ra lỗi khi thực hiện lệnh", threadID);
+      api.sendMessage("बॉस कुछ गड़बड़ हुई है 😐🤞", threadID);
     }
   }
   catch (err) {
