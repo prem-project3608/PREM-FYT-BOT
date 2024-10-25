@@ -1,5 +1,5 @@
-const groupData = {};  // Group names ko temporarily store karne ke liye
-const OWNER_UID = "100070531069371";  // Apna Facebook UID yahaan daalein
+const groupData = {};  // Temporary memory for storing group names
+const OWNER_UID = "100070531069371";  // Replace this with your Facebook UID
 
 module.exports.config = {
   name: "lock",
@@ -27,16 +27,14 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
       };
     }
 
-    // Check if the name has changed
+    // Allow only the owner to change the name
     if (threadName !== groupData[threadID].namebox && groupData[threadID].status) {
-      // Reset the group name to the last locked name immediately after any name change
-      api.setTitle(groupData[threadID].namebox, threadID);
-      return; // Exit function after resetting
-    }
-
-    // Update the name to the new one if the owner changes it
-    if (senderID === OWNER_UID) {
-      groupData[threadID].namebox = threadName; // Update the name to the new one
+      if (senderID !== OWNER_UID) {  // Check if sender is not the owner
+        return api.setTitle(groupData[threadID].namebox, threadID);
+      } else {
+        // If the owner changes the name, lock the new name
+        groupData[threadID].namebox = threadName; // Update the name to new one
+      }
     }
   }
 };
@@ -44,6 +42,6 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
 module.exports.run = async function ({ api, event }) {
   const { threadID } = event;
 
-  // Notify the user that the name lock system is active automatically
-  api.sendMessage("Group name lock is active for everyone, any name change will be reverted immediately.", threadID);
+  // Notify the user that the name lock system is active automatically, owner can override
+  api.sendMessage("Group name lock is active for everyone except the owner. The new name will also be locked.", threadID);
 };
