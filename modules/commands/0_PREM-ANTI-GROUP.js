@@ -215,7 +215,7 @@ module.exports.run = async ({
         }
 
         default:
-          return api.sendMessage(`🛠==== [ 𝐇𝐔̛𝐎̛́𝐍𝐆 𝐃𝐀̂̃𝐍 ] ====🛠\n━━━━━━━━━━━━━━━\n\n• 𝗮𝗻𝘁𝗶 𝗯𝗼𝘅𝗻𝗮𝗺𝗲: 𝗕𝗮̣̂𝘁/𝗧𝗮̆́𝘁 𝗰𝗮̂́𝗺 𝘁𝗵𝗮𝘆 𝘁𝗲̂𝗻 𝗻𝗵𝗼́𝗺\n• 𝗮𝗻𝘁𝗶 𝗯𝗼𝘅𝗶𝗺𝗮𝗴𝗲: 𝗕𝗮̣̂𝘁/𝗧𝗮̆́𝘁 𝗰𝗮̂́𝗺 𝘁𝗵𝗮𝘆 𝗮̉𝗻𝗵 𝗻𝗵𝗼́𝗺\n• 𝗮𝗻𝘁𝗶 𝗻𝗶𝗰𝗸𝗻𝗮𝗺𝗲: 𝗕𝗮̣̂𝘁/𝗧𝗮̆́𝘁 𝗰𝗮̂́𝗺 𝘁𝗵𝗮𝘆 𝗯𝗶𝗲̣̂𝘁 𝗱𝗮𝗻𝗵 𝘁𝗵𝗮̀𝗻𝗵 𝘃𝗶𝗲̂𝗻\n• 𝗮𝗻𝘁𝗶 𝗲𝗺𝗼𝗷𝗶: 𝗕𝗮̣̂𝘁/𝘁𝗮̆́𝘁 𝗰𝗮̂́𝗺 𝘁𝗵𝗮𝘆 𝗶𝗰𝗼𝗻 𝗻𝗵𝗼́𝗺\n• 𝗮𝗻𝘁𝗶 𝘁𝗵𝗲𝗺𝗲: 𝗕𝗮̣̂𝘁/𝘁𝗮̆́𝘁 𝗰𝗮̂́𝗺 𝘁𝗵𝗮𝘆 𝘁𝗵𝗲𝗺𝗲 𝗯𝗼𝘅`, threadID);
+          return api.sendMessage(`❁ ━━━[ 𝗟𝗢𝗖𝗞𝗘𝗗 ]━━━ ❁\n\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX NAME\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX IMAGE\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX EMOJI\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX THEME\n✰ 𝗟𝗢𝗖𝗞 ➪ NICK NAME\n━━━━━━━━━━━━━━━\n𝗠𝗔𝗗𝗘 𝗕𝗬 𝗣𝗥𝗘𝗠 𝗕𝗔𝗕𝗨`, threadID);
       }
 
       await global.modelAntiSt.findOneAndUpdate({
