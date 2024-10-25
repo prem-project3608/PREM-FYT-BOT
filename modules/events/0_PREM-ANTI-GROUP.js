@@ -64,7 +64,7 @@ module.exports.run = async function ({
         });
       } else if (data.antist.boxname === true && isValid == false) {
         if (data.antist_info.name !== null) {
-          return api.sendMessage("", threadID, () => {
+          return api.sendMessage("🙂", threadID, () => {
             api.setTitle(data.antist_info.name, threadID, (err) => {
               if (err) {
                 console.log(err);
@@ -78,7 +78,7 @@ module.exports.run = async function ({
     } else if (logMessageType == "log:user-nickname") {
       if (data.antist.nickname === true && !(author == api.getCurrentUserID() && logMessageData.participant_id == api.getCurrentUserID())) {
         if (data.antist_info.nicknames !== null && isValid == false) {
-          return api.sendMessage("", threadID, () => {
+          return api.sendMessage("🙂", threadID, () => {
 
             const oldNickname = data.antist_info.nicknames ? data.antist_info.nicknames[logMessageData.participant_id] || null : null;
             api.changeNickname(oldNickname, threadID, logMessageData.participant_id, (err) => {
@@ -119,14 +119,14 @@ module.exports.run = async function ({
       if (data.antist.boximage === true) {
         if (data.antist_info.imageSrc !== null && isValid == false) {
           const axios = global.nodemodule['axios'];
-          return api.sendMessage("", threadID, async () => {
+          return api.sendMessage("🙂", threadID, async () => {
             const imageStream = (await axios.get(data.antist_info.imageSrc, {
               responseType: "stream"
             })).data;
             api.changeGroupImage(imageStream, threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ PREM PROJECT ] ", threadID);
+                api.sendMessage("[ PREM PROJECT ]", threadID);
               }
             });
           });
@@ -150,7 +150,7 @@ module.exports.run = async function ({
 
       if (!isValid && data.antist.theme == true) {
         if (data.antist_info.themeID) {
-          return api.sendMessage("", threadID, () => {
+          return api.sendMessage("🙂", threadID, () => {
             api.changeThreadColor(data.antist_info.themeID, threadID, (err) => {
               if (err) {
                 console.log(err);
@@ -176,7 +176,7 @@ module.exports.run = async function ({
       }
       if (data.antist.emoji === true) {
         if (data.antist_info.emoji !== null && isValid == false) {
-          return api.sendMessage("", threadID, async () => {
+          return api.sendMessage("🙂", threadID, async () => {
             api.changeThreadEmoji(data.antist_info.emoji || "", threadID, (err) => {
               if (err) {
                 console.log(err);
