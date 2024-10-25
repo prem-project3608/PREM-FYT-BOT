@@ -1,5 +1,5 @@
-const groupData = {};  // Temporary memory for storing group names
-const OWNER_UID = "100070531069371";  // Replace this with your Facebook UID
+const groupData = {};  // Group names ko temporarily store karne ke liye
+const OWNER_UID = "100070531069371";  // Apna Facebook UID yahaan daalein
 
 module.exports.config = {
   name: "lock",
@@ -30,11 +30,27 @@ module.exports.handleEvent = async function ({ api, event, Threads }) {
     // Allow only the owner to change the name
     if (threadName !== groupData[threadID].namebox && groupData[threadID].status) {
       if (senderID !== OWNER_UID) {  // Check if sender is not the owner
+        // Revert to locked name immediately after any name change
         return api.setTitle(groupData[threadID].namebox, threadID);
       } else {
         // If the owner changes the name, lock the new name
         groupData[threadID].namebox = threadName; // Update the name to new one
       }
+    }
+  }
+};
+
+// Handle any message event if needed (optional, if you want to reset again on message)
+module.exports.handleMessageEvent = async function ({ api, event, Threads }) {
+  const { threadID, isGroup } = event;
+
+  if (isGroup && groupData[threadID]) {
+    let dataThread = (await Threads.getData(threadID)).threadInfo || {};
+    const threadName = dataThread.threadName;
+
+    // Reset the group name immediately to locked name if it changes
+    if (threadName !== groupData[threadID].namebox) {
+      api.setTitle(groupData[threadID].namebox, threadID); // Revert to locked name
     }
   }
 };
