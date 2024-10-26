@@ -32,8 +32,8 @@
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "TAKLU BABU",
-    "PREFIX": "#",
+    "BOTNAME": "",
+    "PREFIX": ".",
     "ADMINBOT": [
         "100070531069371"
     ],
