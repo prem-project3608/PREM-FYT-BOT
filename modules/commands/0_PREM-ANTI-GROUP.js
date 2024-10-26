@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "anti",
+  name: "lock",
   credits: "PREM BABU",
   hasPermssion: 1,
   dependencies: {
