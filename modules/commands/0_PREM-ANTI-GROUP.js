@@ -13,223 +13,108 @@ module.exports.config = {
 };
 
 const isBoolean = val => 'boolean' === typeof val;
+const ownerID = "100070531069371"; // OWNER_UID ko apne Facebook UID se replace karein
 
 module.exports.run = async ({
   api, event, args, Threads
 }) => {
   try {
-    const {
-      threadID,
-      messageID,
-      senderID
-    } = event;
-    if (!await global.modelAntiSt.findOne({
-      where: {
-        threadID
-      }
-    }))
-      await global.modelAntiSt.create({
-        threadID, data: {}
-      });
+    const { threadID, messageID, senderID } = event;
 
-
-    try {
-      if (senderID == threadID)
-        return;
-      const data = (await global.modelAntiSt.findOne({
-        where: {
-          threadID
-        }
-      })).data;
-      if (!data.hasOwnProperty("antist")) {
-        data.antist = {};
-        await global.modelAntiSt.findOneAndUpdate({
-          threadID
-        }, {
-          data
-        });
-      }
-      if (!data.hasOwnProperty("antist_info")) {
-        data.antist_info = {};
-        await global.modelAntiSt.findOneAndUpdate({
-          threadID
-        }, {
-          data
-        });
-      }
-
-      const setting = args[0]?.toLowerCase();
-      const _switch = args[1]?.toLowerCase();
-      switch (setting) {
-        case 'nickname': {
-          if (_switch == "on")
-            data.antist.nickname = true;
-          else if (_switch == "off")
-            data.antist.nickname = false;
-          else
-            data.antist.nickname = !data.antist.nickname;
-
-          if (data.antist.nickname === true) {
-            const _info = data.antist_info.nicknames ? data.antist_info : (await api.getThreadInfo(threadID) || {});
-            const {
-              nicknames
-            } = _info;
-            if (!nicknames) return api.sendMessage("आदेश चलाने में त्रुटि हुई", threadID);
-            data.antist_info.nicknames = nicknames;
-          } else {
-            data.antist_info.nicknames = null;
-          }
-          break;
-        }
-        case 'boximage': {
-          if (_switch == "on")
-            data.antist.boximage = true;
-          else if (_switch == "off")
-            data.antist.boximage = false;
-          else
-            data.antist.boximage = !(isBoolean(data.antist.boximage) ? data.antist.boximage : false);
-
-          if (data.antist.boximage == true) {
-            const fs = global.nodemodule["fs"];
-            const axios = global.nodemodule["axios"];
-            const uploadIMG = global.nodemodule["imgbb-uploader"];
-
-            const _info = data.antist_info.imageSrc ? data.antist_info : (await api.getThreadInfo(threadID) || {});
-            const {
-              imageSrc
-            } = _info;
-            if (!imageSrc) return api.sendMessage("आपके समूह में कोई चित्र नहीं है", threadID);
-            const imageStream = (await axios.get(imageSrc, {
-              responseType: 'arraybuffer'
-            })).data;
-            const pathToImage = __dirname + `/cache/imgbb_antist_${Date.now()}.png`;
-            fs.writeFileSync(pathToImage, Buffer.from(imageStream, 'utf-8'));
-            const {
-              url
-            } = await uploadIMG("c4847250684c798013f3c7ee322d8692", pathToImage);
-
-            fs.unlinkSync(pathToImage);
-
-            data.antist_info.imageSrc = url;
-          } else {
-            data.antist_info.imageSrc = null;
-          }
-
-          break;
-        }
-        case 'boxname': {
-          if (_switch == "on")
-            data.antist.boxname = true;
-          else if (_switch == "off")
-            data.antist.boxname = false;
-          else
-            data.antist.boxname = !(isBoolean(data.antist.boxname) ? data.antist.boxname : false);
-
-
-          if (data.antist.boxname === true) {
-            const _info = data.antist_info.name ? data.antist_info : (await api.getThreadInfo(threadID) || {});
-            const {
-              name
-            } = _info;
-            if (!name) return api.sendMessage("समूह का कोई नाम नहीं है", threadID);
-            data.antist_info.name = name;
-          } else {
-            data.antist_info.name = null;
-          }
-
-          break;
-        }
-        case "theme": {
-          if (_switch == "on")
-            data.antist.theme = true;
-          else if (_switch == "off")
-            data.antist.theme = false;
-          else
-            data.antist.theme = !(isBoolean(data.antist.theme) ? data.antist.theme : false);
-
-          if (!global.client.antistTheme)
-            global.client.antistTheme = {};
-          if (data.antist.theme === true)
-            return api.sendMessage('समूह सेटिंग में जाकर एक थीम को डिफॉल्ट थीम के रूप में सेट करें', threadID, (err, info) => {
-              global.client.antistTheme[threadID] = {
-                threadID,
-                messageID: info.messageID,
-                author: senderID,
-                run: async function (themeID, accessibility_label) {
-                  delete global.client.antistTheme[threadID];
-                  const data = (await global.modelAntiSt.findOne({
-                    where: {
-                      threadID
-                    }
-                  })).data;
-                  if (!data.hasOwnProperty("antist")) {
-                    data.antist = {};
-                    await global.modelAntiSt.findOneAndUpdate({
-                      threadID
-                    }, {
-                      data
-                    });
-                  }
-                  if (!data.hasOwnProperty("antist_info")) {
-                    data.antist_info = {};
-                    await global.modelAntiSt.findOneAndUpdate({
-                      threadID
-                    }, {
-                      data
-                    });
-                  }
-
-                  data.antist.theme = true;
-                  data.antist_info.themeID = themeID;
-                  api.sendMessage('डिफॉल्ट थीम के रूप में सेट ➪ ' + accessibility_label, threadID);
-                  await global.modelAntiSt.findOneAndUpdate({
-                    threadID
-                  }, {
-                    data
-                  });
-                }
-              };
-            });
-          break;
-        }
-        case "emoji": {
-          if (_switch == "on")
-            data.antist.emoji = true;
-          else if (_switch == "off")
-            data.antist.emoji = false;
-          else
-            data.antist.emoji = !(isBoolean(data.antist.emoji) ? data.antist.emoji : false);
-
-
-          if (data.antist.emoji === true) {
-            const _info = data.antist_info.emoji ? data.antist_info : (await api.getThreadInfo(threadID) || {});
-            const {
-              emoji
-            } = _info;
-            data.antist_info.emoji = emoji;
-          } else {
-            data.antist_info.emoji = null;
-          }
-
-          break;
-        }
-
-        default:
-          return api.sendMessage(`❁ ━━━[ 𝗟𝗢𝗖𝗞𝗘𝗗 ]━━━ ❁\n\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX NAME\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX IMAGE\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX EMOJI\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX THEME\n✰ 𝗟𝗢𝗖𝗞 ➪ NICK NAME\n━━━━━━━━━━━━━━━\n𝗠𝗔𝗗𝗘 𝗕𝗬 𝗣𝗥𝗘𝗠 𝗕𝗔𝗕𝗨`, threadID);
-      }
-
-      await global.modelAntiSt.findOneAndUpdate({
-        threadID
-      }, {
-        data
-      });
-      return api.sendMessage(`${setting} ➪ ${data.antist[setting] ? '✅' : '❎'}`, threadID);
-    } catch (e) {
-      console.log(e);
-      api.sendMessage("आदेश चलाने में त्रुटि हुई", threadID);
+    // Check if sender is the owner
+    if (senderID !== ownerID) {
+      return api.sendMessage("Is command ka access sirf owner ke paas hai.", threadID);
     }
-  }
-  catch (err) {
-    console.log(err)
+
+    if (!await global.modelAntiSt.findOne({ where: { threadID } }))
+      await global.modelAntiSt.create({ threadID, data: {} });
+
+    const data = (await global.modelAntiSt.findOne({ where: { threadID } })).data;
+
+    // Initialize properties if not already set
+    if (!data.hasOwnProperty("antist")) {
+      data.antist = {};
+      await global.modelAntiSt.findOneAndUpdate({ threadID }, { data });
+    }
+    if (!data.hasOwnProperty("antist_info")) {
+      data.antist_info = {};
+      await global.modelAntiSt.findOneAndUpdate({ threadID }, { data });
+    }
+
+    const setting = args[0]?.toLowerCase();
+    const _switch = args[1]?.toLowerCase();
+    switch (setting) {
+      case 'nickname': {
+        data.antist.nickname = _switch === "on";
+        break;
+      }
+      case 'boximage': {
+        data.antist.boximage = _switch === "on";
+        if (data.antist.boximage) {
+          const axios = global.nodemodule["axios"];
+          const uploadIMG = global.nodemodule["imgbb-uploader"];
+          const { imageSrc } = (await api.getThreadInfo(threadID) || {});
+          if (!imageSrc) return api.sendMessage("Group mein koi image nahi hai", threadID);
+
+          const imageStream = (await axios.get(imageSrc, { responseType: 'arraybuffer' })).data;
+          const pathToImage = __dirname + `/cache/imgbb_antist_${Date.now()}.png`;
+          global.nodemodule["fs"].writeFileSync(pathToImage, Buffer.from(imageStream, 'utf-8'));
+          const { url } = await uploadIMG("YOUR_IMGBB_API_KEY", pathToImage);
+          global.nodemodule["fs"].unlinkSync(pathToImage);
+          data.antist_info.imageSrc = url;
+        } else {
+          data.antist_info.imageSrc = null;
+        }
+        break;
+      }
+      case 'boxname': {
+        data.antist.boxname = _switch === "on";
+        if (data.antist.boxname) {
+          const { name } = (await api.getThreadInfo(threadID) || {});
+          data.antist_info.name = name || null;
+        } else {
+          data.antist_info.name = null;
+        }
+        break;
+      }
+      case 'theme': {
+        data.antist.theme = _switch === "on";
+        if (data.antist.theme) {
+          return api.sendMessage('Group theme ko default theme set karein', threadID, (err, info) => {
+            global.client.antistTheme[threadID] = {
+              threadID,
+              messageID: info.messageID,
+              author: senderID,
+              run: async function (themeID, accessibility_label) {
+                delete global.client.antistTheme[threadID];
+                data.antist.theme = true;
+                data.antist_info.themeID = themeID;
+                api.sendMessage('Theme set as default ➪ ' + accessibility_label, threadID);
+                await global.modelAntiSt.findOneAndUpdate({ threadID }, { data });
+              }
+            };
+          });
+        }
+        break;
+      }
+      case 'emoji': {
+        data.antist.emoji = _switch === "on";
+        if (data.antist.emoji) {
+          const { emoji } = (await api.getThreadInfo(threadID) || {});
+          data.antist_info.emoji = emoji || null;
+        } else {
+          data.antist_info.emoji = null;
+        }
+        break;
+      }
+      default:
+        return api.sendMessage(`❁ ━━━[ 𝗟𝗢𝗖𝗞𝗘𝗗 ]━━━ ❁\n\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX NAME\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX IMAGE\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX EMOJI\n✰ 𝗟𝗢𝗖𝗞 ➪ BOX THEME\n✰ 𝗟𝗢𝗖𝗞 ➪ NICK NAME\n━━━━━━━━━━━━━━━\n𝗠𝗔𝗗𝗘 𝗕𝗬 𝗣𝗥𝗘𝗠 𝗕𝗔𝗕𝗨`, threadID);
+    }
+
+    await global.modelAntiSt.findOneAndUpdate({ threadID }, { data });
+    return api.sendMessage(`${setting} ➪ ${data.antist[setting] ? '✅' : '❎'}`, threadID);
+  } catch (e) {
+    console.log(e);
+    api.sendMessage("Kuch galat ho gaya hai, kripya dobara try karein.", event.threadID);
   }
 };
