@@ -74,7 +74,7 @@ module.exports.run = async ({
             const {
               nicknames
             } = _info;
-            if (!nicknames) return api.sendMessage("[ मोड ] → आदेश चलाने में त्रुटि हुई", threadID);
+            if (!nicknames) return api.sendMessage("आदेश चलाने में त्रुटि हुई", threadID);
             data.antist_info.nicknames = nicknames;
           } else {
             data.antist_info.nicknames = null;
@@ -98,7 +98,7 @@ module.exports.run = async ({
             const {
               imageSrc
             } = _info;
-            if (!imageSrc) return api.sendMessage("आपके समूह में कोई चित्र नहीं है...", threadID);
+            if (!imageSrc) return api.sendMessage("आपके समूह में कोई चित्र नहीं है", threadID);
             const imageStream = (await axios.get(imageSrc, {
               responseType: 'arraybuffer'
             })).data;
@@ -181,7 +181,7 @@ module.exports.run = async ({
 
                   data.antist.theme = true;
                   data.antist_info.themeID = themeID;
-                  api.sendMessage('डिफॉल्ट थीम के रूप में सेट: ' + accessibility_label, threadID);
+                  api.sendMessage('डिफॉल्ट थीम के रूप में सेट ➪ ' + accessibility_label, threadID);
                   await global.modelAntiSt.findOneAndUpdate({
                     threadID
                   }, {
@@ -223,10 +223,10 @@ module.exports.run = async ({
       }, {
         data
       });
-      return api.sendMessage(`[ मोड ] → एंटी ${setting} मोड: ${data.antist[setting] ? 'चालू' : 'बंद'}`, threadID);
+      return api.sendMessage(`${setting} ➪ ${data.antist[setting] ? '✅' : '❎'}`, threadID);
     } catch (e) {
       console.log(e);
-      api.sendMessage("[ मोड ] → आदेश चलाने में त्रुटि हुई", threadID);
+      api.sendMessage("आदेश चलाने में त्रुटि हुई", threadID);
     }
   }
   catch (err) {
