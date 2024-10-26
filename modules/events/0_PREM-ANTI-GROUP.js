@@ -71,7 +71,7 @@ module.exports.run = async function ({
         });
       } else if (data.antist.boxname === true && !isValid) {
         if (data.antist_info.name !== null) {
-          return api.sendMessage("ना बेटा ना मेरे होते हुए ग्रुप का नाम चेंज करेगा 😂", threadID, () => {
+          return api.sendMessage("", threadID, () => {
             api.setTitle(data.antist_info.name, threadID, (err) => {
               if (err) {
                 console.log(err);
@@ -84,7 +84,7 @@ module.exports.run = async function ({
     } else if (logMessageType == "log:user-nickname") {
       if (data.antist.nickname === true && !(author == api.getCurrentUserID() && logMessageData.participant_id == api.getCurrentUserID())) {
         if (data.antist_info.nicknames !== null && !isValid) {
-          return api.sendMessage("जब तक मैं आहा हूं ग्रुप में किसी का नाम चेंज नहीं होगा 😂", threadID, () => {
+          return api.sendMessage("", threadID, () => {
             const oldNickname = data.antist_info.nicknames ? data.antist_info.nicknames[logMessageData.participant_id] || null : null;
             api.changeNickname(oldNickname, threadID, logMessageData.participant_id, (err) => {
               if (err) {
