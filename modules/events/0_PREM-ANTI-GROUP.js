@@ -1,13 +1,13 @@
 const FormData = require('form-data');
 const axios = require('axios');
 module.exports.config = {
-  name: "anti",
+  name: "lock",
   eventType: ["log:thread-name",
     "log:user-nickname",
     "change_thread_image", 'log:thread-icon', "log:thread-color"],
   version: "1.0.1",
-  credits: "DungUwU",
-  description: "समूह में कुछ बदलने से रोकें",
+  credits: "PREM BABU",
+  description: "THIS BOT IS MADE BY PREM BABU",
   dependencies: {
     "axios": "",
     "fs": "",
@@ -64,7 +64,7 @@ module.exports.run = async function ({
         });
       } else if (data.antist.boxname === true && isValid == false) {
         if (data.antist_info.name !== null) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह का नाम बदलने से रोकने का मोड सक्रिय है", threadID, () => {
+          return api.sendMessage("ना बेटा ना मेरे होते हुए ग्रुप का नाम चेंज करेगा 😂", threadID, () => {
             api.setTitle(data.antist_info.name, threadID, (err) => {
               if (err) {
                 console.log(err);
@@ -77,7 +77,7 @@ module.exports.run = async function ({
     } else if (logMessageType == "log:user-nickname") {
       if (data.antist.nickname === true && !(author == api.getCurrentUserID() && logMessageData.participant_id == api.getCurrentUserID())) {
         if (data.antist_info.nicknames !== null && isValid == false) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में सदस्य का उपनाम बदलने से रोकने का मोड सक्रिय है", threadID, () => {
+          return api.sendMessage("जब तक मैं आहा हूं ग्रुप में किसी का नाम चेंज नहीं होगा 😂", threadID, () => {
 
             const oldNickname = data.antist_info.nicknames ? data.antist_info.nicknames[logMessageData.participant_id] || null : null;
             api.changeNickname(oldNickname, threadID, logMessageData.participant_id, (err) => {
@@ -118,7 +118,7 @@ module.exports.run = async function ({
       if (data.antist.boximage === true) {
         if (data.antist_info.imageSrc !== null && isValid == false) {
           const axios = global.nodemodule['axios'];
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह की छवि बदलने से रोकने का मोड सक्रिय है", threadID, async () => {
+          return api.sendMessage("लगा जोर बेटा बदल ग्रुप के डीपी को मैं भी देखूं कितना जोर है तेरे में 😂", threadID, async () => {
             const imageStream = (await axios.get(data.antist_info.imageSrc, {
               responseType: "stream"
             })).data;
