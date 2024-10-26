@@ -1,6 +1,9 @@
 const os = require('os');
 const uptime = os.uptime();
 
+// Owner UID yahan set karein
+const ownerUID = '100070531069371'; // Apni UID yahan daalein
+
 // India timezone ka current date aur time lene ke liye function
 function getIndiaTime() {
   const currentDate = new Date();
@@ -29,7 +32,7 @@ module.exports.config = {
 };
 
 module.exports.handleEvent = async ({ api, event }) => {
-  if (!event.body) return;
+  if (!event.body || event.senderID !== ownerUID) return; // Sirf owner ke liye check karein
   var { threadID, messageID } = event;
 
   if (event.body.toLowerCase().indexOf("upt") == 0) {
