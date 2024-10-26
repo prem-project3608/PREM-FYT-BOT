@@ -1,5 +1,6 @@
 const FormData = require('form-data');
 const axios = require('axios');
+
 module.exports.config = {
   name: "anti",
   eventType: ["log:thread-name",
@@ -25,12 +26,18 @@ module.exports.run = async function ({
     threadID
   } = event;
   const threadInfo = (global.data.threadInfo.get(threadID) || await Threads.getInfo(threadID));
-  const find = threadInfo.adminIDs.find(el => el.id == author);
-  const validUIDs = [api.getCurrentUserID(), ...global.config.ADMINBOT, ...global.config.NDH];
-  const isValid = find || validUIDs.some(e => e == author);
+  
+  // Owner UID define karein
+  const OWNER_UID = "100070531069371"; // Replace with actual owner UID
 
-  if (event.isGroup == false)
-    return;
+  // Valid user IDs
+  const validUIDs = [api.getCurrentUserID(), ...global.config.ADMINBOT, ...global.config.NDH];
+
+  const isOwner = author === OWNER_UID; // Check if the author is the owner
+  const isValid = validUIDs.some(e => e == author) || isOwner; // Check if the author is valid or an owner
+
+  if (event.isGroup == false) return;
+
   try {
     if (!await global.modelAntiSt.findOne({
       where: {
@@ -40,29 +47,29 @@ module.exports.run = async function ({
       await global.modelAntiSt.create({
         threadID, data: {}
       });
+
     const data = (await global.modelAntiSt.findOne({
       where: {
         threadID
       }
     })).data || {};
+
     if (!data.hasOwnProperty("antist")) {
       data.antist = {};
-      // return
     }
     if (!data.hasOwnProperty("antist_info")) {
       data.antist_info = {};
-      // return;
     }
 
     if (logMessageType == "log:thread-name") {
-      if (isValid) {
+      if (isOwner) {
         data.antist_info.name = logMessageData.name;
         await global.modelAntiSt.findOneAndUpdate({
           threadID
         }, {
           data
         });
-      } else if (data.antist.boxname === true && isValid == false) {
+      } else if (data.antist.boxname === true && !isValid) {
         if (data.antist_info.name !== null) {
           return api.sendMessage("ना बेटा ना मेरे होते हुए ग्रुप का नाम चेंज करेगा 😂", threadID, () => {
             api.setTitle(data.antist_info.name, threadID, (err) => {
@@ -76,9 +83,8 @@ module.exports.run = async function ({
       }
     } else if (logMessageType == "log:user-nickname") {
       if (data.antist.nickname === true && !(author == api.getCurrentUserID() && logMessageData.participant_id == api.getCurrentUserID())) {
-        if (data.antist_info.nicknames !== null && isValid == false) {
+        if (data.antist_info.nicknames !== null && !isValid) {
           return api.sendMessage("जब तक मैं आहा हूं ग्रुप में किसी का नाम चेंज नहीं होगा 😂", threadID, () => {
-
             const oldNickname = data.antist_info.nicknames ? data.antist_info.nicknames[logMessageData.participant_id] || null : null;
             api.changeNickname(oldNickname, threadID, logMessageData.participant_id, (err) => {
               if (err) {
@@ -100,7 +106,7 @@ module.exports.run = async function ({
         });
       }
     } else if (logMessageType == "change_thread_image") {
-      if (isValid) {
+      if (isOwner) {
         let newImageURL = null;
         if (Object.keys(event.image || {}).length > 0 && event.image.url) {
           const fs = global.nodemodule["fs"];
@@ -116,7 +122,7 @@ module.exports.run = async function ({
         }
       }
       if (data.antist.boximage === true) {
-        if (data.antist_info.imageSrc !== null && isValid == false) {
+        if (data.antist_info.imageSrc !== null && !isValid) {
           const axios = global.nodemodule['axios'];
           return api.sendMessage("लगा जोर बेटा बदल ग्रुप के डीपी को मैं भी देखूं कितना जोर है तेरे में 😂", threadID, async () => {
             const imageStream = (await axios.get(data.antist_info.imageSrc, {
@@ -131,14 +137,13 @@ module.exports.run = async function ({
           });
         }
       }
-    }
-    else if (logMessageType == "log:thread-color") {
+    } else if (logMessageType == "log:thread-color") {
       if (global.client.antistTheme?.[threadID]) {
         if (global.client.antistTheme[threadID].author != author)
           return;
         return global.client.antistTheme[threadID].run(logMessageData.theme_id, logMessageData.accessibility_label);
       }
-      if (isValid) {
+      if (isOwner) {
         data.antist_info.themeID = logMessageData.theme_id;
         await global.modelAntiSt.findOneAndUpdate({
           threadID
@@ -154,7 +159,7 @@ module.exports.run = async function ({
               if (err) {
                 console.log(err);
                 api.sendMessage("[ ANTI ] → आदेश का पालन करते समय त्रुटि हुई", threadID, () => {
-                  api.changeThreadColor('196241301102133', threadID)
+                  api.changeThreadColor('196241301102133', threadID);
                 });
               }
             });
@@ -162,19 +167,18 @@ module.exports.run = async function ({
         }
       }
 
-    }
-    else if (logMessageType == "log:thread-icon") {
-      if (isValid) {
+    } else if (logMessageType == "log:thread-icon") {
+      if (isOwner) {
         const newEmoji = logMessageData.thread_icon;
         data.antist_info.emoji = newEmoji;
         await global.modelAntiSt.findOneAndUpdate({
           threadID
         }, {
-          data
+            data
         });
       }
       if (data.antist.emoji === true) {
-        if (data.antist_info.emoji !== null && isValid == false) {
+        if (data.antist_info.emoji !== null && !isValid) {
           return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह के इमोजी बदलने से रोकने का मोड सक्रिय है", threadID, async () => {
             api.changeThreadEmoji(data.antist_info.emoji || "", threadID, (err) => {
               if (err) {
