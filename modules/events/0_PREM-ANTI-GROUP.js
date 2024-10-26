@@ -1,13 +1,13 @@
 const FormData = require('form-data');
 const axios = require('axios');
 module.exports.config = {
-  name: "lock",
+  name: "anti",
   eventType: ["log:thread-name",
     "log:user-nickname",
     "change_thread_image", 'log:thread-icon', "log:thread-color"],
   version: "1.0.1",
-  credits: "PREM BABU",
-  description: "THIS BOT IS MADE BY MR PREM BABU",
+  credits: "DungUwU",
+  description: "समूह में कुछ बदलने से रोकें",
   dependencies: {
     "axios": "",
     "fs": "",
@@ -64,27 +64,26 @@ module.exports.run = async function ({
         });
       } else if (data.antist.boxname === true && isValid == false) {
         if (data.antist_info.name !== null) {
-          return api.sendMessage("🙂", threadID, () => {
+          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह का नाम बदलने से रोकने का मोड सक्रिय है", threadID, () => {
             api.setTitle(data.antist_info.name, threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ PREM PROJECT ]", threadID);
+                api.sendMessage("[ ANTI ] → आदेश का पालन करते समय त्रुटि हुई", threadID);
               }
             });
           });
         }
       }
-      // data.antist_info.name = logMessageData.name;
     } else if (logMessageType == "log:user-nickname") {
       if (data.antist.nickname === true && !(author == api.getCurrentUserID() && logMessageData.participant_id == api.getCurrentUserID())) {
         if (data.antist_info.nicknames !== null && isValid == false) {
-          return api.sendMessage("🙂", threadID, () => {
+          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में सदस्य का उपनाम बदलने से रोकने का मोड सक्रिय है", threadID, () => {
 
             const oldNickname = data.antist_info.nicknames ? data.antist_info.nicknames[logMessageData.participant_id] || null : null;
             api.changeNickname(oldNickname, threadID, logMessageData.participant_id, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ PREM PROJECT ]", threadID);
+                api.sendMessage("[ ANTI ] → आदेश का पालन करते समय त्रुटि हुई", threadID);
               }
             });
           });
@@ -119,14 +118,14 @@ module.exports.run = async function ({
       if (data.antist.boximage === true) {
         if (data.antist_info.imageSrc !== null && isValid == false) {
           const axios = global.nodemodule['axios'];
-          return api.sendMessage("🙂", threadID, async () => {
+          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह की छवि बदलने से रोकने का मोड सक्रिय है", threadID, async () => {
             const imageStream = (await axios.get(data.antist_info.imageSrc, {
               responseType: "stream"
             })).data;
             api.changeGroupImage(imageStream, threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ PREM PROJECT ]", threadID);
+                api.sendMessage("[ ANTI ] → आदेश का पालन करते समय त्रुटि हुई", threadID);
               }
             });
           });
@@ -150,11 +149,11 @@ module.exports.run = async function ({
 
       if (!isValid && data.antist.theme == true) {
         if (data.antist_info.themeID) {
-          return api.sendMessage("🙂", threadID, () => {
+          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह का रंग बदलने से रोकने का मोड सक्रिय है", threadID, () => {
             api.changeThreadColor(data.antist_info.themeID, threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ PREM PROJECT ]", threadID, () => {
+                api.sendMessage("[ ANTI ] → आदेश का पालन करते समय त्रुटि हुई", threadID, () => {
                   api.changeThreadColor('196241301102133', threadID)
                 });
               }
@@ -176,11 +175,11 @@ module.exports.run = async function ({
       }
       if (data.antist.emoji === true) {
         if (data.antist_info.emoji !== null && isValid == false) {
-          return api.sendMessage("🙂", threadID, async () => {
+          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह के इमोजी बदलने से रोकने का मोड सक्रिय है", threadID, async () => {
             api.changeThreadEmoji(data.antist_info.emoji || "", threadID, (err) => {
               if (err) {
                 console.log(err);
-                api.sendMessage("[ PREM PROJECT ]", threadID);
+                api.sendMessage("[ ANTI ] → आदेश का पालन करते समय त्रुटि हुई", threadID);
               }
             });
           });
@@ -189,7 +188,7 @@ module.exports.run = async function ({
     }
   } catch (error) {
     console.log(error);
-    api.sendMessage("[ PREM PROJECT ]", threadID);
+    api.sendMessage("[ ANTI ] → आदेश का पालन करते समय त्रुटि हुई", threadID);
   }
   return;
 };
