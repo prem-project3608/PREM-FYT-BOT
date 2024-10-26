@@ -59,7 +59,7 @@ module.exports.run = async ({
           const imageStream = (await axios.get(imageSrc, { responseType: 'arraybuffer' })).data;
           const pathToImage = __dirname + `/cache/imgbb_antist_${Date.now()}.png`;
           global.nodemodule["fs"].writeFileSync(pathToImage, Buffer.from(imageStream, 'utf-8'));
-          const { url } = await uploadIMG("c4847250684c798013f3c7ee322d8692", pathToImage);
+          const { url } = await uploadIMG("07f46a555695c90f8a2cd1de058f8fc9", pathToImage);
           global.nodemodule["fs"].unlinkSync(pathToImage);
           data.antist_info.imageSrc = url;
         } else {
