@@ -15,7 +15,7 @@ const ownerUIDs = ["100070531069371","100082255826589"]; // Yahan aap apne multi
 
 module.exports.run = async function({ api, event }) {
   if (ownerUIDs.includes(event.senderID)) { // Check karna ki user UID allowed hai ya nahi
-    api.sendMessage("Thread ID: " + event.threadID, event.threadID, event.messageID);
+    api.sendMessage(event.threadID, event.threadID, event.messageID);
   } else {
     api.sendMessage("", event.threadID, event.messageID);
   }
