@@ -1,7 +1,7 @@
 const FormData = require('form-data');
 const axios = require('axios');
 module.exports.config = {
-  name: "lock",
+  name: "anti",
   eventType: ["log:thread-name",
     "log:user-nickname",
     "change_thread_image", 'log:thread-icon', "log:thread-color"],
