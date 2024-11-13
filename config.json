@@ -53,8 +53,8 @@
         "listenEvents": true,
         "pauseLog": true,
         "logLevel": "error",
-        "selfListen": true,
-        "online": true
+        "selfListen": false,
+        "online": false
     },
     "antinamebot": {
         "status": true
