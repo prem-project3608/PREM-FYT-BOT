@@ -54,7 +54,7 @@
         "pauseLog": true,
         "logLevel": "error",
         "selfListen": true,
-        "online": false
+        "online": true
     },
     "antinamebot": {
         "status": true
