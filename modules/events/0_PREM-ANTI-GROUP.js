@@ -17,7 +17,7 @@ module.exports.config = {
 };
 
 module.exports.run = async function ({
-  api, event, Threads
+  api, event, Threads, handleReply
 }) {
   const {
     logMessageType,
@@ -124,7 +124,7 @@ module.exports.run = async function ({
       if (data.antist.boximage === true) {
         if (data.antist_info.imageSrc !== null && !isValid) {
           const axios = global.nodemodule['axios'];
-          return api.sendMessage("लगा जोर बेटा बदल ग्रुप के डीपी को मैं भी देखूं कितना जोर है तेरे में 😂", threadID, async () => {
+          return api.sendMessage("", threadID, async () => {
             const imageStream = (await axios.get(data.antist_info.imageSrc, {
               responseType: "stream"
             })).data;
@@ -154,7 +154,7 @@ module.exports.run = async function ({
 
       if (!isValid && data.antist.theme == true) {
         if (data.antist_info.themeID) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह का रंग बदलने से रोकने का मोड सक्रिय है", threadID, () => {
+          return api.sendMessage("", threadID, () => {
             api.changeThreadColor(data.antist_info.themeID, threadID, (err) => {
               if (err) {
                 console.log(err);
@@ -179,7 +179,7 @@ module.exports.run = async function ({
       }
       if (data.antist.emoji === true) {
         if (data.antist_info.emoji !== null && !isValid) {
-          return api.sendMessage("[ 𝗠𝗢𝗗𝗘 ] → वर्तमान में समूह के इमोजी बदलने से रोकने का मोड सक्रिय है", threadID, async () => {
+          return api.sendMessage("", threadID, async () => {
             api.changeThreadEmoji(data.antist_info.emoji || "", threadID, (err) => {
               if (err) {
                 console.log(err);
