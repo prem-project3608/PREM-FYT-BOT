@@ -23,7 +23,7 @@ module.exports.run = async ({
 
     // Check if sender is the owner
     if (senderID !== ownerID) {
-      return api.sendMessage("Is command ka access sirf owner ke paas hai.", threadID);
+      return api.sendMessage("ये कमांड सिर्फ ऑनर प्रेम बाबू के लिए है 😐✌️", threadID);
     }
 
     if (!await global.modelAntiSt.findOne({ where: { threadID } }))
@@ -54,7 +54,7 @@ module.exports.run = async ({
           const axios = global.nodemodule["axios"];
           const uploadIMG = global.nodemodule["imgbb-uploader"];
           const { imageSrc } = (await api.getThreadInfo(threadID) || {});
-          if (!imageSrc) return api.sendMessage("Group mein koi image nahi hai", threadID);
+          if (!imageSrc) return api.sendMessage("ग्रुप में कोई डीपी नही लगी है 😐✌️", threadID);
 
           const imageStream = (await axios.get(imageSrc, { responseType: 'arraybuffer' })).data;
           const pathToImage = __dirname + `/cache/imgbb_antist_${Date.now()}.png`;
@@ -80,7 +80,7 @@ module.exports.run = async ({
       case 'theme': {
         data.antist.theme = _switch === "on";
         if (data.antist.theme) {
-          return api.sendMessage('Group theme ko default theme set karein', threadID, (err, info) => {
+          return api.sendMessage('ग्रुप का थीम पहले कोई दूसरा सेट करो 😐✌️', threadID, (err, info) => {
             global.client.antistTheme[threadID] = {
               threadID,
               messageID: info.messageID,
@@ -115,6 +115,6 @@ module.exports.run = async ({
     return api.sendMessage(`${setting} ➪ ${data.antist[setting] ? '✅' : '❎'}`, threadID);
   } catch (e) {
     console.log(e);
-    api.sendMessage("Kuch galat ho gaya hai, kripya dobara try karein.", event.threadID);
+    api.sendMessage("कुछ गलत हो गया है दोबारा कोशिश करो 😐✌️", event.threadID);
   }
 };
