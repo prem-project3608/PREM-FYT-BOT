@@ -32,7 +32,7 @@
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "",
+    "BOTNAME": "TERA BAAP HU",
     "PREFIX": ".",
     "ADMINBOT": [
         "100070531069371",
@@ -53,7 +53,7 @@
         "listenEvents": true,
         "pauseLog": true,
         "logLevel": "error",
-        "selfListen": true,
+        "selfListen": false,
         "online": false
     },
     "antinamebot": {
