@@ -1,7 +1,7 @@
 {
 	"Language": "en",
 	"PreKey": "",
-	"AutoUpdate": true,
+	"AutoUpdate": false,
 	"MainColor": "#9900FF",
 	"MainName": "〈 PREM FCA BOT 〉",
 	"Uptime": false,
@@ -30,6 +30,6 @@
 	"Websocket_Extension": {
 		"Status": false,
 		"ResetData": false,
-		"AppState_Path": "PREM-PROJECT.json"
+		"AppState_Path": "appstate.json"
 	}
 }
