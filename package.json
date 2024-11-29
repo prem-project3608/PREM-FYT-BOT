@@ -18,6 +18,7 @@
     "@miraipr0ject/assets": "^1.0.9",
     "@supercharge/strings": "^2.0.0",
     "@xaviabot/fca-unofficial": "^1.4.0",
+    "facebook-chat-api": "^1.8.0",
     "1secmail-api": "^1.1.1",
     "adm-zip": "^0.5.10",
     "aes-js": "^3.1.2",
